@@ -16,7 +16,7 @@ Images and Setup
 
 The idea here is to start really simple, one image [container] with one instance, based on this we will get to examples with persistent data storage on the host and in a data-container.
 
-Explain how to expose the container to nginx on the host server.
+Explain how to expose the container to nginx on the host server. Later on we will use a own nginx container.
 
 
 
