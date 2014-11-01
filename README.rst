@@ -1,7 +1,7 @@
 plone.docker
 ============
 
-`Plone <https://plone.org>`_ and `Docker <http://docker.io>`_. - wip
+`Plone <https://plone.org>`_ and `Docker <http://docker.com>`_. - wip
 
 Want to know more ? Read the `motivation <https://github.com/plone/plone.docker/blob/master/docs/mtivation.rst>`_
 
@@ -9,9 +9,9 @@ Want to know more ? Read the `motivation <https://github.com/plone/plone.docker/
 Features
 --------
 
-These are examples for running `Plone <https://plone.org>`_ in `Docker containers <http://docker.io>`_.
+These are examples for running `Plone <https://plone.org>`_ in `Docker containers <http://docker.com>`_.
 
-Be aware these are really **only** examples according to the best practices of `Docker <http://docker.io>`_.
+Be aware these are really **only** examples according to the best practices of `Docker <http://docker.com>`_.
 
 It is most certain that you want to change the buildout, because you may want to add products for example.
 
