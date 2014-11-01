@@ -14,7 +14,11 @@ Please **do not** use them in production environments out of the box. Add some p
 Images and Setup
 ----------------
 
-The idea here is to start really simple, one image with one instance, based on this we will get to examples with persistent data storage on the host and in a data-container.
+The idea here is to start really simple, one image [container] with one instance, based on this we will get to examples with persistent data storage on the host and in a data-container.
+
+Explain how to expose the container to nginx on the host server.
+
+
 
 So for now we will go with:
 
@@ -26,7 +30,7 @@ Based on that we will dive even further into it and show/write examples how you 
 One more thing
 --------------
 
-Take it even to the next step and also link images with varnish3/varnish4 and ha-proxy into this setup.
+Take it even to the next step and also link images with varnish3/varnish4 and ha-proxy, and nginx into this setup.
 
 
 Cluster
