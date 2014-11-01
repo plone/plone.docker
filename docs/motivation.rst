@@ -26,7 +26,7 @@ Based on that we will dive even further into it and show/write examples how you 
 One more thing
 --------------
 
-Take it even to the next step and also link images with varnish and ha-proxy into this setup.
+Take it even to the next step and also link images with varnish3/varnish4 and ha-proxy into this setup.
 
 
 Cluster
