@@ -38,6 +38,8 @@ Cluster
 
 Show an example with `Fig <http://www.fig.sh/>`_ for easy cluster deployments.
 
+Show an example with `Fig <http://www.fig.sh/>`_  and `systemd <https://en.wikipedia.org/wiki/Systemd/>`_ .
+
 Maybe later on even give examples with more advanced management tools.
 
 
