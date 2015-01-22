@@ -3,7 +3,7 @@ Motivation
 
 What is the motivation behind this:
 
-More and more people using visualization, `Docker <http://docker.com>`_ is getting more and more famous under sysadmins and devops.
+More and more people using virtualization, `Docker <http://docker.com>`_ is getting more and more famous under sysadmins and devops.
 
 For more information about Docker please visit http://docker.com.
 
