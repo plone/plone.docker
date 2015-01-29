@@ -36,7 +36,7 @@ Take it even to the next step and also link images with varnish3/varnish4 and ha
 Cluster
 -------
 
-Show an example with `Fig <http://www.fig.sh/>`_ for easy cluster deployments.
+Show an example with Docker Compose for easy cluster deployments.
 
 Show an example with `Fig <http://www.fig.sh/>`_  and `systemd <https://en.wikipedia.org/wiki/Systemd/>`_ .
 
