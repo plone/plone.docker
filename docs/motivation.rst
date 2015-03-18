@@ -38,7 +38,7 @@ Cluster
 
 Show an example with Docker Compose for easy cluster deployments.
 
-Show an example with `Fig <http://www.fig.sh/>`_  and `systemd <https://en.wikipedia.org/wiki/Systemd/>`_ .
+Show an example with `docker-compose <http://docs.docker.com/compose/install/>`_  and `systemd <https://en.wikipedia.org/wiki/Systemd/>`_ .
 
 Fig will be become docker-compose, keep that in mind.
 
