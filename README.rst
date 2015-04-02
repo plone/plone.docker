@@ -3,7 +3,7 @@ plone.docker
 
 `Plone <https://plone.org>`_ and `Docker <http://docker.com>`_. - wip
 
-Want to know more ? Read the `motivation <https://github.com/plone/plone.docker/blob/master/docs/mtivation.rst>`_
+Want to know more ? Read the `motivation <https://github.com/plone/plone.docker/blob/master/docs/motivation.rst>`_
 
 
 Features
