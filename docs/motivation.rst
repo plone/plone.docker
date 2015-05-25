@@ -40,8 +40,6 @@ Show an example with Docker Compose for easy cluster deployments.
 
 Show an example with `docker-compose <http://docs.docker.com/compose/install/>`_  and `systemd <https://en.wikipedia.org/wiki/Systemd/>`_ .
 
-Fig will be become docker-compose, keep that in mind.
-
 Maybe later on even give examples with more advanced management tools.
 
 
