@@ -22,4 +22,4 @@ By importing/using images like *FROM ubuntu:trusty* you give away all your contr
 
 We will compromise here, since that repo is meant as example and not for production and most people know *debian and ubuntu*. So **we will base** our examples on *official debian/ubuntu docker images*, but **we will** add to the docs, that you should never do that !.
 
-Not perfect bu all means.
+Not perfect but all means.
