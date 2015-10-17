@@ -7,48 +7,46 @@ More and more people using virtualization, `Docker <http://docker.com>`_ is gett
 
 For more information about Docker please visit http://docker.com.
 
-These docker images are really meant as example, starting points or as base for your own ones.
+These docker images are **really meant as example**, maybe as possible starting point for your own ones.
 
 Please **do not** use them in production environments out of the box. Add some point you want to add a product or change something else, this means you will have to build the image again.
 
 Images and Setup
 ----------------
 
-The idea here is to start really simple, one image [container] with one instance, based on this we will get to examples with persistent data storage on the host and in a data-container.
+The idea here is to start really simple, one image [container] with one instance, based on this we will get to examples with persistent data storage on the host.
 
-Explain how to expose the container to nginx on the host server. Later on we will use a own nginx container.
-
-
+Explain how to expose the container to nginx on the host server. 
 
 So for now we will go with:
 
 - instance image
 - zeo image
 
-Based on that we will dive even further into it and show/write examples how you can build a setup where you link a zeoserver images together with a couple instances.
-
-One more thing
---------------
-
-Take it even to the next step and also link images with varnish3/varnish4 and ha-proxy, and nginx into this setup.
+Based on that we will dive even further into it and show/write examples how you can build a setup where you link a zeoserver image together with a couple instances.
 
 
-Cluster
--------
+Possible scenarios 
+------------------
 
-Show an example with Docker Compose for easy cluster deployments.
+- Show example with `docker-compose <http://docs.docker.com/compose/install/>`_ for easy development on your local machine
 
-Show an example with `docker-compose <http://docs.docker.com/compose/install/>`_  and `systemd <https://en.wikipedia.org/wiki/Systemd/>`_ .
+- Show example with `systemd <https://en.wikipedia.org/wiki/Systemd/>`_  for production 
 
-Maybe later on even give examples with more advanced management tools.
+- Include nginx container ?
 
+- Include varnish container ?
 
-Monitoring
-----------
+- Include HA-proxy container ?
 
-Show an example with `cAdvsior <https://github.com/google/cadvisor>`_ .
+Image
+-----
 
-Monitoring is complex and there are lots of different solutions.
+- Operating system ?
+- squash image
+- image cleaning
+- build tools in image or usage of a 'build' image and just include build with runtime dependencies ? less is more here
+- reduce image layer
 
 
 
