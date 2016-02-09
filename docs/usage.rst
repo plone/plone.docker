@@ -52,7 +52,7 @@ instance configured as a ZEO client::
     - ZEO_ADDRESS=zeoserver:8100
 
   zeoserver:
-    image: eeacms/zeoserver
+    image: plone/zeoserver
 
 Start cluster::
 
