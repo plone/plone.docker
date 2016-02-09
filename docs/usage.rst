@@ -64,3 +64,52 @@ Scale the number of ZEO clients::
 
 Now, open http://localhost:8080 in your workstation web browser. To see the
 HAProxy backends health, go to http://localhost:1936 Default user: `admin/admin`
+
+4. Debug mode
+-------------
+You can also start Plone in debug mode (fg) by running::
+
+    $ docker run -p 8080:8080 plone/plone fg
+
+Still, this will not allow you to add `pdb` breakpoints. For this, you'll have
+to run Plone inside container like::
+
+    $ docker run -it -p 8080:8080 plone/plone bash
+      $ bin/instance fg
+
+5. Extending this image
+-----------------------
+In order to run Plone with your custom theme or Plone Add-ons, you'll have to
+build another image based on this one. For this, you'll need to create two files,
+`site.cfg` which is a `zc.buildout <https://pypi.python.org/pypi/zc.buildout/2.5.0>`_
+configuration file, and `Dockerfile <https://docs.docker.com/engine/reference/builder/>`
+which is the Docker recipe for your image
+
+site.cfg
+~~~~~~~~
+::
+
+  [buildout]
+  extends = buildout.cfg
+
+  [instance]
+  eggs += plone.awsome.addon
+
+Dockerfile
+~~~~~~~~~~
+::
+
+  FROM plone/plone:5
+
+  COPY site.cfg
+  RUN bin/buildout -c site.cfg
+
+Build your custom Plone image::
+
+  $ docker build -t plone:custom .
+
+Run it::
+
+  $ docker run -p 8080:8080 plone:custom
+
+Test it at http://localhost:8080
