@@ -46,6 +46,7 @@ RUN apk add --no-cache --virtual .build-deps \
  && rm -rf /plone/buildout-cache/downloads/* \
  && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
+COPY docker-initialize.py /
 COPY docker-entrypoint.sh /
 
 EXPOSE 8080

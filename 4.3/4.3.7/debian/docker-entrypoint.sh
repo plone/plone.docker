@@ -4,6 +4,8 @@ set -e
 COMMANDS="debug help logtail show stop adduser fg kill quit run wait console foreground logreopen reload shell status"
 START="start restart"
 
+python /docker-initialize.py
+
 if [[ $START == *"$1"* ]]; then
   _stop() {
     bin/instance stop
