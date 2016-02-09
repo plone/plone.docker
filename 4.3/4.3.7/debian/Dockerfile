@@ -32,8 +32,9 @@ RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev
  && rm -rf /plone/buildout-cache/downloads/* \
  && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
-COPY docker-initialize.py /
-COPY docker-entrypoint.sh /
+VOLUME /data/filestorage /data/blobstorage
+
+COPY docker-initialize.py docker-entrypoint.sh /
 
 EXPOSE 8080
 USER plone
