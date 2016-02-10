@@ -14,9 +14,9 @@ You can find all the documentation in the `docs <https://github.com/plone/plone.
 Contribute
 ----------
 
-- `Issue Tracker <github.com/plone/plone.docker/issues>`_
-- `Source Code <github.com/plone/plone.docker/>`_
-- `Documentation <github.com/plone/plone.docker/docs>`_
+- `Issue Tracker <https://github.com/plone/plone.docker/issues>`_
+- `Source Code <https://github.com/plone/plone.docker/>`_
+- `Documentation <https://github.com/plone/plone.docker/tree/master/docs>`_
 
 Please **DO NOT** commit to master directly. Even for the smallest and most trivial fix. **ALWAYS** open a pull request and ask somebody else to merge your code. **NEVER** merge it yourself.
 
@@ -25,5 +25,3 @@ License
 -------
 
 The project is licensed under the GPLv2.
-
-
