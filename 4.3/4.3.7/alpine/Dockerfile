@@ -3,7 +3,7 @@ MAINTAINER "Plone Community" http://community.plone.org
 
 RUN addgroup -g 500 plone \
  && adduser -S -D -G plone -u 500 plone \
- && mkdir -p /plone /data \
+ && mkdir -p /plone /data/filestorage /data/blobstorage \
  && chown -R plone:plone /plone /data
 
 ENV PLONE_MAJOR=4.3
@@ -37,6 +37,7 @@ RUN apk add --no-cache --virtual .build-deps \
       --instance=instance \
       --var=/data \
       standalone \
+ && chown -R plone:plone /plone /data \
  && apk del .build-deps \
  && apk add --no-cache --virtual .run-deps \
     bash \

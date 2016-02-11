@@ -2,7 +2,7 @@ FROM python:2.7-slim
 MAINTAINER "Plone Community" http://community.plone.org
 
 RUN useradd --system -U -u 500 plone \
- && mkdir -p /plone /data \
+ && mkdir -p /plone /data/filestorage /data/blobstorage \
  && chown -R plone:plone /plone /data
 
 ENV PLONE_MAJOR=5.0
@@ -25,6 +25,7 @@ RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev
       --instance=instance \
       --var=/data \
       standalone \
+ && chown -R plone:plone /plone /data \
  && rm -rf Plone* \
  && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
