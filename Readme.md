@@ -52,7 +52,7 @@ For more information on how to extend this image with your own custom settings, 
 
 ## Documentation
 
-Full documentation for end users can be found in the ["docs"]((https://github.com/plone/plone.docker/tree/master/docs) folder.
+Full documentation for end users can be found in the ["docs"](https://github.com/plone/plone.docker/tree/master/docs) folder.
 It is also available online at http://docs.plone.org/
 
 
