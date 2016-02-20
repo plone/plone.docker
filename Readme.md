@@ -1,9 +1,12 @@
-# plone.docker
+# Plone
 
 [Plone](https://plone.org) is a free and open source content management system built on top of the Zope application server.
 
 
 ## Features
+
+- Images for Plone 5 and Plone 4
+- Choose between [Alpine](http://www.alpinelinux.org/) or [Debian](https://www.debian.org/) based images
 
 ### Supported tags and respective `Dockerfile` links
 
@@ -16,6 +19,8 @@
 ## Usage
 
 ### Start a Plone instance
+
+This will download and start the latest Plone 5 container, based on [Debian](https://www.debian.org/).
 
 ```console
 $ docker run -p 8080:8080 plone/plone
