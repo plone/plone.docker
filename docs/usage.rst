@@ -101,7 +101,7 @@ Dockerfile
 
   FROM plone/plone:5
 
-  COPY site.cfg
+  COPY site.cfg /plone/instance/
   RUN bin/buildout -c site.cfg
 
 Build your custom Plone image::
