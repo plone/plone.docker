@@ -6,6 +6,12 @@ START="start restart"
 
 python /docker-initialize.py
 
+if [ -e "custom.cfg" ]; then
+  if [ ! -e "bin/develop" ]; then
+    bin/buildout -c custom.cfg
+  fi
+fi
+
 if [[ $START == *"$1"* ]]; then
   _stop() {
     bin/instance stop
