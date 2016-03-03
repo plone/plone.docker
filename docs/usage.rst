@@ -97,7 +97,7 @@ existing Plone add-ons::
 Make sure that you have your Plone add-on code at `src/plone.theme.winter` and
 that Plone user inside Docker container (`uid: 500`) has the rights to read/write there.
 
-Running unit/functional tests possible::
+Running unit tests::
 
     $ docker run --rm -e BUILDOUT_EGGS="plone.app.testing plone.theme.winter" \
              plone/plone \
