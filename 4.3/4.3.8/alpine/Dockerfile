@@ -6,9 +6,9 @@ RUN addgroup -g 500 plone \
  && mkdir -p /plone /data/filestorage /data/blobstorage \
  && chown -R plone:plone /plone /data
 
-ENV PLONE_MAJOR=5.0
-ENV PLONE_VERSION=5.0.2
-ENV PLONE_MD5=b141f65cef30e3e47456b7a6968616c5
+ENV PLONE_MAJOR=4.3
+ENV PLONE_VERSION=4.3.8
+ENV PLONE_MD5=c308e7a2b37ff35825225afd982228aa
 
 RUN apk add --no-cache --virtual .build-deps \
     curl \
@@ -27,6 +27,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libpng-dev openssl \
  && curl -SL -o Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
  && tar -zxvf Plone.tgz \
+ && curl -SL -o /Plone-$PLONE_VERSION-UnifiedInstaller/helper_scripts/user_group_utilities.sh https://raw.githubusercontent.com/plone/Installers-UnifiedInstaller/master/helper_scripts/user_group_utilities.sh \
  && ./Plone-$PLONE_VERSION-UnifiedInstaller/install.sh \
       --password=admin \
       --daemon-user=plone \
@@ -37,7 +38,7 @@ RUN apk add --no-cache --virtual .build-deps \
       --var=/data \
       standalone \
  && chown -R plone:plone /plone /data \
-# && apk del .build-deps \
+ && apk del .build-deps \
  && apk add --no-cache --virtual .run-deps \
     bash \
     libxml2 \

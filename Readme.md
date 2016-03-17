@@ -11,10 +11,11 @@
 ### Supported tags and respective `Dockerfile` links
 
 - [`5.0.2`, `5.0`, `5`, `latest` (*5.0.2/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.2/debian/Dockerfile)
-- [`4.3.7`, `4.3`, `4` (*4.3.7/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.7/debian/Dockerfile)
+- [`4.3.8`, `4.3`, `4` (*4.3.8/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.8/debian/Dockerfile)
+- [`4.3.7` (*4.3.7/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.7/debian/Dockerfile)
 - [`5.0.2-alpine`, `5.0-alpine`, `5-alpine` (*5.0.2/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.2/alpine/Dockerfile)
-- [`4.3.7-alpine`, `4.3-alpine`, `4-alpine` (*4.3.7/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.7/alpine/Dockerfile)
-
+- [`4.3.8-alpine`, `4.3-alpine`, `4-alpine` (*4.3.8/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.8/alpine/Dockerfile)
+- [`4.3.7-alpine` (*4.3.7/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.7/alpine/Dockerfile)
 
 ## Usage
 
