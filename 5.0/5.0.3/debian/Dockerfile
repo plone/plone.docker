@@ -24,9 +24,13 @@ RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev
       --target=/plone \
       --instance=instance \
       --var=/data \
-      standalone \
+      none \
+ && cd /plone/instance \
+ && sed -i 's/parts =/parts =\n    zeoserver/g' buildout.cfg \
+ && echo '\n[zeoserver]\nrecipe = plone.recipe.zeoserver\nfile-storage = /data/filestorage/Data.fs\nblob-storage = /data/blobstorage' >> buildout.cfg \
+ && sudo -u plone bin/buildout \
  && chown -R plone:plone /plone /data \
- && rm -rf Plone* \
+ && rm -rf /Plone* \
  && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
  && rm -rf /var/lib/apt/lists/* \

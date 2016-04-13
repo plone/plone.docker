@@ -14,12 +14,17 @@ There are two ways to use this image out-of-the-box:
 Now, ask for http://localhost:8080/ in your workstation web browser,
 and add a Plone site.
 
-2. ZEO client
--------------
+2. ZEO cluster
+--------------
 
-Considering ZEO server is running at `192.168.1.1` on default port `8100`::
+Start `ZEO` server::
 
-  $ docker run -e ZEO_ADDRESS=192.168.1.1:8100 -p 8080:8080 plone/plone
+  $ docker run --name=zeo plone/plone zeoserver
+
+Start 2 Plone clients::
+
+  $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone/plone
+  $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone/plone
 
 Now, open http://localhost:8080/ in your workstation web browser. If you
 already have a Plone site within ZEO database, click on `View your Plone site`,
@@ -52,7 +57,8 @@ instance configured as a ZEO client::
     - ZEO_ADDRESS=zeoserver:8100
 
   zeoserver:
-    image: plone/zeoserver
+    image: plone/plone
+    command: zeoserver
 
 Start cluster::
 
@@ -82,7 +88,7 @@ to run Plone inside container like::
 You can easily test new or existing Plone add-ons by passing them via `BUILDOUT_EGGS`
 environment variable::
 
-    $ docker run -p 8080:8080 -e BUILDOUT_EGGS="plone.theme.spring plone.content.publication" plone/plone fg
+    $ docker run -p 8080:8080 -e BUILDOUT_EGGS="Products.PloneFormGen eea.facetednavigation" plone/plone fg
 
 The same way as above you can pass `BUILDOUT_ZCML` environment variable to include
 custom ZCML files or `BUILDOUT_DEVELOP` environment variable to develop new or
@@ -99,9 +105,9 @@ that Plone user inside Docker container (`uid: 500`) has the rights to read/writ
 
 Running unit tests::
 
-    $ docker run --rm -e BUILDOUT_EGGS="plone.app.testing plone.theme.winter" \
+    $ docker run --rm -e BUILDOUT_EGGS="eea.facetednavigation" \
              plone/plone \
-             bin/test plone.theme.winter
+             bin/test -v -vv -s eea.facetednavigation
 
 .. note::
 

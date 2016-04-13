@@ -2,7 +2,8 @@
 set -e
 
 COMMANDS="debug help logtail show stop adduser fg kill quit run wait console foreground logreopen reload shell status"
-START="start restart"
+START="start restart zeoserver"
+CMD="bin/instance"
 
 python /docker-initialize.py
 
@@ -12,15 +13,19 @@ if [ -e "custom.cfg" ]; then
   fi
 fi
 
+if [[ "$1" == "zeo"* ]]; then
+  CMD="bin/zeoserver"
+fi
+
 if [[ $START == *"$1"* ]]; then
   _stop() {
-    bin/instance stop
+    $CMD stop
     kill -TERM $child 2>/dev/null
   }
 
   trap _stop SIGTERM SIGINT
-  bin/instance start
-  bin/instance logtail &
+  $CMD start
+  $CMD logtail &
 
   child=$!
   wait "$child"

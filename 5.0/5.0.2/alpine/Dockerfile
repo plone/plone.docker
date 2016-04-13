@@ -35,15 +35,19 @@ RUN apk add --no-cache --virtual .build-deps \
       --target=/plone \
       --instance=instance \
       --var=/data \
-      standalone \
+      none \
+ && cd /plone/instance \
+ && sed -i 's/parts =/parts =\n    zeoserver/g' buildout.cfg \
+ && echo -e '\n[zeoserver]\nrecipe = plone.recipe.zeoserver\nfile-storage = /data/filestorage/Data.fs\nblob-storage = /data/blobstorage' >> buildout.cfg \
+ && sudo -u plone LIBRARY_PATH=/lib:/usr/lib bin/buildout \
  && chown -R plone:plone /plone /data \
-# && apk del .build-deps \
+ && apk del .build-deps \
  && apk add --no-cache --virtual .run-deps \
     bash \
     libxml2 \
     libxslt \
     libjpeg-turbo \
- && rm -rf Plone* \
+ && rm -rf /Plone* \
  && rm -rf /plone/buildout-cache/downloads/* \
  && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
