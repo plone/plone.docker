@@ -47,6 +47,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libxml2 \
     libxslt \
     libjpeg-turbo \
+    rsync \
  && rm -rf /Plone* \
  && rm -rf /plone/buildout-cache/downloads/* \
  && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +

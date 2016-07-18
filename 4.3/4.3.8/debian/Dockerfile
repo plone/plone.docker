@@ -10,7 +10,7 @@ ENV PLONE_VERSION=4.3.8
 ENV PLONE_MD5=c308e7a2b37ff35825225afd982228aa
 
 RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev" \
- && runDeps="libxml2 libxslt1.1 libjpeg62" \
+ && runDeps="libxml2 libxslt1.1 libjpeg62 rsync" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
  && curl -o Plone.tgz -SL https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
