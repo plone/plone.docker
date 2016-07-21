@@ -130,8 +130,6 @@ site.cfg
 
   [buildout]
   extends = buildout.cfg
-
-  [instance]
   eggs += plone.awsome.addon
 
 Dockerfile
