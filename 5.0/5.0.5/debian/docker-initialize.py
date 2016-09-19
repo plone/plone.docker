@@ -8,10 +8,12 @@ class Environment(object):
     """
     def __init__(self, env=os.environ,
                  zope_conf="/plone/instance/parts/instance/etc/zope.conf",
-                 custom_conf="/plone/instance/custom.cfg"):
+                 custom_conf="/plone/instance/custom.cfg",
+                 zeopack_conf="/plone/instance/bin/zeopack"):
         self.env = env
         self.zope_conf = zope_conf
         self.custom_conf = custom_conf
+        self.zeopack_conf = zeopack_conf
 
     def zeoclient(self):
         """ ZEO Client
@@ -48,6 +50,27 @@ class Environment(object):
         with open(self.zope_conf, "w") as cfile:
             cfile.write(config)
 
+    def zeopack(self):
+        """ ZEO Pack
+        """
+        server = self.env.get("ZEO_ADDRESS", None)
+        if not server:
+            return
+
+        if ":" in server:
+            host, port = server.split(":")
+        else:
+            host, port = (server, "8100")
+
+        with open(self.zeopack_conf, 'r') as cfile:
+            text = cfile.read()
+            text = text.replace('address = "8100"', 'address = "%s"' % server)
+            text = text.replace('host = "127.0.0.1"', 'host = "%s"' % host)
+            text = text.replace('port = "8100"', 'port = "%s"' % port)
+
+        with open(self.zeopack_conf, 'w') as cfile:
+            cfile.write(text)
+
     def buildout(self):
         """ Buildout from environment variables
         """
@@ -74,6 +97,7 @@ class Environment(object):
     def setup(self, **kwargs):
         self.buildout()
         self.zeoclient()
+        self.zeopack()
 
     __call__ = setup
 
