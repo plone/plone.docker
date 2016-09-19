@@ -167,6 +167,8 @@ The Plone image uses several environment variable that allow to specify a more s
 * `BUILDOUT_EGGS` - Customize Plone via Plone add-ons using this environment variable.
 * `BUILDOUT_ZCML` - Include custom `ZCML` files.
 * `BUILDOUT_DEVELOP` - Develop new or existing Plone add-ons.
+* `HEALTH_CHECK_TIMEOUT` - Time in seconds to wait until health check starts. Defaults to `1` second.
+* `HEALTH_CHECK_INTERVAL` - Interval in seconds to check that the Zope application is still healthy. Defaults to `1` second.
 
 
 8. Where to Store Data

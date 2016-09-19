@@ -39,7 +39,7 @@ RUN apk add --no-cache --virtual .build-deps \
       none \
  && cd /plone/instance \
  && sed -i 's/parts =/parts =\n    zeoserver/g' buildout.cfg \
- && echo -e '\n[zeoserver]\nrecipe = plone.recipe.zeoserver\nfile-storage = /data/filestorage/Data.fs\nblob-storage = /data/blobstorage' >> buildout.cfg \
+ && echo -e '\n[zeoserver]\n<= zeoserver_base\nrecipe = plone.recipe.zeoserver' >> buildout.cfg \
  && sudo -u plone LIBRARY_PATH=/lib:/usr/lib bin/buildout \
  && chown -R plone:plone /plone /data \
  && apk del .build-deps \
