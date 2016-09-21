@@ -183,28 +183,21 @@ The Docker documentation is a good starting point for understanding the differen
 storage options and variations, and there are multiple blogs and forum postings
 that discuss and give advice in this area.
 
-8.1 Data-only containers (suitable for production use)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+8.1 Data volumes (suitable for production use)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let Docker manage the storage of your database data `by writing the database files to disk on the host system using its own internal volume management <https://docs.docker.com/engine/userguide/containers/dockervolumes/#creating-and-mounting-a-data-volume-container>`_.
+Let Docker manage the storage of your database data `by writing the database files to disk on the host system using its own internal volume management <https://docs.docker.com/engine/tutorials/dockervolumes/>`_.
 The advantages of this approach is that you can deploy your Plone stack anywhere,
 without having to prepare hosts in advance or care about read/write permission
 or selinux policy rules. The downside is that the files may be hard to locate
 for tools and applications that run directly on the host system,
 i.e. outside containers.
 
-* Create the data container::
+* Use data volumes with Plone::
 
-    $ docker run --name plone_data \
-                -v /data/blobstorage \
-                -v /data/filestorage \
-             busybox chown -R 500:500 /data
-
-* Use data container with Plone::
-
-    $ docker run --name plone_one \
-                 --volumes-from plone_data \
-                -p 8080:8080 \
+    $ docker run --name plone \
+                 --volume=plone-data:/data \
+                 -p 8080:8080 \
              plone
 
 Or with `Docker Compose <https://docs.docker.com/compose>`_
@@ -213,18 +206,10 @@ Or with `Docker Compose <https://docs.docker.com/compose>`_
 
     plone:
       image: plone
-      volumes_from:
-      - plone_data
+      volumes:
+      - plone-data:/data
       ports:
       - "8080:8080"
-
-    plone_data:
-      image: busybox
-      volumes:
-      - /data/filestorage
-      - /data/blobstorage
-      command: ['chown', '-R', '500:500', '/data']
-
 
 * Start Plone stack::
 
@@ -234,33 +219,29 @@ Or with `Docker Compose <https://docs.docker.com/compose>`_
 8.2 Mount host directories as data volumes (suitable for development use)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create data directories on the host system (outside the container) and `mount these to a directory visible from inside the container <https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume>`_.
+Create data directories on the host system (outside the container) and `mount these to a directory visible from inside the container <https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume>`_.
 This places the database files in a known location on the host system, and makes
 it easy for tools and applications on the host system to access the files.
 The downside is that the user needs to make sure that the directory exists,
 and that e.g. directory permissions and other security mechanisms
 on the host system are set up correctly.
 
-* Create a data directories on a suitable volume on your host system, e.g. `/path/to/filestorage` and `/path/to/blobstorage`
+* Create a data directory on a suitable volume on your host system, e.g. `/var/local/data`
 * Start your `plone` container like this::
 
-    $ docker run -v /path/to/filestorage:/data/filestorage -v /path/to/blobstorage:/data/blobstorage -d plone
+    $ docker run -v /var/local/data:/data -d plone
 
-The `-v /path/to/filestorage:/data/filestorage` part of the command
-mounts the `-v /path/to/filestorage` directory from the underlying host system
-as `/data/filestorage` inside the container, where Plone will
-look for/create the `Data.fs` database file.
-
-The `-v /path/to/blobstorage:/data/blobstorage` part of the command
-mounts the `-v /path/to/blobstorage` directory from the underlying host system
-as `/data/blobstorage` where blobs will be stored.
+The `-v /var/local/data:/data` part of the command
+mounts the `/var/local/data` directory from the underlying host system
+as `/data` inside the container, where Plone will look for/create the `filestorage`
+directory were `Data.fs` is stored and the `blobstorage` where blobs will are stored.
 
 Make sure that Plone has access to read/write within these folders::
 
-    $ chown -R 500:500 /path/to/filestorage /path/to/blobstorage
+    $ chown -R 500:500 /var/local/data
 
 Note that users on host systems with SELinux enabled may see issues with this.
 The current workaround is to assign the relevant SELinux policy type to the
 new data directory so that the container will be allowed to access it::
 
-    $ chcon -Rt svirt_sandbox_file_t /path/to/filestorage /path/to/blobstorage
+    $ chcon -Rt svirt_sandbox_file_t /var/local/data
