@@ -3,17 +3,21 @@
 import re
 import os
 
+
 class Environment(object):
     """ Configure container via environment variables
     """
     def __init__(self, env=os.environ,
                  zope_conf="/plone/instance/parts/instance/etc/zope.conf",
                  custom_conf="/plone/instance/custom.cfg",
-                 zeopack_conf="/plone/instance/bin/zeopack"):
+                 zeopack_conf="/plone/instance/bin/zeopack",
+                 zeoserver_conf="/plone/instance/parts/zeoserver/etc/zeo.conf"
+                 ):
         self.env = env
         self.zope_conf = zope_conf
         self.custom_conf = custom_conf
         self.zeopack_conf = zeopack_conf
+        self.zeoserver_conf = zeoserver_conf
 
     def zeoclient(self):
         """ ZEO Client
@@ -71,6 +75,22 @@ class Environment(object):
         with open(self.zeopack_conf, 'w') as cfile:
             cfile.write(text)
 
+    def zeoserver(self):
+        """ ZEO Server
+        """
+        pack_keep_old = self.env.get("ZEO_PACK_KEEP_OLD", '')
+        if pack_keep_old.lower() in ("false", "no", "0", "n", "f"):
+            with open(self.zeoserver_conf, 'r') as cfile:
+                text = cfile.read()
+                if 'pack-keep-old' not in text:
+                    text = text.replace(
+                        '</filestorage>',
+                        '  pack-keep-old false\n</filestorage>'
+                    )
+
+            with open(self.zeoserver_conf, 'w') as cfile:
+                cfile.write(text)
+
     def buildout(self):
         """ Buildout from environment variables
         """
@@ -98,6 +118,7 @@ class Environment(object):
         self.buildout()
         self.zeoclient()
         self.zeopack()
+        self.zeoserver()
 
     __call__ = setup
 

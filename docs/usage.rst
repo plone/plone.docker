@@ -162,6 +162,7 @@ The Plone image uses several environment variable that allow to specify a more s
 * `ZEO_SHARED_BLOB_DIR` - Set this to on if the ZEO server and the instance have access to the same directory. Defaults to `off`.
 * `ZEO_STORAGE` - Set the storage number of the ZEO storage. Defaults to `1`.
 * `ZEO_CLIENT_CACHE_SIZE` - Set the size of the ZEO client cache. Defaults to `128MB`.
+* `ZEO_PACK_KEEP_OLD` - Can be set to false to disable the creation of *.fs.old files before the pack is run. Defaults to true.
 * `BUILDOUT_EGGS` - Customize Plone via Plone add-ons using this environment variable.
 * `BUILDOUT_ZCML` - Include custom `ZCML` files.
 * `BUILDOUT_DEVELOP` - Develop new or existing Plone add-ons.
