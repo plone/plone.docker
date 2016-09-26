@@ -226,15 +226,14 @@ The downside is that the user needs to make sure that the directory exists,
 and that e.g. directory permissions and other security mechanisms
 on the host system are set up correctly.
 
-* Create a data directory on a suitable volume on your host system, e.g. `/var/local/data`
+* Create data directories on a suitable volume on your host system, e.g. `/var/local/data/filestorage` and `/var/local/data/blobstorage`
 * Start your `plone` container like this::
 
-    $ docker run -v /var/local/data:/data -d plone
+    $ docker run -v /var/local/data/filestorage:/data/filestorage -v /var/local/data/blobstorage:/data/blobstorage -d plone
 
-The `-v /var/local/data:/data` part of the command
-mounts the `/var/local/data` directory from the underlying host system
-as `/data` inside the container, where Plone will look for/create the `filestorage`
-directory were `Data.fs` is stored and the `blobstorage` where blobs will are stored.
+The -v /path/to/filestorage:/data/filestorage part of the command mounts the -v /path/to/filestorage directory from the underlying host system as /data/filestorage inside the container, where Plone will look for/create the Data.fs database file.
+
+The -v /path/to/blobstorage:/data/blobstorage part of the command mounts the -v /path/to/blobstorage directory from the underlying host system as /data/blobstorage where blobs will be stored.
 
 Make sure that Plone has access to read/write within these folders::
 
