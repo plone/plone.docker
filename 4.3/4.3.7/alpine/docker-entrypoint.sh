@@ -10,6 +10,7 @@ python /docker-initialize.py
 if [ -e "custom.cfg" ]; then
   if [ ! -e "bin/develop" ]; then
     bin/buildout -c custom.cfg
+    python /docker-initialize.py
   fi
 fi
 
