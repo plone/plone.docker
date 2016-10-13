@@ -9,7 +9,7 @@ There are two ways to use this image out-of-the-box:
 ---------------
 ::
 
-  $ docker run -p 8080:8080 plone/plone
+  $ docker run -p 8080:8080 plone
 
 Now, ask for http://localhost:8080/ in your workstation web browser,
 and add a Plone site.
@@ -19,12 +19,12 @@ and add a Plone site.
 
 Start `ZEO` server::
 
-  $ docker run --name=zeo plone/plone zeoserver
+  $ docker run --name=zeo plone zeoserver
 
 Start 2 Plone clients::
 
-  $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone/plone
-  $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone/plone
+  $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
+  $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
 
 Now, open http://localhost:8080/ in your workstation web browser. If you
 already have a Plone site within ZEO database, click on `View your Plone site`,
@@ -50,14 +50,14 @@ instance configured as a ZEO client::
     - SERVICE_NAMES=plone
 
   plone:
-    image: plone/plone
+    image: plone
     links:
     - zeoserver
     environment:
     - ZEO_ADDRESS=zeoserver:8100
 
   zeoserver:
-    image: plone/plone
+    image: plone
     command: zeoserver
 
 Start cluster::
@@ -75,12 +75,12 @@ HAProxy backends health, go to http://localhost:1936 Default user: `admin/admin`
 -------------
 You can also start Plone in debug mode (fg) by running::
 
-    $ docker run -p 8080:8080 plone/plone fg
+    $ docker run -p 8080:8080 plone fg
 
 Still, this will not allow you to add `pdb` breakpoints. For this, you'll have
 to run Plone inside container like::
 
-    $ docker run -it -p 8080:8080 plone/plone bash
+    $ docker run -it -p 8080:8080 plone bash
       $ bin/instance fg
 
 5. Add-ons
@@ -88,7 +88,7 @@ to run Plone inside container like::
 You can easily test new or existing Plone add-ons by passing them via `PLONE_ADDONS`
 environment variable::
 
-    $ docker run -p 8080:8080 -e PLONE_ADDONS="Products.PloneFormGen eea.facetednavigation" plone/plone fg
+    $ docker run -p 8080:8080 -e PLONE_ADDONS="Products.PloneFormGen eea.facetednavigation" plone fg
 
 The same way as above you can pass `PLONE_ZCML` environment variable to include
 custom ZCML files or `PLONE_DEVELOP` environment variable to develop new or
@@ -98,7 +98,7 @@ existing Plone add-ons::
                  -e PLONE_ADDONS="plone.theme.winter" \
                  -e PLONE_DEVELOP="src/plone.theme.winter" \
                  -v $(pwd)/src:/plone/instance/src \
-             plone/plone fg
+             plone fg
 
 Make sure that you have your Plone add-on code at `src/plone.theme.winter` and
 that Plone user inside Docker container (`uid: 500`) has the rights to read/write there.
@@ -106,7 +106,7 @@ that Plone user inside Docker container (`uid: 500`) has the rights to read/writ
 Running unit tests::
 
     $ docker run --rm -e PLONE_ADDONS="eea.facetednavigation" \
-             plone/plone \
+             plone \
              bin/test -v -vv -s eea.facetednavigation
 
 .. note::
@@ -136,18 +136,18 @@ Dockerfile
 ~~~~~~~~~~
 ::
 
-  FROM plone/plone:5
+  FROM plone:5
 
   COPY site.cfg /plone/instance/
   RUN bin/buildout -c site.cfg
 
 Build your custom Plone image::
 
-  $ docker build -t plone:custom .
+  $ docker build -t custom-plone-image .
 
 Run it::
 
-  $ docker run -p 8080:8080 plone:custom
+  $ docker run -p 8080:8080 custom-plone-image
 
 Test it at http://localhost:8080
 
@@ -165,7 +165,7 @@ The Plone image uses several environment variable that allow to specify a more s
 * `ZEO_SHARED_BLOB_DIR` - Set this to on if the ZEO server and the instance have access to the same directory. Defaults to `off`.
 * `ZEO_STORAGE` - Set the storage number of the ZEO storage. Defaults to `1`.
 * `ZEO_CLIENT_CACHE_SIZE` - Set the size of the ZEO client cache. Defaults to `128MB`.
-* `ZEO_PACK_KEEP_OLD` - Can be set to false to disable the creation of *.fs.old files before the pack is run. Defaults to true.
+* `ZEO_PACK_KEEP_OLD` - Can be set to false to disable the creation of `*.fs.old` files before the pack is run. Defaults to true.
 * `HEALTH_CHECK_TIMEOUT` - Time in seconds to wait until health check starts. Defaults to `1` second.
 * `HEALTH_CHECK_INTERVAL` - Interval in seconds to check that the Zope application is still healthy. Defaults to `1` second.
 
@@ -186,7 +186,8 @@ that discuss and give advice in this area.
 8.1 Data volumes (suitable for production use)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let Docker manage the storage of your database data `by writing the database files to disk on the host system using its own internal volume management <https://docs.docker.com/engine/tutorials/dockervolumes/>`_.
+Let Docker manage the storage of your database data
+`by writing the database files to disk on the host system using its own internal volume management <https://docs.docker.com/engine/tutorials/dockervolumes/>`_.
 The advantages of this approach is that you can deploy your Plone stack anywhere,
 without having to prepare hosts in advance or care about read/write permission
 or selinux policy rules. The downside is that the files may be hard to locate
@@ -219,7 +220,8 @@ Or with `Docker Compose <https://docs.docker.com/compose>`_
 8.2 Mount host directories as data volumes (suitable for development use)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create data directories on the host system (outside the container) and `mount these to a directory visible from inside the container <https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume>`_.
+Create data directories on the host system (outside the container) and
+`mount these to a directory visible from inside the container <https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume>`_.
 This places the database files in a known location on the host system, and makes
 it easy for tools and applications on the host system to access the files.
 The downside is that the user needs to make sure that the directory exists,
