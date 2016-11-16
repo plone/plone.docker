@@ -1,6 +1,8 @@
 FROM python:2.7-slim
 MAINTAINER "Plone Community" http://community.plone.org
 
+LABEL plone.version="5.0.6"
+
 RUN useradd --system -U -u 500 plone \
  && mkdir -p /plone /data/filestorage /data/blobstorage \
  && chown -R plone:plone /plone /data
