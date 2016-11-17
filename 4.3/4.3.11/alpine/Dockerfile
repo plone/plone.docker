@@ -1,8 +1,6 @@
 FROM python:2.7-alpine
 MAINTAINER "Plone Community" http://community.plone.org
 
-LABEL plone.version="4.3.11"
-
 RUN addgroup -g 500 plone \
  && adduser -S -D -G plone -u 500 plone \
  && mkdir -p /plone /data/filestorage /data/blobstorage \
@@ -11,6 +9,9 @@ RUN addgroup -g 500 plone \
 ENV PLONE_MAJOR=4.3
 ENV PLONE_VERSION=4.3.11
 ENV PLONE_MD5=207cdf096869d11cee69339e95ace496
+
+LABEL plone.version=$PLONE_VERSION
+LABEL os="alpine" os.version="3.4"
 
 RUN apk add --no-cache --virtual .build-deps \
     curl \

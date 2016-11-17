@@ -1,8 +1,6 @@
 FROM python:2.7-slim
 MAINTAINER "Plone Community" http://community.plone.org
 
-LABEL plone.version="4.3.11"
-
 RUN useradd --system -U -u 500 plone \
  && mkdir -p /plone /data/filestorage /data/blobstorage \
  && chown -R plone:plone /plone /data
@@ -10,6 +8,9 @@ RUN useradd --system -U -u 500 plone \
 ENV PLONE_MAJOR=4.3
 ENV PLONE_VERSION=4.3.11
 ENV PLONE_MD5=207cdf096869d11cee69339e95ace496
+
+LABEL plone.version=$PLONE_VERSION
+LABEL os="debian" os.version="8"
 
 RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev" \
  && runDeps="libxml2 libxslt1.1 libjpeg62 rsync" \
