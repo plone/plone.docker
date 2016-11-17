@@ -1,6 +1,8 @@
 FROM python:2.7-alpine
 MAINTAINER "Plone Community" http://community.plone.org
 
+LABEL plone.version="4.3.11"
+
 RUN addgroup -g 500 plone \
  && adduser -S -D -G plone -u 500 plone \
  && mkdir -p /plone /data/filestorage /data/blobstorage \
