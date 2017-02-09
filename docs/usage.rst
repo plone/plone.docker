@@ -138,7 +138,18 @@ site.cfg
 
   [buildout]
   extends = buildout.cfg
-  eggs += plone.awsome.addon
+  eggs +=
+    plone.awsome.addon
+    plone.other.addon
+
+  [versions]
+  plone.awsome.addon = 1.0
+  plone.other.addon = 24.13
+
+  # Required by:
+  # plone.other.addon = 24.13
+  plone.api = 1.5.1
+
 
 Dockerfile
 ~~~~~~~~~~
