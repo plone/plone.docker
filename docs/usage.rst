@@ -38,27 +38,35 @@ orchestration tools like `docker-compose <http://docs.docker.com/compose/install
 Bellow is a `docker-compose.yml` example with ZEO server and Plone
 instance configured as a ZEO client::
 
-  haproxy:
-    image: eeacms/haproxy
-    ports:
-    - 8080:5000
-    - 1936:1936
-    links:
-    - plone
-    environment:
-    - BACKENDS_PORT=8080
-    - SERVICE_NAMES=plone
+  version: "2"
+  services:
+    haproxy:
+      image: eeacms/haproxy
+      ports:
+      - 8080:5000
+      - 1936:1936
+      depends_on:
+      - plone
+      environment:
+        BACKENDS: "plone"
+        BACKENDS_PORT: "8080"
+        DNS_ENABLED: "True"
 
-  plone:
-    image: plone
-    links:
-    - zeoserver
-    environment:
-    - ZEO_ADDRESS=zeoserver:8100
+    plone:
+      image: plone
+      depends_on:
+      - zeoserver
+      environment:
+      - ZEO_ADDRESS=zeoserver:8100
 
-  zeoserver:
-    image: plone
-    command: zeoserver
+    zeoserver:
+      image: plone
+      command: zeoserver
+      volumes:
+      - data:/data
+
+  volumes:
+    data:
 
 Start cluster::
 
@@ -205,12 +213,17 @@ Or with `Docker Compose <https://docs.docker.com/compose>`_
 
 * Add docker-compose.yml file::
 
-    plone:
-      image: plone
-      volumes:
-      - plone-data:/data
-      ports:
-      - "8080:8080"
+    version: "2"
+    services:
+      plone:
+        image: plone
+        volumes:
+        - data:/data
+        ports:
+        - "8080:8080"
+
+    volumes:
+      data:
 
 * Start Plone stack::
 
