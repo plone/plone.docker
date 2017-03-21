@@ -10,9 +10,9 @@
 
 ### Supported tags and respective `Dockerfile` links
 
-- [`5.0.6`, `5.0`, `5`, `latest` (*5.0.6/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.6/debian/Dockerfile)
+- [`5.0.7`, `5.0`, `5`, `latest` (*5.0.7/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.7/debian/Dockerfile)
 - [`4.3.12`, `4.3`, `4` (*4.3.12/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.12/debian/Dockerfile)
-- [`5.0.6-alpine`, `5.0-alpine`, `5-alpine` (*5.0.6/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.6/alpine/Dockerfile)
+- [`5.0.7-alpine`, `5.0-alpine`, `5-alpine` (*5.0.7/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.7/alpine/Dockerfile)
 - [`4.3.12-alpine`, `4.3-alpine`, `4-alpine` (*4.3.12/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.12/alpine/Dockerfile)
 
 ## Usage
