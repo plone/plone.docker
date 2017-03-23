@@ -9,8 +9,10 @@ ENV PLONE_MAJOR=5.0
 ENV PLONE_VERSION=5.0.7
 ENV PLONE_MD5=347e787d10a6a02d8156ed8c05effcdb
 
-LABEL plone.version=$PLONE_VERSION
-LABEL os="debian" os.version="8"
+LABEL version=$PLONE_VERSION \
+	  os="debian" \
+	  os.version="8" \
+	  name="plone"
 
 
 RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev" \
@@ -37,6 +39,7 @@ RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev
  && rm -rf /Plone* \
  && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
+ && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/* \
  && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
