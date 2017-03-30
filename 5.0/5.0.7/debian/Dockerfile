@@ -37,11 +37,13 @@ RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev
  && sudo -u plone bin/buildout \
  && chown -R plone:plone /plone /data \
  && rm -rf /Plone* \
- && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
+ && ADDED_PACKAGES=`apt-mark showauto` \
+ && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps $ADDED_PACKAGES \
  && apt-get install -y --no-install-recommends $runDeps \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/* \
+ && rm -rf /plone/Plone-docs \
  && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
 VOLUME /data
