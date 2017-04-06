@@ -9,11 +9,12 @@ ENV PLONE_MAJOR=5.0
 ENV PLONE_VERSION=5.0.7
 ENV PLONE_MD5=347e787d10a6a02d8156ed8c05effcdb
 
-LABEL version=$PLONE_VERSION \
+LABEL plone=$PLONE_VERSION \
 	  os="debian" \
 	  os.version="8" \
-	  name="plone"
-
+	  name="Plone 5 " \
+	  description="Plone image, based on Unified Installer" \
+	  maintainer="Plone Community"
 
 RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev" \
  && runDeps="libxml2 libxslt1.1 libjpeg62 rsync" \
