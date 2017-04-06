@@ -12,7 +12,7 @@ ENV PLONE_MD5=347e787d10a6a02d8156ed8c05effcdb
 LABEL plone=$PLONE_VERSION \
 	  os="debian" \
 	  os.version="8" \
-	  name="Plone5 " \
+	  name="Plone 5" \
 	  description="Plone image, based on Unified Installer" \
 	  maintainer="Plone Community"
 
