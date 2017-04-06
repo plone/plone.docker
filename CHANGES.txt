@@ -1,0 +1,5 @@
+CHANGELOG
+---------
+
+- Add (apt-mark showauto), Jenkins shut up
+  [svx]
