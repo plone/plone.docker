@@ -1,5 +1,6 @@
 CHANGELOG
 ---------
 
+- Adjust Label settings to follow best practices
 - Add (apt-mark showauto), Jenkins shut up
   [svx]
