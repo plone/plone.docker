@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 
+- Remove deprecated maintainer setting
+  [svx]
 - Adjust Label settings to follow best practices
+  [svx]
 - Add (apt-mark showauto), Jenkins shut up
   [svx]
