@@ -1,6 +1,9 @@
 CHANGELOG
 ---------
 
+- Add -d /home to adduser to correctly set the home dir.
+  [jladage]
+
 - Remove deprecated maintainer setting
   [svx]
 - Adjust Label settings to follow best practices
