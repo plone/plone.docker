@@ -1,6 +1,6 @@
 FROM python:2.7-slim
 
-RUN useradd --system -U -u 500 -d plone plone \
+RUN useradd --system -U -u 500 plone \
  && mkdir -p /plone /data/filestorage /data/blobstorage \
  && chown -R plone:plone /plone /data
 
