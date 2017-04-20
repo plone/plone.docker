@@ -1,9 +1,12 @@
 CHANGELOG
 ---------
 
+<<<<<<< HEAD
 - Add missing dependencies for pillow and transforms.
   [jladage]
 
+=======
+>>>>>>> master
 - Remove deprecated maintainer setting
   [svx]
 - Adjust Label settings to follow best practices
