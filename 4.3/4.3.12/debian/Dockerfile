@@ -1,9 +1,9 @@
 FROM python:2.7-slim
 MAINTAINER "Plone Community" http://community.plone.org
 
-RUN useradd --system -m -d /plone -U -u 500 plone \
- && mkdir -p /data/filestorage /data/blobstorage \
- && chown -R plone:plone /data
+RUN useradd --system -U -u 500 plone \
+ && mkdir -p /plone /data/filestorage /data/blobstorage \
+ && chown -R plone:plone /plone /data
 
 ENV PLONE_MAJOR=4.3
 ENV PLONE_VERSION=4.3.12
