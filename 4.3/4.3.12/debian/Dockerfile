@@ -12,8 +12,8 @@ ENV PLONE_MD5=62291e00e1b86b8794772e6841a29570
 LABEL plone.version=$PLONE_VERSION
 LABEL os="debian" os.version="8"
 
-RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev" \
- && runDeps="libxml2 libxslt1.1 libjpeg62 rsync" \
+RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev libtiff5-dev libopenjp2-7-dev" \
+ && runDeps="libxml2 libxslt1.1 libjpeg62 rsync lynx wv libtiff5 libopenjp2-7 poppler-utils" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
  && curl -o Plone.tgz -SL https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
