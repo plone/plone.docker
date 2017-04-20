@@ -1,8 +1,8 @@
 FROM python:2.7-slim
 
-RUN useradd --system -U -u 500 -d plone plone \
- && mkdir -p /plone /data/filestorage /data/blobstorage \
- && chown -R plone:plone /plone /data
+RUN useradd --system -m -d /plone -U -u 500 plone \
+ && mkdir -p /data/filestorage /data/blobstorage \
+ && chown -R plone:plone /data
 
 ENV PLONE_MAJOR=5.0
 ENV PLONE_VERSION=5.0.7

@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-- Add -d /home to adduser to correctly set the home dir.
+- Add -m option to useradd command to correctly set the home dir.
   [jladage]
 
 - Remove deprecated maintainer setting
