@@ -1,6 +1,8 @@
 CHANGELOG
 ---------
 
+- Add -m option to useradd command to correctly set the home dir.
+  [jladage]
 - Remove deprecated maintainer setting
   [svx]
 - Adjust Label settings to follow best practices
