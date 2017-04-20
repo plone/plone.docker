@@ -1,7 +1,7 @@
 CHANGELOG
 ---------
 
-- Add -d /home to adduser to correctly set the home dir.
+- Add missing dependencies for pillow and transforms.
   [jladage]
 
 - Remove deprecated maintainer setting
