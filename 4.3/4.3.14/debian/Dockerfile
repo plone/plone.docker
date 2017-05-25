@@ -1,18 +1,20 @@
 FROM python:2.7-slim
-MAINTAINER "Plone Community" http://community.plone.org
+
+ENV PLONE_MAJOR=4.3 \
+    PLONE_VERSION=4.3.14 \
+    PLONE_MD5=e10c55a870735b90e7a82c2f2a39d123
+
+LABEL plone=$PLONE_VERSION \
+    os="debian" \
+    os.version="8" \
+    name="Plone 4" \
+    description="Plone image, based on Unified Installer" \
+    maintainer="Plone Community"
 
 RUN useradd --system -m -d /plone -U -u 500 plone \
  && mkdir -p /data/filestorage /data/blobstorage \
- && chown -R plone:plone /data
-
-ENV PLONE_MAJOR=4.3
-ENV PLONE_VERSION=4.3.12
-ENV PLONE_MD5=62291e00e1b86b8794772e6841a29570
-
-LABEL plone.version=$PLONE_VERSION
-LABEL os="debian" os.version="8"
-
-RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev libtiff5-dev libopenjp2-7-dev" \
+ && chown -R plone:plone /data \
+ && buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev libtiff5-dev libopenjp2-7-dev" \
  && runDeps="libxml2 libxslt1.1 libjpeg62 rsync lynx wv libtiff5 libopenjp2-7 poppler-utils" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
@@ -34,10 +36,12 @@ RUN buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev
  && sudo -u plone bin/buildout \
  && chown -R plone:plone /plone /data \
  && rm -rf /Plone* \
- && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
+ && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps $(apt-mark showauto) \
  && apt-get install -y --no-install-recommends $runDeps \
+ && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/* \
+ && rm -rf /plone/Plone-docs \
  && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
 VOLUME /data

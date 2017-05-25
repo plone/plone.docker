@@ -1,19 +1,21 @@
 FROM python:2.7-alpine
-MAINTAINER "Plone Community" http://community.plone.org
+
+ENV PLONE_MAJOR=4.3 \
+    PLONE_VERSION=4.3.14 \
+    PLONE_MD5=e10c55a870735b90e7a82c2f2a39d123
+
+LABEL plone=$PLONE_VERSION \
+    os="alpine" \
+    os.version="3.4" \
+    name="Plone 4" \
+    description="Plone image, based on Unified Installer" \
+    maintainer="Plone Community"
 
 RUN addgroup -g 500 plone \
- && adduser -S -D -G plone -u 500 plone \
- && mkdir -p /plone /data/filestorage /data/blobstorage \
- && chown -R plone:plone /plone /data
-
-ENV PLONE_MAJOR=4.3
-ENV PLONE_VERSION=4.3.12
-ENV PLONE_MD5=62291e00e1b86b8794772e6841a29570
-
-LABEL plone.version=$PLONE_VERSION
-LABEL os="alpine" os.version="3.4"
-
-RUN apk add --no-cache --virtual .build-deps \
+ && adduser -S -D -G plone -u 500 -h /plone plone \
+ && mkdir -p /data/filestorage /data/blobstorage \
+ && chown -R plone:plone /data \
+ && apk add --no-cache --virtual .build-deps \
     curl \
     bzip2-dev \
     gcc \
