@@ -36,7 +36,7 @@ RUN useradd --system -m -d /plone -U -u 500 plone \
  && sudo -u plone bin/buildout \
  && chown -R plone:plone /plone /data \
  && rm -rf /Plone* \
- && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps $(apt-mark showauto) \
+ && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/* \
