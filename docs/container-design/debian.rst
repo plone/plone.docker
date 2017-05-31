@@ -98,9 +98,9 @@ Remove not needed files.
 
 .. code-block:: docker
 
-   && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps $(apt-mark showauto) \
+   && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps \
 
-Remove all package with dependencies, which were needed for building.
+Remove all package which were needed for building.
 
 .. code-block:: docker
 
