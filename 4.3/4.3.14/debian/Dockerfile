@@ -14,11 +14,11 @@ LABEL plone=$PLONE_VERSION \
 RUN useradd --system -m -d /plone -U -u 500 plone \
  && mkdir -p /data/filestorage /data/blobstorage \
  && chown -R plone:plone /data \
- && buildDeps="curl sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev libtiff5-dev libopenjp2-7-dev" \
+ && buildDeps="wget sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev libtiff5-dev libopenjp2-7-dev" \
  && runDeps="libxml2 libxslt1.1 libjpeg62 rsync lynx wv libtiff5 libopenjp2-7 poppler-utils" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
- && curl -o Plone.tgz -SL https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
+ && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
  && echo "$PLONE_MD5 Plone.tgz" | md5sum -c - \
  && tar -xzf Plone.tgz \
  && ./Plone-$PLONE_VERSION-UnifiedInstaller/install.sh \
@@ -36,9 +36,8 @@ RUN useradd --system -m -d /plone -U -u 500 plone \
  && sudo -u plone bin/buildout \
  && chown -R plone:plone /plone /data \
  && rm -rf /Plone* \
- && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps $(apt-mark showauto) \
+ && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
- && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/* \
  && rm -rf /plone/Plone-docs \
