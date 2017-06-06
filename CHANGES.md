@@ -1,6 +1,6 @@
 # Changelog
 
-- Switch from `curl` to `wget`, becaue `wget` has less dependecies than `curl`
+- Switch from `curl` to `wget`, because `wget` has less dependencies than `curl` for Plone 4 and 5.
   [svx]
 - Remove `apt-clean`, not needed because of https://github.com/moby/moby/blob/e925820bfd5af066497800a02c597d6846988398/contrib/mkimage/debootstrap#L107-L130
   [svx]
