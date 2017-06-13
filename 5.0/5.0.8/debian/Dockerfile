@@ -5,8 +5,8 @@ RUN useradd --system -m -d /plone -U -u 500 plone \
  && chown -R plone:plone /data
 
 ENV PLONE_MAJOR=5.0
-ENV PLONE_VERSION=5.0.7
-ENV PLONE_MD5=347e787d10a6a02d8156ed8c05effcdb
+ENV PLONE_VERSION=5.0.8
+ENV PLONE_MD5=246788240851f48bc2f84289a3dc6480
 
 LABEL plone=$PLONE_VERSION \
     os="debian" \
