@@ -26,7 +26,7 @@ Start 2 Plone clients::
   $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
   $ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
 
-Now, open http://localhost:8080/ in your workstation web browser. If you
+Now, open http://localhost:8081 or http://localhost:8082 in your workstation web browser. If you
 already have a Plone site within ZEO database, click on `View your Plone site`,
 otherwise add a new one.
 
