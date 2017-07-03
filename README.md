@@ -17,6 +17,8 @@
 
 ## Usage
 
+Choose either single Plone instance or ZEO cluster. It is unadvaisable to use following configurations for production. 
+
 ### Start a single Plone instance
 
 This will download and start the latest Plone 5 container, based on [Debian](https://www.debian.org/).
@@ -25,7 +27,7 @@ This will download and start the latest Plone 5 container, based on [Debian](htt
 $ docker run -p 8080:8080 plone
 ```
 
-This image includes `EXPOSE 8080` (the Plone port), so standard container linking will make it automatically available to the linked containers. Now you can add a Plone Site at http://localhost:8080 - default Zope user and password are `admin/admin`.
+This image includes `EXPOSE 8080` (the Plone port), so standard container linking will make it automatically available to the linked containers. Now you can add a Plone Site at http://localhost:8080 - default Zope user and password are **`admin/admin`**.
 
 ### Start Plone within a ZEO cluster
 
@@ -38,8 +40,8 @@ $ docker run --name=zeo plone zeoserver
 Start 2 Plone clients
 
 ```console
-$ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
-$ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
+$ docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
+$ docker run --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
 ```
 
 ### Start Plone in debug mode
@@ -50,16 +52,33 @@ You can also start Plone in debug mode (`fg`) by running
 $ docker run -p 8080:8080 plone fg
 ```
 
+Debug mode may also be used with ZEO
+
+```console
+$ docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8080:8080 plone fg
+```
+
 For more information on how to extend this image with your own custom settings, adding more add-ons, building it or mounting volumes, please refer to our [documentation](https://github.com/plone/plone.docker/tree/master/docs).
 
 ### Supported Environment Variables
 
 The Plone image uses several environment variable that allow to specify a more specific setup.
 
-* `PLONE_ADDONS`, `ADDONS` - Customize Plone via Plone add-ons using this environment variable (former `BUILDOUT_EGGS`)
+## For basic usage
+
+* `ADDONS` - Customize Plone via Plone add-ons using this environment variable
+* `ZEO_ADDRESS` - This environment variable allows you to run Plone image as a ZEO client.
+
+Run Plone with ZEO and install two addons (PloneFormGen and collective.roster)
+
+```console
+docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8080:8080 -e ADDONS="Products.PloneFormGen collective.roster" plone
+```
+
+## For advanced usage
+
 * `PLONE_ZCML`, `ZCML` - Include custom Plone add-ons ZCML files (former `BUILDOUT_ZCML`)
 * `PLONE_DEVELOP`, `DEVELOP` - Develop new or existing Plone add-ons (former `BUILDOUT_DEVELOP`)
-* `ZEO_ADDRESS` - This environment variable allows you to run Plone image as a ZEO client.
 * `ZEO_READ_ONLY` - Run Plone as a read-only ZEO client. Defaults to `off`.
 * `ZEO_CLIENT_READ_ONLY_FALLBACK` - A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available. Defaults to `false`.
 * `ZEO_SHARED_BLOB_DIR` - Set this to on if the ZEO server and the instance have access to the same directory. Defaults to `off`.
