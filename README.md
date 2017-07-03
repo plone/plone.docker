@@ -17,7 +17,7 @@
 
 ## Usage
 
-Choose either single Plone instance or ZEO cluster. It is unadvaisable to use following configurations for production. 
+Choose either single Plone instance or ZEO cluster. It is inadvisable to use following configurations for production. 
 
 ### Start a single Plone instance
 
