@@ -45,4 +45,4 @@ Start 2 Plone clients
 
  Open http://localhost:8080/ or http://localhost:8081/ in your browser.
 
-If you already have a Plone site, click on ``View your Plone site``, otherwise add a new one.
+If you already have a Plone site, click on :guilabel:`View your Plone site`, otherwise add a new one.
