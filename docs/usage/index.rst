@@ -14,8 +14,8 @@ Usage
    debug_mode
    variables
 
-Basic
-=====
+Basic Usage
+===========
 
 How to start a single instance or a ZEO cluster.
 
