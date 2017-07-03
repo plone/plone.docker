@@ -31,17 +31,17 @@ This image includes `EXPOSE 8080` (the Plone port), so standard container linkin
 
 ### Start Plone within a ZEO cluster
 
-Start ZEO server
+Start ZEO server in the background
 
 ```console
-$ docker run --name=zeo plone zeoserver
+$ docker run -d --name=zeo plone zeoserver
 ```
 
-Start 2 Plone clients
+Start 2 Plone clients (also in the background)
 
 ```console
-$ docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
-$ docker run --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
+$ docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
+$ docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
 ```
 
 ### Start Plone in debug mode
