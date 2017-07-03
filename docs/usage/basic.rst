@@ -16,7 +16,7 @@ Standalone
 
 .. todo::
 
-   Explain: Standalone
+Plone standalone instances are best suited for testing and development.
 
 .. code-block:: shell
 
@@ -27,9 +27,8 @@ Open your browser and go to http://localhost:8080/ and add a Plone site.
 ZEO Cluster
 ===========
 
-.. todo::
+ZEO cluster are best suited for production setups, you will **need** a loadbalancer.
 
-   Explain ZEO Cluster
 
 Start ZEO server
 
@@ -41,9 +40,9 @@ Start 2 Plone clients
 
 .. code-block:: shell
 
-   docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
-   docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
+   docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
+   docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
 
- Open http://localhost:8080/ in your browser.
+ Open http://localhost:8080/ or http://localhost:8081/ in your browser.
 
 If you already have a Plone site, click on ``View your Plone site``, otherwise add a new one.

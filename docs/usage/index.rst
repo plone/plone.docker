@@ -36,4 +36,4 @@ How to use environment variables that to specify a setup.
 
 .. note::
 
-   This is requires advanved knowledge of Plone
+   This requires advanved knowledge of Plone
