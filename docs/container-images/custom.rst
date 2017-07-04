@@ -19,16 +19,16 @@ Configuration File
 
 ``site.cfg``
 
-.. code-block:: shell
+.. code-block:: bash
 
    [buildout]
    extends = buildout.cfg
    eggs +=
-     plone.awsome.addon
+     plone.awesome.addon
      plone.other.addon
 
    [versions]
-   plone.awsome.addon = 1.0
+   plone.awesome.addon = 1.0
    plone.other.addon = 24.13
 
    # Required by:
@@ -39,7 +39,7 @@ Configuration File
 Dockerfile
 ----------
 
-.. code-block:: shell
+.. code-block:: bash
 
    FROM plone:5
 
