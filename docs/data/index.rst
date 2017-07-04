@@ -60,8 +60,8 @@ Start Plone stack
    docker-compose up
 
 
-Mount Host Directories As Data Volumes
-======================================
+Host Directories As Data Volumes
+================================
 
 Create data directories on the host system and `mount these to a directory visible from inside the container <https://docs.docker.com/engine/tutorials/dockervolumes/#/mount-a-host-directory-as-a-data-volume>`_.
 
