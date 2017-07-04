@@ -9,4 +9,4 @@ Scaling
 .. toctree::
 
    docker_compose
-
+   swarm
