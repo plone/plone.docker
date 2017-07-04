@@ -2,10 +2,11 @@
 Custom Images
 =============
 
-Extending A Base Image
-======================
+.. topic:: Description
 
-To run Plone with your custom theme or Plone add-ons, you'll have to build another image based on this one.
+   This document explains how you can extend and build the *plone.docker* base image with your custom theme and Add-ons, using a *site.cfg* configuration file.
+
+To run Plone with your custom theme or Plone Add-ons, you'll have to build another image based on this one.
 
 For this, you'll need to create two files:
 

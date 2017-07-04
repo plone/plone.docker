@@ -7,7 +7,7 @@ Plone On Docker
 
    intoduction
    usage/index
-   container-images/index
+   container-images/custom
    data/index
    scaling/index
 
