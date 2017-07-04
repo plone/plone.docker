@@ -53,7 +53,7 @@ Add ``docker-compose.yml`` file
    volumes:
      data:
 
-Start Plone stack
+Start the Plone stack
 
 .. code-block:: shell
 
