@@ -84,9 +84,9 @@ on the host system are set up correctly.
    	 -v /var/local/data/blobstorage:/data/blobstorage \
    	 -d plone
 
-The -v /path/to/filestorage:/data/filestorage part of the command mounts the -v /path/to/filestorage directory from the underlying host system as /data/filestorage inside the container, where Plone will look for/create the Data.fs database file.
+The *-v /path/to/filestorage:/data/filestorage* part of the command mounts the *-v /path/to/filestorage* directory from the underlying host system as /data/filestorage inside the container, where Plone will look for/create the Data.fs database file.
 
-The -v /path/to/blobstorage:/data/blobstorage part of the command mounts the -v /path/to/blobstorage directory from the underlying host system as /data/blobstorage where blobs will be stored.
+The *-v /path/to/blobstorage:/data/blobstorage* part of the command mounts the *-v /path/to/blobstorage* directory from the underlying host system as /data/blobstorage where blobs will be stored.
 
 Make sure that Plone has access to read/write within these folders
 
