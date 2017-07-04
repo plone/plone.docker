@@ -2,7 +2,9 @@
 Swarm
 =====
 
-The following configuration creates two ZEO instances which connect to the ZEO server via dedicated network (zeo-net).
+.. topic:: Description
+
+   The following configuration creates two ZEO instances which connect to the ZEO server via dedicated network (zeo-net).
 
 Load balancer (`Traefik <https://traefik.io/>`_) and ZEO instances connect via their own network (traefik-net).
 
