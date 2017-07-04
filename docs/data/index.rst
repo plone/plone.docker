@@ -39,7 +39,7 @@ Or with `Docker Compose <https://docs.docker.com/compose>`_
 
 Add ``docker-compose.yml`` file
 
-.. code-block:: shell
+.. code-block:: yaml
 
    version: "2"
    services:
