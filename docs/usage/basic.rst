@@ -22,6 +22,8 @@ Plone standalone instances are best suited for testing and development.
 
 Open your browser and go to http://localhost:8080/ and add a Plone site.
 
+Default Zope user and password are admin/admin.
+
 ZEO Cluster
 ===========
 
@@ -45,5 +47,7 @@ Start 2 Plone clients
    docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
 
 Open http://localhost:8080/ or http://localhost:8081/ in your browser.
+
+Default Zope user and password are admin/admin.
 
 If you already have a Plone site, click on :guilabel:`View your Plone site`, otherwise add a new one.

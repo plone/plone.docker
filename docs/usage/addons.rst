@@ -8,7 +8,7 @@ The following examples adds the `eea.facetednavigation <https://github.com/eea/e
 
 .. code-block:: shell
 
-   docker run -p 8080:8080 -e PLONE_ADDONS="Products.PloneFormGen eea.facetednavigation" plone fg
+   docker run -p 8080:8080 -e PLONE_ADDONS="eea.facetednavigation" plone fg
 
 This will start your container in foreground mode and install `eea.facetednavigation <https://github.com/eea/eea.facetednavigation>`_.
 
