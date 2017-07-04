@@ -30,10 +30,10 @@ Use data volumes with Plone on the command line
 
 .. code-block:: shell
 
-   $ docker run --name plone \
-                --volume=plone-data:/data \
-                -p 8080:8080 \
-            plone
+   docker run --name plone \
+   	--volume=plone-data:/data \
+   	-p 8080:8080 \
+   	plone
 
 Or with `Docker Compose <https://docs.docker.com/compose>`_
 
@@ -74,11 +74,15 @@ and that e.g. directory permissions and other security mechanisms
 on the host system are set up correctly.
 
 - Create data directories on a suitable volume on your host system, e.g. ``/var/local/data/filestorage`` and ``/var/local/data/blobstorage``
+
+
 - Start your ``Plone`` container
 
 .. code-block:: shell
 
-   docker run -v /var/local/data/filestorage:/data/filestorage -v /var/local/data/blobstorage:/data/blobstorage -d plone
+   docker run -v /var/local/data/filestorage:/data/filestorage \
+   	 -v /var/local/data/blobstorage:/data/blobstorage \
+   	 -d plone
 
 The -v /path/to/filestorage:/data/filestorage part of the command mounts the -v /path/to/filestorage directory from the underlying host system as /data/filestorage inside the container, where Plone will look for/create the Data.fs database file.
 
@@ -97,7 +101,8 @@ Make sure that Plone has access to read/write within these folders
    The current workaround is to assign the relevant SELinux policy type to the
    new data directory so that the container will be allowed to access it
 
-   ..code-block:: shell
+
+.. code-block:: shell
    
    chcon -Rt svirt_sandbox_file_t /var/local/data
 

@@ -14,8 +14,6 @@ There are two ways to use this image out-of-the-box, meaning without any additio
 Standalone
 ==========
 
-.. todo::
-
 Plone standalone instances are best suited for testing and development.
 
 .. code-block:: shell
@@ -41,6 +39,9 @@ Start 2 Plone clients
 .. code-block:: shell
 
    docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
+
+.. code-block:: shell
+
    docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
 
 Open http://localhost:8080/ or http://localhost:8081/ in your browser.
