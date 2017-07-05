@@ -6,6 +6,15 @@ Swarm
 
    The following example creates two ZEO instances which connects to the ZEO server via a dedicated network (zeo-net).
 
+.. topic:: Note
+
+   This example assumes that Swarm manager node is also the load balancing node.
+
+   If more nodes are added make sure that ZEO server has a constraint to run only on a specific node.
+   Otherwise you might loose your site temporary when ZEO server migrates to another node (and new volume is created there).
+   
+   This can be mitigated by using distributed volume driver on mounting the zeo-data from NFS.
+
 Load balancer (`Traefik <https://traefik.io/>`_) and ZEO instances connect via their own network (traefik-net).
 
 Only Traefik exposes its ports (80/TCP and 8080/TCP).
@@ -96,9 +105,4 @@ Redeploy the configuration with the same command as before:
 
    docker deploy plone --compose-file plone-compose.yml
    
-.. topic:: Notes
 
-   This example assumes that Swarm manager node is also the load balancing node. 
-   If more nodes are added make sure that ZEO server has a constraint to run only on a specific node.
-   Otherwise you might loose your site temporary when ZEO server migrates to another node (and new volume is created there).
-   This can be mitigated by using distributed volume driver on mounting the zeo-data from NFS.
