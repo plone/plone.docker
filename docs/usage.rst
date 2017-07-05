@@ -109,7 +109,11 @@ existing Plone add-ons::
              plone fg
 
 Make sure that you have your Plone add-on code at `src/plone.theme.winter` and
-that Plone user inside Docker container (`uid: 500`) has the rights to read/write there.
+that Plone user inside Docker container (`uid: 500`) has the rights to read/write there::
+
+    $ setfacl  -R -m u:500:rwX src/
+    $ setfacl -dR -m u:500:rwX src/
+    $ getfacl src/
 
 Running unit tests::
 
@@ -264,6 +268,13 @@ The -v /path/to/blobstorage:/data/blobstorage part of the command mounts the -v 
 Make sure that Plone has access to read/write within these folders::
 
     $ chown -R 500:500 /var/local/data
+    $ ls -l
+
+    or (by updating ACLs)
+
+    $ setfacl  -R -m u:500:rwX /var/local/data
+    $ setfacl -dR -m u:500:rwX /var/local/data
+    $ getfacl
 
 Note that users on host systems with SELinux enabled may see issues with this.
 The current workaround is to assign the relevant SELinux policy type to the
