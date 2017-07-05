@@ -12,7 +12,8 @@ Only Traefik exposes its ports (80/TCP and 8080/TCP).
 
 Traefik monitoring interface is at port 8080 and Plone trafik goes through the port 80.
 
-First we need to put Docker in swarm mode:
+You need to be running Docker Engine 1.12 on newer for this example to work.
+First we need to put Docker in swarm mode if it is not already:
 
 .. code-block:: shell
 
@@ -89,8 +90,15 @@ After the site is created you can modify the traefik.frontend.rule label so that
 
 traefik.frontend.rule: *Host:plone.traefik;AddPrefix:/VirtualHostBase/http/plone.traefik:80/Plone/VirtualHostRoot*
 
-Redeploy the configuration with same command as before:
+Redeploy the configuration with the same command as before:
 
 .. code-block:: shell
 
    docker deploy plone --compose-file plone-compose.yml
+   
+.. topic:: Notes
+
+   This example assumes that Swarm manager node is also the load balancing node. 
+   If more nodes are added make sure that ZEO server has a constraint to run only on a specific node.
+   Otherwise you might loose your site temporary when ZEO server migrates to another node (and new volume is created there).
+   This can be mitigated by using distributed volume driver on mounting the zeo-data from NFS.
