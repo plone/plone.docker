@@ -52,4 +52,4 @@ Scale the number of ZEO clients
 
 Now, open http://localhost:8080 in your workstation web browser.
 
-To see the HAProxy backends health, go to http://localhost:1936 Default user: `admin/admin`
+To see the HAProxy backends health, go to http://localhost:1936 and login with: `admin/admin`
