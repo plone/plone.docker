@@ -4,7 +4,7 @@ Swarm
 
 .. topic:: Description
 
-   The following configuration creates two ZEO instances which connect to the ZEO server via dedicated network (zeo-net).
+   The following example creates two ZEO instances which connects to the ZEO server via a dedicated network (zeo-net).
 
 Load balancer (`Traefik <https://traefik.io/>`_) and ZEO instances connect via their own network (traefik-net).
 
@@ -13,7 +13,10 @@ Only Traefik exposes its ports (80/TCP and 8080/TCP).
 Traefik monitoring interface is at port 8080 and Plone trafik goes through the port 80.
 
 First we need to put Docker in swarm mode:
-$ docker swarm init
+
+.. code-block:: shell
+
+   docker swarm init
 
 Create plone-compose.yml with following content:
 
