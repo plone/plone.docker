@@ -1,5 +1,7 @@
 # Changelog
 
+- Update docs
+  [svx]
 - Switch from `curl` to `wget`, because `wget` has less dependencies than `curl` for Plone 5.
   [svx]
 - Switch from `curl` to `wget`, because `wget` has less dependencies than `curl` for Plone 4.
