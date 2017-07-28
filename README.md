@@ -15,6 +15,10 @@
 - [`5.0.8-alpine`, `5.0-alpine`, `5-alpine` (*5.0.8/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.8/alpine/Dockerfile)
 - [`4.3.14-alpine`, `4.3-alpine`, `4-alpine` (*4.3.14/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.14/alpine/Dockerfile)
 
+## Prerequisites
+
+Make sure you have Docker installed and running for your platform. You can download Docker from https://www.docker.com.
+
 ## Usage
 
 Choose either single Plone instance or ZEO cluster.
