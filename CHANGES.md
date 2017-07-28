@@ -1,5 +1,7 @@
 # Changelog
 
+- add prerequisite of installing & running Docker
+  [tkimnguyen]
 - Update docs
   [svx]
 - Switch from `curl` to `wget`, because `wget` has less dependencies than `curl` for Plone 5.
