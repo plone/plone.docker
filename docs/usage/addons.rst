@@ -33,7 +33,7 @@ that Plone user inside Docker container (`uid: 500`) has the rights to read/writ
 
    setfacl  -R -m u:500:rwX src/
    setfacl -dR -m u:500:rwX src/
-   setfacl src/
+   getfacl src/
 
 Running unit tests:
 
