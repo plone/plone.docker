@@ -1,5 +1,4 @@
 FROM python:2.7-alpine
-MAINTAINER "Plone Community" http://community.plone.org
 
 RUN addgroup -g 500 plone \
  && adduser -S -D -G plone -u 500 plone \
@@ -10,8 +9,13 @@ ENV PLONE_MAJOR=5.1
 ENV PLONE_VERSION=5.1.0
 ENV PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
 
-LABEL plone.version=$PLONE_VERSION
-LABEL os="alpine" os.version="3.4"
+LABEL plone=$PLONE_VERSION \
+    os="alpine" \
+    os.version="3.4" \
+    name="Plone 5.1" \
+    description="Plone image, based on Unified Installer" \
+    maintainer="Plone Community"
+
 
 RUN apk add --no-cache --virtual .build-deps \
     curl \
