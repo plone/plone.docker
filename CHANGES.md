@@ -1,5 +1,7 @@
 # Changelog
 
+- add Plone 5.1 images
+  [svx]
 - add prerequisite of installing & running Docker
   [tkimnguyen]
 - Update docs

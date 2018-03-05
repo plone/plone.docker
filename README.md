@@ -5,11 +5,13 @@
 
 ## Features
 
-- Images for Plone 5 and Plone 4
+- Images for Plone 5.x and Plone 4.x
 - Choose between [Debian](https://www.debian.org/) or [Alpine (unstable)](http://www.alpinelinux.org/) based images
 
 ### Supported tags and respective `Dockerfile` links
 
+- [`5.1.0`, `5.1`, `5.1`, `latest` (*5.1.0/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.0/debian/Dockerfile)
+- [`5.1.0-alpine`, `5.1-alpine`, `5-alpine` (*5.1.0/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.0/alpine/Dockerfile)
 - [`5.0.8`, `5.0`, `5`, `latest` (*5.0.8/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.8/debian/Dockerfile)
 - [`4.3.15`, `4.3`, `4` (*4.3.15/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.15/debian/Dockerfile)
 - [`5.0.8-alpine`, `5.0-alpine`, `5-alpine` (*5.0.8/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.0/5.0.8/alpine/Dockerfile)
