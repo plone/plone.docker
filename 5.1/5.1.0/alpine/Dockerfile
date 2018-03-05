@@ -1,4 +1,4 @@
-FROM python:2.7-alpine
+FROM python:2.7-alpine3.7
 
 RUN addgroup -g 500 plone \
  && adduser -S -D -G plone -u 500 plone \
@@ -11,7 +11,7 @@ ENV PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
 
 LABEL plone=$PLONE_VERSION \
     os="alpine" \
-    os.version="3.4" \
+    os.version="3.7" \
     name="Plone 5.1" \
     description="Plone image, based on Unified Installer" \
     maintainer="Plone Community"

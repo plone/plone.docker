@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM python:2.7-slim-stretch
 
 RUN useradd --system -m -d /plone -U -u 500 plone \
  && mkdir -p /data/filestorage /data/blobstorage \
@@ -10,7 +10,7 @@ ENV PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
 
 LABEL plone=$PLONE_VERSION \
     os="debian" \
-    os.version="8" \
+    os.version="9" \
     name="Plone 5.1" \
     description="Plone image, based on Unified Installer" \
     maintainer="Plone Community"
