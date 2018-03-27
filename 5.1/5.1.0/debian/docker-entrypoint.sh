@@ -28,13 +28,13 @@ fi
 
 if [[ $START == *"$1"* ]]; then
   _stop() {
-    $CMD stop
+    gosu plone $CMD stop
     kill -TERM $child 2>/dev/null
   }
 
   trap _stop SIGTERM SIGINT
-  $CMD start
-  $CMD logtail &
+  gosu plone $CMD start
+  gosu plone $CMD logtail &
   child=$!
 
   pid=`$CMD status | sed 's/[^0-9]*//g'`
@@ -50,7 +50,7 @@ if [[ $START == *"$1"* ]]; then
   fi
 else
   if [[ $COMMANDS == *"$1"* ]]; then
-    exec bin/instance "$@"
+    exec gosu plone bin/instance "$@"
   fi
   exec "$@"
 fi

@@ -19,6 +19,7 @@ RUN useradd --system -m -d /plone -U -u 500 plone \
 COPY buildout.cfg /plone/instance/
 
 RUN buildDeps="wget gcc libc6-dev libpcre3-dev" \
+ && runDeps="gosu" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
  && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
@@ -35,7 +36,8 @@ RUN buildDeps="wget gcc libc6-dev libpcre3-dev" \
  && ln -s /data/blobstorage /plone/instance//var/blobstorage \
  && chown -R plone:plone /plone /data \
  && rm -rf /Plone* \
- && apt-get remove --purge -y $buildDeps\
+ && apt-get purge -y --auto-remove $buildDeps \
+ && apt-get install -y --no-install-recommends $runDeps \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/*
@@ -45,7 +47,6 @@ VOLUME /data
 COPY docker-initialize.py docker-entrypoint.sh /
 
 EXPOSE 8080
-USER plone
 WORKDIR /plone/instance
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
