@@ -5,17 +5,17 @@ COMMANDS="debug help logtail show stop adduser fg kill quit run wait console for
 START="start restart zeoserver"
 CMD="bin/instance"
 
-python /docker-initialize.py
+gosu plone python /docker-initialize.py
 
 if [ -e "custom.cfg" ]; then
   if [ ! -e "bin/develop" ]; then
-    bin/buildout -c custom.cfg
-    python /docker-initialize.py
+    gosu plone bin/buildout -c custom.cfg
+    gosu plone python /docker-initialize.py
   fi
 fi
 
 if [[ "$1" == "zeo"* ]]; then
-  CMD="bin/zeoserver"
+  CMD="bin/$1"
 fi
 
 if [ -z "$HEALTH_CHECK_TIMEOUT" ]; then
