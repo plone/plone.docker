@@ -34,17 +34,17 @@ Start ZEO server
 
 .. code-block:: shell
 
-   docker run --name=zeo plone zeoserver
+   docker run --name=zeo plone zeo
 
 Start 2 Plone clients
 
 .. code-block:: shell
 
-   docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
+   docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8081:8080 plone
 
 .. code-block:: shell
 
-   docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
+   docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8082:8080 plone
 
 Open http://localhost:8080/ or http://localhost:8081/ in your browser.
 

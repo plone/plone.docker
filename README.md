@@ -48,14 +48,14 @@ ZEO cluster are best suited for production setups, you will **need** a loadbalan
 Start ZEO server in the background
 
 ```console
-$ docker run -d --name=zeo plone zeoserver
+$ docker run -d --name=zeo plone zeo
 ```
 
 Start 2 Plone clients (also in the background)
 
 ```console
-docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8081:8080 plone
-docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8082:8080 plone
+docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8081:8080 plone
+docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8082:8080 plone
 ```
 
 ### Start Plone In Debug Mode
@@ -69,7 +69,7 @@ docker run -p 8080:8080 plone fg
 Debug mode may also be used with ZEO
 
 ```console
-docker run --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8080:8080 plone fg
+docker run --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 plone fg
 ```
 
 For more information on how to extend this image with your own custom settings, adding more add-ons, building it or mounting volumes, please refer to our [documentation](https://github.com/plone/plone.docker/tree/master/docs).
@@ -86,7 +86,7 @@ The Plone image uses several environment variable that allow to specify a more s
 Run Plone with ZEO and install two addons (PloneFormGen and collective.roster)
 
 ```console
-docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8100 -p 8080:8080 \
+docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 \
 -e ADDONS="Products.PloneFormGen collective.roster" plone
 ```
 
