@@ -19,7 +19,7 @@ RUN useradd --system -m -d /plone -U -u 500 plone \
 COPY buildout.cfg /plone/instance/
 
 RUN buildDeps="wget gcc libc6-dev libpcre3-dev" \
- && runDeps="gosu" \
+ && runDeps="gosu poppler-utils wv" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
  && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
