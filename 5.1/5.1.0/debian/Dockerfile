@@ -1,12 +1,10 @@
 FROM python:2.7-slim-stretch
 
-RUN useradd --system -m -d /plone -U -u 500 plone \
- && mkdir -p /data/filestorage /data/blobstorage \
- && chown -R plone:plone /data
-
-ENV PLONE_MAJOR=5.1
-ENV PLONE_VERSION=5.1.0
-ENV PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
+ENV ZC_BUILDOUT=2.11.2 \
+    SETUPTOOLS=33.1.1 \
+    PLONE_MAJOR=5.1 \
+    PLONE_VERSION=5.1.0 \
+    PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
 
 LABEL plone=$PLONE_VERSION \
     os="debian" \
@@ -15,35 +13,32 @@ LABEL plone=$PLONE_VERSION \
     description="Plone image, based on Unified Installer" \
     maintainer="Plone Community"
 
-RUN buildDeps="wget sudo python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev libtiff5-dev libopenjp2-7-dev" \
- && runDeps="libxml2 libxslt1.1 libjpeg62 rsync lynx wv libtiff5 libopenjp2-7 poppler-utils" \
+RUN useradd --system -m -d /plone -U -u 500 plone \
+ && mkdir -p /plone/instance/ /data/filestorage /data/blobstorage
+
+COPY buildout.cfg /plone/instance/
+
+RUN buildDeps="wget gcc libc6-dev libpcre3-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
  && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
  && echo "$PLONE_MD5 Plone.tgz" | md5sum -c - \
  && tar -xzf Plone.tgz \
- && ./Plone-$PLONE_VERSION-UnifiedInstaller/install.sh \
-      --password=admin \
-      --daemon-user=plone \
-      --owner=plone \
-      --group=plone \
-      --target=/plone \
-      --instance=instance \
-      --var=/data \
-      none \
+ && cp -rv ./Plone-$PLONE_VERSION-UnifiedInstaller/base_skeleton/* /plone/instance/ \
+ && cp -v ./Plone-$PLONE_VERSION-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
+ && pip install setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
  && cd /plone/instance \
- && sed -i 's/parts =/parts =\n    zeoserver/g' buildout.cfg \
- && echo '\n[zeoserver]\n<= zeoserver_base\nrecipe = plone.recipe.zeoserver' >> buildout.cfg \
- && sudo -u plone bin/buildout \
+ && buildout \
+ && ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
+ && ln -s /usr/local/bin/python /plone/Python-2.7 \
+ && ln -s /data/filestorage/ /plone/instance/var/filestorage \
+ && ln -s /data/blobstorage /plone/instance//var/blobstorage \
  && chown -R plone:plone /plone /data \
  && rm -rf /Plone* \
- && SUDO_FORCE_REMOVE=yes apt-get remove --purge -y $buildDeps\
- && apt-get install -y --no-install-recommends $runDeps \
+ && apt-get remove --purge -y $buildDeps\
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
- && rm -rf /plone/buildout-cache/downloads/* \
- && rm -rf /plone/Plone-docs \
- && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
+ && rm -rf /plone/buildout-cache/downloads/*
 
 VOLUME /data
 
