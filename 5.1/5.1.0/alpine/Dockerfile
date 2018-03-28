@@ -1,13 +1,10 @@
 FROM python:2.7-alpine3.7
 
-RUN addgroup -g 500 plone \
- && adduser -S -D -G plone -u 500 plone \
- && mkdir -p /plone /data/filestorage /data/blobstorage \
- && chown -R plone:plone /plone /data
-
-ENV PLONE_MAJOR=5.1
-ENV PLONE_VERSION=5.1.0
-ENV PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
+ENV ZC_BUILDOUT=2.11.2 \
+    SETUPTOOLS=33.1.1 \
+    PLONE_MAJOR=5.1 \
+    PLONE_VERSION=5.1.0 \
+    PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
 
 LABEL plone=$PLONE_VERSION \
     os="alpine" \
@@ -16,55 +13,50 @@ LABEL plone=$PLONE_VERSION \
     description="Plone image, based on Unified Installer" \
     maintainer="Plone Community"
 
+RUN addgroup -g 500 plone \
+ && adduser -S -D -G plone -u 500 plone \
+ && mkdir -p /plone/instance /data/filestorage /data/blobstorage
+
+COPY buildout.cfg /plone/instance/
 
 RUN apk add --no-cache --virtual .build-deps \
-    curl \
-    bzip2-dev \
     gcc \
     libc-dev \
-    ncurses-dev \
-    openssl-dev \
-    readline-dev \
     zlib-dev \
-    sudo \
-    make \
+    libjpeg-turbo-dev \
+    libpng-dev \
     libxml2-dev \
     libxslt-dev \
-    libjpeg-turbo-dev \
-    libpng-dev openssl \
- && curl -SL -o Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
- && tar -zxvf Plone.tgz \
- && ./Plone-$PLONE_VERSION-UnifiedInstaller/install.sh \
-      --password=admin \
-      --daemon-user=plone \
-      --owner=plone \
-      --group=plone \
-      --target=/plone \
-      --instance=instance \
-      --var=/data \
-      none \
- && cd /plone/instance \
- && sed -i 's/parts =/parts =\n    zeoserver/g' buildout.cfg \
- && echo -e '\n[zeoserver]\n<= zeoserver_base\nrecipe = plone.recipe.zeoserver' >> buildout.cfg \
- && sudo -u plone LIBRARY_PATH=/lib:/usr/lib bin/buildout \
- && chown -R plone:plone /plone /data \
- && apk del .build-deps \
- && apk add --no-cache --virtual .run-deps \
+    pcre-dev \
+&& wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
+&& echo "$PLONE_MD5  Plone.tgz" | md5sum -c - \
+&& tar -zxvf Plone.tgz \
+&& cp -rv ./Plone-$PLONE_VERSION-UnifiedInstaller/base_skeleton/* /plone/instance/ \
+&& cp -v ./Plone-$PLONE_VERSION-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
+&& pip install setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
+&& cd /plone/instance \
+&& buildout \
+&& ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
+&& ln -s /usr/local/bin/python /plone/Python-2.7 \
+&& ln -s /data/filestorage/ /plone/instance/var/filestorage \
+&& ln -s /data/blobstorage /plone/instance//var/blobstorage \
+&& chown -R plone:plone /plone /data \
+&& rm -rf /Plone* \
+&& apk del .build-deps \
+&& apk add --no-cache --virtual .run-deps \
+    su-exec \
     bash \
+    rsync \
     libxml2 \
     libxslt \
     libjpeg-turbo \
-    rsync \
- && rm -rf /Plone* \
- && rm -rf /plone/buildout-cache/downloads/* \
- && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
+&& rm -rf /plone/buildout-cache/downloads/*
 
 VOLUME /data
 
 COPY docker-initialize.py docker-entrypoint.sh /
 
 EXPOSE 8080
-USER plone
 WORKDIR /plone/instance
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
