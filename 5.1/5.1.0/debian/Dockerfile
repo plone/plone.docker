@@ -1,7 +1,7 @@
 FROM python:2.7-slim-stretch
 
 ENV ZC_BUILDOUT=2.11.2 \
-    SETUPTOOLS=33.1.1 \
+    SETUPTOOLS=39.0.1 \
     PLONE_MAJOR=5.1 \
     PLONE_VERSION=5.1.0 \
     PLONE_MD5=76dc6cfc1c749d763c32fff3a9870d8d
@@ -19,7 +19,7 @@ RUN useradd --system -m -d /plone -U -u 500 plone \
 COPY buildout.cfg /plone/instance/
 
 RUN buildDeps="wget gcc libc6-dev libpcre3-dev" \
- && runDeps="gosu poppler-utils wv" \
+ && runDeps="gosu poppler-utils wv rsync lynx" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
  && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
