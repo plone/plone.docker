@@ -29,30 +29,29 @@ RUN apk add --no-cache --virtual .build-deps \
     libxml2-dev \
     libxslt-dev \
     pcre-dev \
-&& wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
-&& echo "$PLONE_MD5  Plone.tgz" | md5sum -c - \
-&& tar -zxvf Plone.tgz \
-&& cp -rv ./Plone-$PLONE_VERSION-UnifiedInstaller/base_skeleton/* /plone/instance/ \
-&& cp -v ./Plone-$PLONE_VERSION-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
-&& pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
-&& cd /plone/instance \
-&& buildout \
-&& ln -s /usr/local/bin/pip /plone/instance/bin/pip \
-&& ln -s /usr/local/bin/python /plone/instance/bin/python \
-&& ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
-&& ln -s /data/filestorage/ /plone/instance/var/filestorage \
-&& ln -s /data/blobstorage /plone/instance//var/blobstorage \
-&& chown -R plone:plone /plone /data \
-&& rm -rf /Plone* \
-&& apk del .build-deps \
-&& apk add --no-cache --virtual .run-deps \
+ && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
+ && echo "$PLONE_MD5  Plone.tgz" | md5sum -c - \
+ && tar -zxvf Plone.tgz \
+ && cp -rv ./Plone-$PLONE_VERSION-UnifiedInstaller/base_skeleton/* /plone/instance/ \
+ && cp -v ./Plone-$PLONE_VERSION-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
+ && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
+ && cd /plone/instance \
+ && buildout \
+ && ln -s /usr/local/bin/pip /plone/instance/bin/pip \
+ && ln -s /usr/local/bin/python /plone/instance/bin/python \
+ && ln -s /data/filestorage/ /plone/instance/var/filestorage \
+ && ln -s /data/blobstorage /plone/instance//var/blobstorage \
+ && chown -R plone:plone /plone /data \
+ && rm -rf /Plone* \
+ && apk del .build-deps \
+ && apk add --no-cache --virtual .run-deps \
     su-exec \
     bash \
     rsync \
     libxml2 \
     libxslt \
     libjpeg-turbo \
-&& rm -rf /plone/buildout-cache/downloads/*
+ && rm -rf /plone/buildout-cache/downloads/*
 
 VOLUME /data
 
