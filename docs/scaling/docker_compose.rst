@@ -27,11 +27,11 @@ instance configured as a ZEO client::
       depends_on:
       - zeoserver
       environment:
-      - ZEO_ADDRESS=zeoserver:8100
+      - ZEO_ADDRESS=zeoserver:8080
 
     zeoserver:
       image: plone
-      command: zeoserver
+      command: zeo
       volumes:
       - data:/data
 

@@ -1,4 +1,4 @@
-#!/plone/instance/bin/python
+#!/usr/local/bin/python
 
 import re
 import os

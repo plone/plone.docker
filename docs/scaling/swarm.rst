@@ -12,7 +12,7 @@ Swarm
 
    If more nodes are added make sure that ZEO server has a constraint to run only on a specific node.
    Otherwise you might loose your site temporary when ZEO server migrates to another node (and new volume is created there).
-   
+
    This can be mitigated by using distributed volume driver on mounting the zeo-data from NFS.
 
 Load balancer (`Traefik <https://traefik.io/>`_) and ZEO instances connect via their own network (traefik-net).
@@ -57,7 +57,7 @@ Create plone-compose.yml with following content:
          - traefik-net
          - zeo-net
        environment:
-         - ZEO_ADDRESS=zeo:8100
+         - ZEO_ADDRESS=zeo:8080
        deploy:
          replicas: 2
          labels:
@@ -68,7 +68,7 @@ Create plone-compose.yml with following content:
      zeo:
        hostname: zeo
        image: library/plone:latest
-       command: zeoserver
+       command: zeo
        volumes:
          - zeo-data:/data
        networks:
@@ -104,5 +104,5 @@ Redeploy the configuration with the same command as before:
 .. code-block:: shell
 
    docker deploy plone --compose-file plone-compose.yml
-   
+
 

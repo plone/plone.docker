@@ -5,17 +5,17 @@ COMMANDS="debug help logtail show stop adduser fg kill quit run wait console for
 START="start restart zeoserver"
 CMD="bin/instance"
 
-python /docker-initialize.py
+su-exec plone python /docker-initialize.py
 
 if [ -e "custom.cfg" ]; then
   if [ ! -e "bin/develop" ]; then
-    bin/buildout -c custom.cfg
-    python /docker-initialize.py
+    su-exec plone bin/buildout -c custom.cfg
+    su-exec plone python /docker-initialize.py
   fi
 fi
 
 if [[ "$1" == "zeo"* ]]; then
-  CMD="bin/zeoserver"
+  CMD="bin/$1"
 fi
 
 if [ -z "$HEALTH_CHECK_TIMEOUT" ]; then
@@ -28,13 +28,13 @@ fi
 
 if [[ $START == *"$1"* ]]; then
   _stop() {
-    $CMD stop
+    su-exec plone $CMD stop
     kill -TERM $child 2>/dev/null
   }
 
   trap _stop SIGTERM SIGINT
-  $CMD start
-  $CMD logtail &
+  su-exec plone $CMD start
+  su-exec plone $CMD logtail &
   child=$!
 
   pid=`$CMD status | sed 's/[^0-9]*//g'`
@@ -50,7 +50,7 @@ if [[ $START == *"$1"* ]]; then
   fi
 else
   if [[ $COMMANDS == *"$1"* ]]; then
-    exec bin/instance "$@"
+    exec su-exec plone bin/instance "$@"
   fi
   exec "$@"
 fi
