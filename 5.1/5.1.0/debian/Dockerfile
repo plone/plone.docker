@@ -1,6 +1,7 @@
 FROM python:2.7-slim-stretch
 
-ENV ZC_BUILDOUT=2.11.2 \
+ENV PIP=9.0.3 \
+    ZC_BUILDOUT=2.11.2 \
     SETUPTOOLS=38.7.0 \
     PLONE_MAJOR=5.1 \
     PLONE_VERSION=5.1.0 \
@@ -27,7 +28,7 @@ RUN buildDeps="wget gcc libc6-dev libpcre3-dev" \
  && tar -xzf Plone.tgz \
  && cp -rv ./Plone-$PLONE_VERSION-UnifiedInstaller/base_skeleton/* /plone/instance/ \
  && cp -v ./Plone-$PLONE_VERSION-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
- && pip install setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
+ && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
  && cd /plone/instance \
  && buildout \
  && ln -s /usr/local/bin/pip /plone/instance/bin/pip \
