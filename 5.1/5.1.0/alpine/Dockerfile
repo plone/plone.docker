@@ -59,5 +59,8 @@ COPY docker-initialize.py docker-entrypoint.sh /
 EXPOSE 8080
 WORKDIR /plone/instance
 
+HEALTHCHECK --interval=1m --timeout=5s --start-period=1m \
+  CMD nc -z -w5 127.0.0.1 8080 || exit 1
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["start"]
