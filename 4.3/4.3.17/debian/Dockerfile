@@ -33,7 +33,6 @@ RUN buildDeps="wget gcc libc6-dev libpcre3-dev libxml2-dev libxslt1-dev zlib1g-d
  && buildout \
  && ln -s /usr/local/bin/pip /plone/instance/bin/pip \
  && ln -s /usr/local/bin/python /plone/instance/bin/python \
- && ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
  && ln -s /data/filestorage/ /plone/instance/var/filestorage \
  && ln -s /data/blobstorage /plone/instance/var/blobstorage \
  && chown -R plone:plone /plone /data \
