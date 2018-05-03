@@ -9,7 +9,7 @@ su-exec plone python /docker-initialize.py
 
 if [ -e "custom.cfg" ]; then
   if [ ! -e "bin/develop" ]; then
-    su-exec plone bin/buildout -c custom.cfg
+    su-exec plone buildout -c custom.cfg
     su-exec plone python /docker-initialize.py
   fi
 fi

@@ -31,6 +31,8 @@ RUN buildDeps="wget gcc libc6-dev libpcre3-dev libxml2-dev libxslt1-dev zlib1g-d
  && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
  && cd /plone/instance \
  && buildout \
+ && rm -rf bin/buildout \
+ && ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
  && ln -s /usr/local/bin/pip /plone/instance/bin/pip \
  && ln -s /usr/local/bin/python /plone/instance/bin/python \
  && ln -s /data/filestorage/ /plone/instance/var/filestorage \

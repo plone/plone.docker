@@ -37,6 +37,8 @@ RUN apk add --no-cache --virtual .build-deps \
  && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
  && cd /plone/instance \
  && buildout \
+ && rm -rf bin/buildout \
+ && ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
  && ln -s /usr/local/bin/pip /plone/instance/bin/pip \
  && ln -s /usr/local/bin/python /plone/instance/bin/python \
  && ln -s /data/filestorage/ /plone/instance/var/filestorage \
