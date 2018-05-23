@@ -88,6 +88,12 @@ docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 \
 -e ADDONS="Products.PloneFormGen collective.roster" plone
 ```
 
+To use specific add-ons versions:
+
+```console
+ -e ADDONS="Products.PloneFormGen==1.8.5 collective.roster==2.3.1"
+```
+
 ## For Advanced Usage
 
 * `PLONE_ZCML`, `ZCML` - Include custom Plone add-ons ZCML files (former `BUILDOUT_ZCML`)
