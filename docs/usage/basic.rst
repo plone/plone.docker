@@ -8,7 +8,7 @@ There are two ways to use this image out-of-the-box, meaning without any additio
 
    This is fine for testing but **not for production**
 
-   Out-of-the-box, this setup has **no data presidency** which means
+   Out-of-the-box, this setup has **no data persistency** which means
    by stopping the container you will loose all you data !
 
 Standalone
