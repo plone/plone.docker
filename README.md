@@ -12,8 +12,8 @@
 
 - [`5.1.4`, `5.1`, `5`, `latest` (*5.1.4/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.4/debian/Dockerfile)
 - [`5.1.4-alpine`, `5.1-alpine`, `5-alpine`, `alpine` (*5.1.4/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.4/alpine/Dockerfile)
-- [`4.3.17`, `4.3`, `4` (*4.3.17/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.17/debian/Dockerfile)
-- [`4.3.17-alpine`, `4.3-alpine`, `4-alpine` (*4.3.17/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.17/alpine/Dockerfile)
+- [`4.3.18`, `4.3`, `4` (*4.3.18/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.18/debian/Dockerfile)
+- [`4.3.18-alpine`, `4.3-alpine`, `4-alpine` (*4.3.18/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.18/alpine/Dockerfile)
 
 ## Prerequisites
 

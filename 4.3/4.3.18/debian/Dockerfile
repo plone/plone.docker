@@ -1,11 +1,11 @@
 FROM python:2.7-slim-stretch
 
 ENV PIP=9.0.3 \
-    ZC_BUILDOUT=2.11.2 \
-    SETUPTOOLS=38.7.0 \
+    ZC_BUILDOUT=2.11.4 \
+    SETUPTOOLS=39.1.0 \
     PLONE_MAJOR=4.3 \
-    PLONE_VERSION=4.3.17 \
-    PLONE_MD5=4d9f175803c63301758f42dbf68f015a
+    PLONE_VERSION=4.3.18 \
+    PLONE_MD5=c9932e919254a2799b0e340b2ecbda9b
 
 LABEL plone=$PLONE_VERSION \
     os="debian" \
@@ -32,9 +32,6 @@ RUN buildDeps="dpkg-dev gcc libbz2-dev libc6-dev libjpeg62-turbo-dev libopenjp2-
  && cd /plone/instance \
  && buildout \
  && rm -rf bin/buildout \
- && ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
- && ln -s /usr/local/bin/pip /plone/instance/bin/pip \
- && ln -s /usr/local/bin/python /plone/instance/bin/python \
  && ln -s /data/filestorage/ /plone/instance/var/filestorage \
  && ln -s /data/blobstorage /plone/instance/var/blobstorage \
  && chown -R plone:plone /plone /data \
