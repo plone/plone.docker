@@ -1,11 +1,11 @@
 FROM python:2.7-alpine3.7
 
 ENV PIP=9.0.3 \
-    ZC_BUILDOUT=2.11.2 \
-    SETUPTOOLS=38.7.0 \
+    ZC_BUILDOUT=2.11.4 \
+    SETUPTOOLS=39.1.0 \
     PLONE_MAJOR=5.1 \
-    PLONE_VERSION=5.1.2 \
-    PLONE_MD5=e34790cea362b8db6a8ffe30854c6fc3
+    PLONE_VERSION=5.1.4 \
+    PLONE_MD5=ce3b87b1cb8ee30e577ae347d9bdd647
 
 LABEL plone=$PLONE_VERSION \
     os="alpine" \
@@ -37,9 +37,6 @@ RUN apk add --no-cache --virtual .build-deps \
 && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
 && cd /plone/instance \
 && buildout \
-&& ln -s /usr/local/bin/pip /plone/instance/bin/pip \
-&& ln -s /usr/local/bin/python /plone/instance/bin/python \
-&& ln -s /usr/local/bin/buildout /plone/instance/bin/buildout \
 && ln -s /data/filestorage/ /plone/instance/var/filestorage \
 && ln -s /data/blobstorage /plone/instance//var/blobstorage \
 && chown -R plone:plone /plone /data \
