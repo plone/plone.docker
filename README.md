@@ -37,7 +37,7 @@ Plone standalone instances are best suited for testing Plone and development.
 Download and start the latest Plone 5 container, based on [Debian](https://www.debian.org/).
 
 ```console
-docker run -p 8080:8080 plone
+$ docker run -p 8080:8080 plone
 ```
 
 This image includes `EXPOSE 8080` (the Plone port), so standard container linking will make it automatically available to the linked containers. Now you can add a Plone Site at http://localhost:8080 - default Zope user and password are **`admin/admin`**.
@@ -56,8 +56,8 @@ $ docker run -d --name=zeo plone zeo
 Start 2 Plone clients (also in the background)
 
 ```console
-docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8081:8080 plone
-docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8082:8080 plone
+$ docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8081:8080 plone
+$ docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8082:8080 plone
 ```
 
 ### Start Plone In Debug Mode
@@ -65,13 +65,13 @@ docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8082:8080 p
 You can also start Plone in debug mode (`fg`) by running
 
 ```console
-docker run -p 8080:8080 plone fg
+$ docker run -p 8080:8080 plone fg
 ```
 
 Debug mode may also be used with ZEO
 
 ```console
-docker run --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 plone fg
+$ docker run --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 plone fg
 ```
 
 For more information on how to extend this image with your own custom settings, adding more add-ons, building it or mounting volumes, please refer to our [documentation](https://docs.plone.org/manage/docker/docs/index.html).
@@ -89,7 +89,7 @@ The Plone image uses several environment variable that allow to specify a more s
 Run Plone with ZEO and install two addons (PloneFormGen and collective.roster)
 
 ```console
-docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 \
+$ docker run --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 \
 -e ADDONS="Products.PloneFormGen collective.roster" plone
 ```
 
