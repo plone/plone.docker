@@ -3,6 +3,7 @@ FROM python:2.7-slim-stretch
 ENV PIP=9.0.3 \
     ZC_BUILDOUT=2.11.4 \
     SETUPTOOLS=39.1.0 \
+    WHEEL=0.31.1 \
     PLONE_MAJOR=5.1 \
     PLONE_VERSION=5.1.4 \
     PLONE_MD5=ce3b87b1cb8ee30e577ae347d9bdd647
@@ -28,7 +29,7 @@ RUN buildDeps="dpkg-dev gcc libbz2-dev libc6-dev libjpeg62-turbo-dev libopenjp2-
  && tar -xzf Plone.tgz \
  && cp -rv ./Plone-$PLONE_VERSION-UnifiedInstaller/base_skeleton/* /plone/instance/ \
  && cp -v ./Plone-$PLONE_VERSION-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
- && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT \
+ && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT wheel==$WHEEL \
  && cd /plone/instance \
  && buildout \
  && ln -s /data/filestorage/ /plone/instance/var/filestorage \
