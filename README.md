@@ -6,25 +6,28 @@
 ## Features
 
 - Images for Plone 5.x and Plone 4.x
+- Enable add-ons via environment variables
 - Choose between [Debian](https://www.debian.org/) or [Alpine (unstable)](http://www.alpinelinux.org/) based images
 
-### Supported tags and respective `Dockerfile` links
+
+## Supported tags and respective `Dockerfile` links
 
 - [`5.1.4`, `5.1`, `5`, `latest` (*5.1.4/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.4/debian/Dockerfile)
 - [`5.1.4-alpine`, `5.1-alpine`, `5-alpine`, `alpine` (*5.1.4/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.4/alpine/Dockerfile)
 - [`4.3.18`, `4.3`, `4` (*4.3.18/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.18/debian/Dockerfile)
 - [`4.3.18-alpine`, `4.3-alpine`, `4-alpine` (*4.3.18/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.18/alpine/Dockerfile)
 
+
 ## Prerequisites
 
 Make sure you have Docker installed and running for your platform. You can download Docker from https://www.docker.com.
+
 
 ## Usage
 
 Choose either single Plone instance or ZEO cluster.
 
 **It is inadvisable to use following configurations for production.**
-
 
 
 ### Standalone Plone Instance
@@ -38,6 +41,7 @@ docker run -p 8080:8080 plone
 ```
 
 This image includes `EXPOSE 8080` (the Plone port), so standard container linking will make it automatically available to the linked containers. Now you can add a Plone Site at http://localhost:8080 - default Zope user and password are **`admin/admin`**.
+
 
 ### Plone As ZEO Cluster
 
@@ -70,13 +74,14 @@ Debug mode may also be used with ZEO
 docker run --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 plone fg
 ```
 
-For more information on how to extend this image with your own custom settings, adding more add-ons, building it or mounting volumes, please refer to our [documentation](https://github.com/plone/plone.docker/tree/master/docs).
+For more information on how to extend this image with your own custom settings, adding more add-ons, building it or mounting volumes, please refer to our [documentation](https://docs.plone.org/manage/docker/docs/index.html).
 
-### Supported Environment Variables
+
+## Supported Environment Variables
 
 The Plone image uses several environment variable that allow to specify a more specific setup.
 
-## For Basic Usage
+### For Basic Usage
 
 * `ADDONS` - Customize Plone via Plone add-ons using this environment variable
 * `ZEO_ADDRESS` - This environment variable allows you to run Plone image as a ZEO client.
@@ -94,7 +99,7 @@ To use specific add-ons versions:
  -e ADDONS="Products.PloneFormGen==1.8.5 collective.roster==2.3.1"
 ```
 
-## For Advanced Usage
+### For Advanced Usage
 
 * `PLONE_ZCML`, `ZCML` - Include custom Plone add-ons ZCML files (former `BUILDOUT_ZCML`)
 * `PLONE_DEVELOP`, `DEVELOP` - Develop new or existing Plone add-ons (former `BUILDOUT_DEVELOP`)
@@ -107,10 +112,10 @@ To use specific add-ons versions:
 * `HEALTH_CHECK_TIMEOUT` - Time in seconds to wait until health check starts. Defaults to `1` second.
 * `HEALTH_CHECK_INTERVAL` - Interval in seconds to check that the Zope application is still healthy. Defaults to `1` second.
 
+
 ## Documentation
 
-Full documentation for end users can be found in the ["docs"](https://github.com/plone/plone.docker/tree/master/docs) folder.
-It is also available online at http://docs.plone.org/
+Full documentation for end users can be found online at ["docs.plone.org"](https://docs.plone.org/manage/docker/docs/index.html).
 
 
 ## Contribute
@@ -120,10 +125,12 @@ It is also available online at http://docs.plone.org/
 - Source Code: http://github.com/plone/plone.docker
 - Documentation: http://docs.plone.org/
 
+
 ## Support
 
 
 If you are having issues, please let us know at https://community.plone.org
+
 
 ## License
 
