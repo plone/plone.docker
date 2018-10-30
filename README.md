@@ -115,7 +115,7 @@ To use specific add-ons versions:
 
 ## Documentation
 
-Full documentation for end users can be found online at ["docs.plone.org"](https://docs.plone.org/manage/docker/docs/index.html).
+Full documentation for end users can be found online at [docs.plone.org](https://docs.plone.org/manage/docker/docs/index.html).
 
 
 ## Contribute
