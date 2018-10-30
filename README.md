@@ -7,7 +7,7 @@
 
 - Images for Plone 5.x and Plone 4.x
 - Enable add-ons via environment variables
-- Choose between [Debian](https://www.debian.org/) or [Alpine (unstable)](http://www.alpinelinux.org/) based images
+- Choose between [Debian](https://www.debian.org/) or [Alpine](http://www.alpinelinux.org/) based images
 
 
 ## Supported tags and respective `Dockerfile` links
