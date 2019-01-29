@@ -5,8 +5,8 @@ ENV PIP=9.0.3 \
     SETUPTOOLS=39.1.0 \
     WHEEL=0.31.1 \
     PLONE_MAJOR=5.1 \
-    PLONE_VERSION=5.1.4 \
-    PLONE_MD5=ce3b87b1cb8ee30e577ae347d9bdd647
+    PLONE_VERSION=5.1.5 \
+    PLONE_MD5=8ed5ff27fab67b1b510a1ce0ee2dd655
 
 LABEL plone=$PLONE_VERSION \
     os="alpine" \
