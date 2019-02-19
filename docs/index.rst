@@ -23,7 +23,7 @@ the `Plone Community <https://plone.org>`_.
 .. note::
 
    Because of the way how `Docker, Inc. <https://docker.com>`_ handles 'official images', sometimes the releases
-   are lacking behind.
+   are lagging behind.
 
    You can get always the latest releases from our own `repository <https://github.com/plone/plone.docker>`_ on Docker Hub.
 
