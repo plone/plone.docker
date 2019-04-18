@@ -14,7 +14,8 @@ sed -i "s|Products.DocFinderTab||g" develop.cfg
 
 if [ -e "custom.cfg" ]; then
   if [ ! -e "bin/develop" ]; then
-    gosu plone buildout -c custom.cfg
+    buildout -c custom.cfg
+    chown -R plone:plone /plone
     gosu plone python /docker-initialize.py
   fi
 fi
