@@ -1,5 +1,9 @@
 # Changelog
 
+- Added libffi-dev to alpine 5.2.0 Dockerfile, build depedency was needed to successfully build BTrees package.
+  [pigeonflight]
+- Used PLONE_VERSION_RELEASE env variable in the 5.2.0 Dockerfiles... fixes issue #117
+  [pigeonflght]
 - add Plone 5.1 images
   [svx]
 - add prerequisite of installing & running Docker

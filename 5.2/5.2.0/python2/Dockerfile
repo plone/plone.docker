@@ -5,8 +5,9 @@ ENV PIP=19.0.3 \
     SETUPTOOLS=41.0.0 \
     WHEEL=0.33.1 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2rc1 \
-    PLONE_MD5=436d721f722e5eff74509f69833d0174
+    PLONE_VERSION=5.2 \
+    PLONE_VERSION_RELEASE=5.2.0 \
+    PLONE_MD5=211ff749422611db2e448dea639e1fba
 
 LABEL plone=$PLONE_VERSION \
     os="debian" \
@@ -24,11 +25,11 @@ RUN buildDeps="dpkg-dev gcc libbz2-dev libc6-dev libjpeg62-turbo-dev libopenjp2-
  && runDeps="gosu libjpeg62 libopenjp2-7 libtiff5 libxml2 libxslt1.1 lynx netcat poppler-utils rsync wv" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
- && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
+ && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION_RELEASE-UnifiedInstaller.tgz \
  && echo "$PLONE_MD5 Plone.tgz" | md5sum -c - \
  && tar -xzf Plone.tgz \
- && cp -rv ./Plone-$PLONE_VERSION-UnifiedInstaller/base_skeleton/* /plone/instance/ \
- && cp -v ./Plone-$PLONE_VERSION-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
+ && cp -rv ./Plone-$PLONE_VERSION_RELEASE-UnifiedInstaller/base_skeleton/* /plone/instance/ \
+ && cp -v ./Plone-$PLONE_VERSION_RELEASE-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
  && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT wheel==$WHEEL \
  && cd /plone/instance \
  && buildout \
