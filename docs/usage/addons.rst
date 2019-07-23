@@ -51,3 +51,21 @@ Running unit tests:
   Thus, we strongly recommend to use this only for testing or development purpose.
 
   For production use, create a new image as described.
+
+Theme development
+=================
+You can mount a local `resources` folder to serve diazo theme resources `from resources/theme/mycustom.theme`. 
+Please refer to `plone.resource <https://pypi.org/project/plone.resource>`_ for more details and setup instructions.
+
+.. code-block:: shell
+
+   docker run --rm -v $(pwd)/resources:/plone/instance/resources -p 8080:8080 plone
+
+Make sure that you have your Plone diazo theme code at `resources/theme/mycustom.theme` and
+that Plone user inside Docker container (`uid: 500`) has the rights to read/write there:
+
+.. code-block:: shell
+
+   setfacl  -R -m u:500:rwX resources/
+   setfacl -dR -m u:500:rwX resources/
+   getfacl resources/

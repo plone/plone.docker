@@ -1,5 +1,6 @@
 # Changelog
-
+- Added support for Diazo theme central resource directory - fixes issue #114
+  [avoinea]
 - Added libffi-dev to alpine 5.2.0 Dockerfile, build depedency was needed to successfully build BTrees package.
   [pigeonflight]
 - Used PLONE_VERSION_RELEASE env variable in the 5.2.0 Dockerfiles... fixes issue #117
