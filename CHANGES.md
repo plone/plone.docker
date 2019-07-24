@@ -1,4 +1,7 @@
 # Changelog
+- Cleanup docker-entrypoint.sh: Use `bin/instance console` to start Plone and `bin/zeo fg` for ZEO Server.
+  See https://github.com/docker-library/official-images/pull/6343
+  [avoinea]
 - Added support for Diazo theme central resource directory - fixes issue #114
   [avoinea]
 - Added libffi-dev to alpine 5.2.0 Dockerfile, build depedency was needed to successfully build BTrees package.
