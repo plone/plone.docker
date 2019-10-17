@@ -1,7 +1,7 @@
 FROM python:2.7-slim-stretch
 
 ENV PIP=19.3 \
-    ZC_BUILDOUT=2.13.1 \
+    ZC_BUILDOUT=2.13.2 \
     SETUPTOOLS=41.4.0 \
     WHEEL=0.33.6 \
     PLONE_MAJOR=5.1 \
