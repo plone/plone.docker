@@ -30,6 +30,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libxml2-dev \
     libxslt-dev \
     pcre-dev \
+    libffi-dev \
 && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
 && echo "$PLONE_MD5  Plone.tgz" | md5sum -c - \
 && tar -zxvf Plone.tgz \
