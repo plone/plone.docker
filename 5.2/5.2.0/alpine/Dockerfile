@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.9
+FROM python:3.7-alpine
 
 ENV PIP=19.0.3 \
     ZC_BUILDOUT=2.13.1 \
@@ -11,7 +11,7 @@ ENV PIP=19.0.3 \
 
 LABEL plone=$PLONE_VERSION \
     os="alpine" \
-    os.version="3.9" \
+    os.version="3.10" \
     name="Plone 5.2" \
     description="Plone image, based on Unified Installer" \
     maintainer="Plone Community"
