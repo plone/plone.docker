@@ -9,6 +9,7 @@ Supported Environment Variables
 For Basic Usage
 ===============
 
+* ``SITE`` - Add Plone with this id to `Data.fs` on first run. If NOT provided, you'll have to manually add a Plone Site via web UI (*v5.2+*)
 * ``ADDONS`` - Customize Plone via Plone add-ons using this environment variable
 * ``ZEO_ADDRESS`` - This environment variable allows you to run Plone image as a ZEO client.
 
@@ -16,8 +17,8 @@ For Basic Usage
 For Advanced Usage
 ==================
 
-* ``PLONE_ZCML``, ``ZCML`` - Include custom Plone add-ons ZCML files (former `BUILDOUT_ZCML`)
-* ``PLONE_DEVELOP``, ``DEVELOP`` - Develop new or existing Plone add-ons (former `BUILDOUT_DEVELOP`)
+* ``PLONE_ZCML``, ``ZCML`` - Include custom Plone add-ons ZCML files
+* ``PLONE_DEVELOP``, ``DEVELOP`` - Develop new or existing Plone add-ons
 * ``ZEO_READ_ONLY`` - Run Plone as a read-only ZEO client. Defaults to `off`.
 * ``ZEO_CLIENT_READ_ONLY_FALLBACK`` - A flag indicating whether a read-only remote storage should be acceptable as a fallback when no writable storages are available. Defaults to `false`.
 * ``ZEO_SHARED_BLOB_DIR`` - Set this to on if the ZEO server and the instance have access to the same directory. Defaults to `off`.

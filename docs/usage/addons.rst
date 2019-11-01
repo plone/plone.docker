@@ -45,7 +45,7 @@ Running unit tests:
 
 .. note::
 
-  Please note that passing `BUILDOUT_` environment variables will slow down
+  Please note that passing `PLONE_` environment variables will slow down
   container creation as a buildout re-run inside container is triggered.
 
   Thus, we strongly recommend to use this only for testing or development purpose.

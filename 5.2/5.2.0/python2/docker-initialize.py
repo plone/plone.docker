@@ -2,8 +2,6 @@
 
 import re
 import os
-import warnings
-warnings.simplefilter('always', DeprecationWarning)
 
 class Environment(object):
     """ Configure container via environment variables
@@ -101,38 +99,36 @@ class Environment(object):
 
         eggs = self.env.get("PLONE_ADDONS",
                self.env.get("ADDONS", "")).strip().split()
-        if not eggs:
-            eggs = self.env.get("BUILDOUT_EGGS", "").strip().split()
-            if eggs:
-                warnings.warn(
-                    "BUILDOUT_EGGS is deprecated. Please use "
-                    "PLONE_ADDONS instead !!!", DeprecationWarning)
 
         zcml = self.env.get("PLONE_ZCML",
                self.env.get("ZCML", "")).strip().split()
-        if not zcml:
-            zcml = self.env.get("BUILDOUT_ZCML", "").strip().split()
-            if zcml:
-                warnings.warn(
-                    "BUILDOUT_ZCML is deprecated. Please use "
-                    "PLONE_ZCML instead !!!", DeprecationWarning)
 
         develop = self.env.get("PLONE_DEVELOP",
                   self.env.get("DEVELOP", "")).strip().split()
-        if not develop:
-            develop = self.env.get("BUILDOUT_DEVELOP", "").strip().split()
-            if develop:
-                warnings.warn(
-                    "BUILDOUT_DEVELOP is deprecated. Please use "
-                    "PLONE_DEVELOP instead !!!", DeprecationWarning)
 
-        if not (eggs or zcml or develop):
+        site = self.env.get("PLONE_SITE",
+               self.env.get("SITE", "")).strip()
+
+        profiles = self.env.get("PLONE_PROFILES",
+                   self.env.get("PROFILES", "")).strip().split()
+
+        # If profiles not provided. Install ADDONS :default profiles
+        if not profiles:
+            for egg in eggs:
+                base = egg.split("=")[0]
+                profiles.append("%s:default" % base)
+
+        enabled = bool(site)
+        if not (eggs or zcml or develop or enabled):
             return
 
         buildout = BUILDOUT_TEMPLATE.format(
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
-            develop="\n\t".join(develop)
+            develop="\n\t".join(develop),
+            profiles="\n\t".join(profiles),
+            site=site,
+            enabled=enabled
         )
 
         with open(self.custom_conf, 'w') as cfile:
@@ -166,6 +162,11 @@ extends = develop.cfg
 develop += {develop}
 eggs += {eggs}
 zcml += {zcml}
+
+[plonesite]
+enabled = {enabled}
+site-id = {site}
+profiles += {profiles}
 """
 
 def initialize():

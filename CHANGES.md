@@ -1,4 +1,6 @@
 # Changelog
+- Add possibility to initialize Plone SITE with custom PROFILES/ADDONS on first run
+  [avoinea refs #121]
 - Cleanup docker-entrypoint.sh: Use `bin/instance console` to start Plone and `bin/zeo fg` for ZEO Server.
   See https://github.com/docker-library/official-images/pull/6343
   [avoinea]
