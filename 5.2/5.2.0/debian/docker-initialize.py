@@ -127,7 +127,7 @@ class Environment(object):
             zcml="\n\t".join(zcml),
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
-            site=site,
+            site=site or "Plone",
             enabled=enabled
         )
 
