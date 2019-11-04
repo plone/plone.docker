@@ -10,13 +10,15 @@ class Environment(object):
                  zope_conf="/plone/instance/parts/instance/etc/zope.conf",
                  custom_conf="/plone/instance/custom.cfg",
                  zeopack_conf="/plone/instance/bin/zeopack",
-                 zeoserver_conf="/plone/instance/parts/zeoserver/etc/zeo.conf"
+                 zeoserver_conf="/plone/instance/parts/zeoserver/etc/zeo.conf",
+                 cors_conf="/plone/instance/parts/instance/etc/package-includes/999-additional-overrides.zcml"
                  ):
         self.env = env
         self.zope_conf = zope_conf
         self.custom_conf = custom_conf
         self.zeopack_conf = zeopack_conf
         self.zeoserver_conf = zeoserver_conf
+        self.cors_conf = cors_conf
 
     def zeoclient(self):
         """ ZEO Client
@@ -90,6 +92,33 @@ class Environment(object):
             with open(self.zeoserver_conf, 'w') as cfile:
                 cfile.write(text)
 
+    def cors(self):
+        """ Configure CORS Policies
+        """
+        if not [e for e in self.env if e.startswith("CORS_")]:
+            return
+
+        allow_origin = self.env.get("CORS_ALLOW_ORIGIN",
+            "http://localhost:3000,http://127.0.0.1:3000")
+        allow_methods = self.env.get("CORS_ALLOW_METHODS",
+            "DELETE,GET,OPTIONS,PATCH,POST,PUT")
+        allow_credentials = self.env.get("CORS_ALLOW_CREDENTIALS", "true")
+        expose_headers = self.env.get("CORS_EXPOSE_HEADERS",
+            "Content-Length,X-My-Header")
+        allow_headers = self.env.get("CORS_ALLOW_HEADERS",
+            "Accept,Authorization,Content-Type,X-Custom-Header")
+        max_age = self.env.get("CORS_MAX_AGE", "3600")
+        cors_conf = CORS_TEMPLACE.format(
+            allow_origin=allow_origin,
+            allow_methods=allow_methods,
+            allow_credentials=allow_credentials,
+            expose_headers=expose_headers,
+            allow_headers=allow_headers,
+            max_age=max_age
+        )
+        with open(self.cors_conf, "w") as cfile:
+            cfile.write(cors_conf)
+
     def buildout(self):
         """ Buildout from environment variables
         """
@@ -140,6 +169,7 @@ class Environment(object):
 
     def setup(self, **kwargs):
         self.buildout()
+        self.cors()
         self.zeoclient()
         self.zeopack()
         self.zeoserver()
@@ -159,6 +189,23 @@ ZEO_TEMPLATE = """
       cache-size {zeo_client_cache_size}
     </zeoclient>
 """.strip()
+
+CORS_TEMPLACE = """<configure
+  xmlns="http://namespaces.zope.org/zope">
+  <configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone">
+    <plone:CORSPolicy
+      allow_origin="{allow_origin}"
+      allow_methods="{allow_methods}"
+      allow_credentials="{allow_credentials}"
+      expose_headers="{expose_headers}"
+      allow_headers="{allow_headers}"
+      max_age="{max_age}"
+     />
+  </configure>
+</configure>
+"""
 
 BUILDOUT_TEMPLATE = """
 [buildout]

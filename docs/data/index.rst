@@ -103,6 +103,6 @@ Make sure that Plone has access to read/write within these folders
 
 
 .. code-block:: shell
-   
+
    chcon -Rt svirt_sandbox_file_t /var/local/data
 
