@@ -112,6 +112,9 @@ class Environment(object):
         profiles = self.env.get("PLONE_PROFILES",
                    self.env.get("PROFILES", "")).strip().split()
 
+        versions = self.env.get("PLONE_VERSIONS",
+                   self.env.get("VERSIONS", "")).strip().split()
+
         # If profiles not provided. Install ADDONS :default profiles
         if not profiles:
             for egg in eggs:
@@ -127,6 +130,7 @@ class Environment(object):
             zcml="\n\t".join(zcml),
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
+            versions="\n".join(versions),
             site=site or "Plone",
             enabled=enabled
         )
@@ -167,6 +171,9 @@ zcml += {zcml}
 enabled = {enabled}
 site-id = {site}
 profiles += {profiles}
+
+[versions]
+{versions}
 """
 
 def initialize():

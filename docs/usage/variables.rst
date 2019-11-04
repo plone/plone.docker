@@ -9,9 +9,10 @@ Supported Environment Variables
 For Basic Usage
 ===============
 
-* ``SITE`` - Add Plone with this id to `Data.fs` on first run. If NOT provided, you'll have to manually add a Plone Site via web UI (*v5.2+*)
 * ``ADDONS`` - Customize Plone via Plone add-ons using this environment variable
 * ``ZEO_ADDRESS`` - This environment variable allows you to run Plone image as a ZEO client.
+* ``SITE`` - Add Plone with this id to `Data.fs` on first run. If NOT provided, you'll have to manually add a Plone Site via web UI
+* ``VERSIONS`` - Use specific versions of Plone Add-on or python libraries
 
 
 For Advanced Usage

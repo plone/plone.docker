@@ -86,9 +86,10 @@ The Plone image uses several environment variable that allow to specify a more s
 
 ### For Basic Usage
 
-* `SITE` - Add Plone within this id to `Data.fs` on first run. If NOT provided, you'll have to manually add a Plone Site via web UI (*v5.2+*)
 * `ADDONS` - Customize Plone via Plone add-ons using this environment variable
 * `ZEO_ADDRESS` - This environment variable allows you to run Plone image as a ZEO client.
+* `SITE` - Add Plone with this id to `Data.fs` on first run. If NOT provided, you'll have to manually add a Plone Site via web UI
+* `VERSIONS` - Use specific versions of Plone Add-on or python libraries
 
 Run Plone and install two addons (eea.facetednavigation and collective.easyform)
 
@@ -99,7 +100,7 @@ $ docker run -p 8080:8080 -e SITE="mysite" -e ADDONS="eea.facetednavigation coll
 To use specific add-ons versions:
 
 ```console
- -e ADDONS="eea.facetednavigation==13.3 collective.easyform==2.1.0"
+ -e ADDONS="eea.facetednavigation collective.easyform" -e VERSIONS="eea.facetednavigation=13.3 collective.easyform=2.1.0"
 ```
 
 RestAPI:
@@ -112,7 +113,7 @@ $ curl -H 'Accept: application/json' http://localhost:8080/plone
 
 ### For Advanced Usage
 
-* `PLONE_PROFILES, PROFILES` - GenericSetup profiles to include when `SITE` environment provided. (*v5.2+*)
+* `PLONE_PROFILES, PROFILES` - GenericSetup profiles to include when `SITE` environment provided.
 * `PLONE_ZCML`, `ZCML` - Include custom Plone add-ons ZCML files
 * `PLONE_DEVELOP`, `DEVELOP` - Develop new or existing Plone add-ons
 * `ZEO_READ_ONLY` - Run Plone as a read-only ZEO client. Defaults to `off`.
