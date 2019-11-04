@@ -41,7 +41,8 @@ RUN apk add --no-cache --virtual .build-deps \
  && rm -rf bin/buildout \
  && ln -s /data/filestorage/ /plone/instance/var/filestorage \
  && ln -s /data/blobstorage /plone/instance//var/blobstorage \
- && chown -R plone:plone /plone /data \
+ && find /data  -not -user plone -exec chown plone:plone {} \+ \
+ && find /plone -not -user plone -exec chown plone:plone {} \+ \
  && rm -rf /Plone* \
  && apk del .build-deps \
  && apk add --no-cache --virtual .run-deps \

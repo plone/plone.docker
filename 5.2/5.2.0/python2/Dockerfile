@@ -35,8 +35,8 @@ RUN buildDeps="dpkg-dev gcc libbz2-dev libc6-dev libffi-dev libjpeg62-turbo-dev 
  && buildout \
  && ln -s /data/filestorage/ /plone/instance/var/filestorage \
  && ln -s /data/blobstorage /plone/instance/var/blobstorage \
- && find /data  -not -user plone -execdir chown plone:plone {} \+ \
- && find /plone -not -user plone -execdir chown plone:plone {} \+ \
+ && find /data  -not -user plone -exec chown plone:plone {} \+ \
+ && find /plone -not -user plone -exec chown plone:plone {} \+ \
  && rm -rf /Plone* \
  && apt-get purge -y --auto-remove $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
