@@ -9,7 +9,9 @@ gosu plone python /docker-initialize.py
 
 if [ -e "custom.cfg" ]; then
   if [ ! -e "bin/develop" ]; then
-    gosu plone buildout -c custom.cfg
+    buildout -c custom.cfg
+    find /data  -not -user plone -exec chown plone:plone {} \+
+    find /plone -not -user plone -exec chown plone:plone {} \+
     gosu plone python /docker-initialize.py
   fi
 fi
