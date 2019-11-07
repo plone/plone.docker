@@ -84,7 +84,7 @@ See more about `Plone RestAPI <https://plonerestapi.readthedocs.io/en/latest/>`_
 CORS Configuration
 ==================
 
-If you use CORS and want to make it work with TUS, you have to make sure the TUS specific HTTP headers are allowed by your CORS policy.
+If you use CORS and want to make it work with `TUS <https://tus.io/>`_, you have to make sure the TUS specific HTTP headers are allowed by your CORS policy.
 
 .. code-block:: shell
 
@@ -92,6 +92,8 @@ If you use CORS and want to make it work with TUS, you have to make sure the TUS
               -e PLONE_SITE=Plone \
               -e CORS_ALLOW_ORIGIN="http://example.net"
           plone
+
+See http://tus.io/protocols/resumable-upload.html#headers for a list and description of the individual headers.
 
 Supported CORS environment variables
 ------------------------------------
