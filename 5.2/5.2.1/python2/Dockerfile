@@ -1,13 +1,13 @@
 FROM python:2.7-slim-stretch
 
-ENV PIP=19.0.3 \
-    ZC_BUILDOUT=2.13.1 \
-    SETUPTOOLS=41.0.0 \
-    WHEEL=0.33.1 \
+ENV PIP=19.3.1 \
+    ZC_BUILDOUT=2.13.2 \
+    SETUPTOOLS=45.0.0 \
+    WHEEL=0.33.6 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2 \
-    PLONE_VERSION_RELEASE=5.2.0 \
-    PLONE_MD5=211ff749422611db2e448dea639e1fba
+    PLONE_VERSION=5.2.1 \
+    PLONE_VERSION_RELEASE=Plone-5.2.1-UnifiedInstaller-r1 \
+    PLONE_MD5=3659c6ee9150de52aca9b66e4435187b
 
 LABEL plone=$PLONE_VERSION \
     os="debian" \

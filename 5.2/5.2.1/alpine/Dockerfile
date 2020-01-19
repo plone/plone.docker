@@ -1,17 +1,17 @@
 FROM python:3.7-alpine
 
-ENV PIP=19.0.3 \
-    ZC_BUILDOUT=2.13.1 \
-    SETUPTOOLS=41.0.0 \
-    WHEEL=0.33.1 \
+ENV PIP=19.3.1 \
+    ZC_BUILDOUT=2.13.2 \
+    SETUPTOOLS=45.0.0 \
+    WHEEL=0.33.6 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2 \
-    PLONE_VERSION_RELEASE=5.2.0 \
-    PLONE_MD5=211ff749422611db2e448dea639e1fba
+    PLONE_VERSION=5.2.1 \
+    PLONE_VERSION_RELEASE=Plone-5.2.1-UnifiedInstaller-r1 \
+    PLONE_MD5=3659c6ee9150de52aca9b66e4435187b
 
 LABEL plone=$PLONE_VERSION \
     os="alpine" \
-    os.version="3.10" \
+    os.version="3.11" \
     name="Plone 5.2" \
     description="Plone image, based on Unified Installer" \
     maintainer="Plone Community"
@@ -32,11 +32,11 @@ RUN apk add --no-cache --virtual .build-deps \
     libxslt-dev \
     pcre-dev \
     libffi-dev \
-&& wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION_RELEASE-UnifiedInstaller.tgz \
+&& wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/$PLONE_VERSION_RELEASE.tgz \
 && echo "$PLONE_MD5  Plone.tgz" | md5sum -c - \
 && tar -zxvf Plone.tgz \
-&& cp -rv ./Plone-$PLONE_VERSION_RELEASE-UnifiedInstaller/base_skeleton/* /plone/instance/ \
-&& cp -v ./Plone-$PLONE_VERSION_RELEASE-UnifiedInstaller/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
+&& cp -rv ./$PLONE_VERSION_RELEASE/base_skeleton/* /plone/instance/ \
+&& cp -v ./$PLONE_VERSION_RELEASE/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
 && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT wheel==$WHEEL \
 && cd /plone/instance \
 && buildout \
