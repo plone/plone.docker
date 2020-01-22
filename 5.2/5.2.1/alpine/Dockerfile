@@ -6,8 +6,8 @@ ENV PIP=19.3.1 \
     WHEEL=0.33.6 \
     PLONE_MAJOR=5.2 \
     PLONE_VERSION=5.2.1 \
-    PLONE_VERSION_RELEASE=Plone-5.2.1-UnifiedInstaller-r1 \
-    PLONE_MD5=3659c6ee9150de52aca9b66e4435187b
+    PLONE_VERSION_RELEASE=Plone-5.2.1-UnifiedInstaller-r2 \
+    PLONE_MD5=42407c0313791d3626dc86e674684efe
 
 LABEL plone=$PLONE_VERSION \
     os="alpine" \
