@@ -1,8 +1,8 @@
 FROM python:2.7-slim-stretch
 
-ENV PIP=19.3.1 \
+ENV PIP=19.0.3 \
     ZC_BUILDOUT=2.13.2 \
-    SETUPTOOLS=45.0.0 \
+    SETUPTOOLS=41.0.0 \
     WHEEL=0.33.6 \
     PLONE_MAJOR=5.2 \
     PLONE_VERSION=5.2.1 \
