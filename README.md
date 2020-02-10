@@ -45,6 +45,13 @@ $ docker run -p 8080:8080 plone
 
 This image includes `EXPOSE 8080` (the Plone port), so standard container linking will make it automatically available to the linked containers. Now you can add a Plone Site at http://localhost:8080 - default Zope user and password are **`admin/admin`**.
 
+By using the `tags` listed above a Plone container with a different version can be downloaded and started.
+
+The following command starts a Plone 4.3 container, based on [Alpine](https://alpinelinux.org/).
+
+```console
+$ docker run -p 8080:8080 plone:4.3-alpine
+```
 
 ### Plone As ZEO Cluster
 
