@@ -44,7 +44,9 @@ Dockerfile
    FROM plone:5
 
    COPY site.cfg /plone/instance/
-   RUN gosu plone buildout -c site.cfg
+   RUN buildout -c site.cfg \
+    && find /data  -not -user plone -exec chown plone:plone {} \+ \
+    && find /plone -not -user plone -exec chown plone:plone {} \+
 
 Build your custom Plone image
 
