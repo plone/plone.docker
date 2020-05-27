@@ -38,12 +38,17 @@ class Environment(object):
         read_only = self.env.get("ZEO_READ_ONLY", "false")
         zeo_ro_fallback = self.env.get("ZEO_CLIENT_READ_ONLY_FALLBACK", "false")
         shared_blob_dir=self.env.get("ZEO_SHARED_BLOB_DIR", "off")
+        if shared_blob_dir.lower() in ("false", "no", "0", "n", "f"):
+            blob_dir = "blobcache"
+        else:
+            blob_dir = "blobstorage"
         zeo_storage=self.env.get("ZEO_STORAGE", "1")
         zeo_client_cache_size=self.env.get("ZEO_CLIENT_CACHE_SIZE", "128MB")
         zeo_conf = ZEO_TEMPLATE.format(
             zeo_address=server,
             read_only=read_only,
             zeo_client_read_only_fallback=zeo_ro_fallback,
+            blob_dir=blob_dir,
             shared_blob_dir=shared_blob_dir,
             zeo_storage=zeo_storage,
             zeo_client_cache_size=zeo_client_cache_size
@@ -154,6 +159,13 @@ class Environment(object):
         if not (eggs or zcml or develop or enabled):
             return
 
+        # If we need to create a plonesite and we have a zeo setup
+        # configure collective.recipe.plonesite properly
+        server = self.env.get("ZEO_ADDRESS", "")
+        zeo = ""
+        if server:
+            zeo = "zeo"
+
         buildout = BUILDOUT_TEMPLATE.format(
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
@@ -161,8 +173,14 @@ class Environment(object):
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
             site=site or "Plone",
-            enabled=enabled
+            enabled=enabled,
+            zeoserver=zeo,
         )
+
+        if server:
+            buildout += ZEO_INSTANCE_TEMPLATE.format(
+                zeoaddress=server,
+            )
 
         with open(self.custom_conf, 'w') as cfile:
             cfile.write(buildout)
@@ -180,7 +198,7 @@ ZEO_TEMPLATE = """
     <zeoclient>
       read-only {read_only}
       read-only-fallback {zeo_client_read_only_fallback}
-      blob-dir /data/blobstorage
+      blob-dir /data/{blob_dir}
       shared-blob-dir {shared_blob_dir}
       server {zeo_address}
       storage {zeo_storage}
@@ -218,9 +236,20 @@ zcml += {zcml}
 enabled = {enabled}
 site-id = {site}
 profiles += {profiles}
+zeoserver = {zeoserver}
 
 [versions]
 {versions}
+"""
+
+ZEO_INSTANCE_TEMPLATE = """
+
+[instance]
+zeo-client = true
+zeo-address = {zeoaddress}
+blob-storage = /data/blobcache
+shared-blob = off
+http-fast-listen = off
 """
 
 def initialize():
