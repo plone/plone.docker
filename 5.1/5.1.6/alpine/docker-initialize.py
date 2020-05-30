@@ -161,8 +161,16 @@ class Environment(object):
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
             site=site or "Plone",
-            enabled=enabled
+            enabled=enabled,
         )
+
+        # If we need to create a plonesite and we have a zeo setup
+        # configure collective.recipe.plonesite properly
+        server = self.env.get("ZEO_ADDRESS", None)
+        if server:
+            buildout += ZEO_INSTANCE_TEMPLATE.format(
+                zeoaddress=server,
+            )
 
         with open(self.custom_conf, 'w') as cfile:
             cfile.write(buildout)
@@ -221,6 +229,15 @@ profiles += {profiles}
 
 [versions]
 {versions}
+"""
+
+ZEO_INSTANCE_TEMPLATE = """
+
+[instance]
+zeo-client = true
+zeo-address = {zeoaddress}
+shared-blob = off
+http-fast-listen = off
 """
 
 def initialize():

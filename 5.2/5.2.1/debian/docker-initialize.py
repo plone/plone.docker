@@ -188,6 +188,7 @@ ZEO_TEMPLATE = """
     <zeoclient>
       read-only {read_only}
       read-only-fallback {zeo_client_read_only_fallback}
+      blob-dir /data/blobstorage
       shared-blob-dir {shared_blob_dir}
       server {zeo_address}
       storage {zeo_storage}
