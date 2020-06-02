@@ -8,9 +8,16 @@ jobs:
         version: [4.3.19, 5.1.6, 5.2.1]
         os: [debian, alpine]
     steps:
+    - name: Major version
+    - uses: actions/github-script@0.2.0
+    - id: major
+    - with:
+      - version: ${{ matrix.version }}
+      - script: return version.split('.').slice(0, -1).join('.')
+
     - uses: actions/checkout@v2
     - name: Build & Test Plone ${{ matrix.version }} - ${{ matrix.os }}
       run: |
-        docker build -t plone:${{ matrix.version }}-${{ matrix.os }} ${{ matrix.version%.* }}/${{ matrix.version }}/${{ matrix.os }}
+        docker build -t plone:${{ matrix.version }}-${{ matrix.os }} ${{ steps.major.outputs.result }}/${{ matrix.version }}/${{ matrix.os }}
         git clone https://github.com/docker-library/official-images.git && cd official-images
         ./test/run.sh plone:${{ matrix.version }}-${{ matrix.os }}
