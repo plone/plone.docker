@@ -1,5 +1,7 @@
 # Changelog
 
+- Fixed interaction between SITE env var and a zeo setup. Fixes issue #135
+  [pnicolli]
 - Update docs
   [staeff]
 - Add possibility to initialize Plone SITE with custom PROFILES/ADDONS on first run
