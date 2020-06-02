@@ -1,0 +1,22 @@
+name: Plone Docker Official Image
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [4.3.19, 5.1.6, 5.2.1]
+        os: [debian, alpine]
+    steps:
+    - name: Extract version
+      id: version
+      env:
+        VERSION: ${{ matrix.version }}
+      run: echo ::set-output name=major::${VERSION%.*}
+
+    - uses: actions/checkout@v2
+    - name: Build & Test Plone ${{ matrix.version }} - ${{ matrix.os }}
+      run: |
+        docker build -t plone:${{ matrix.version }}-${{ matrix.os }} ${{ steps.version.outputs.major }}/${{ matrix.version }}/${{ matrix.os }}
+        git clone https://github.com/docker-library/official-images.git && cd official-images
+        ./test/run.sh plone:${{ matrix.version }}-${{ matrix.os }}
