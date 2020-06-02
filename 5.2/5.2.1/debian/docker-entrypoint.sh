@@ -4,6 +4,13 @@ set -e
 COMMANDS="adduser debug fg foreground help kill logreopen logtail reopen_transcript run show status stop wait"
 START="console start restart"
 
+echo "Fixing permissions for external /data volumes"
+mkdir -p /data/blobstorage /data/cache /data/filestorage /data/instance /data/log /data/zeoserver
+mkdir -p /plone/instance/src
+find /data  -not -user plone -exec chown plone:plone {} \+
+find /plone -not -user plone -exec chown plone:plone {} \+
+
+echo "Initializing from environment variables"
 gosu plone python /docker-initialize.py
 
 if [ -e "custom.cfg" ]; then
