@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Extract version
       id: version
-      run: echo ::set-output name=major::${version%.*}
+      run: echo ::set-output name=major::${matrix.version%.*}
 
     - uses: actions/checkout@v2
     - name: Build & Test Plone ${{ matrix.version }} - ${{ matrix.os }}
