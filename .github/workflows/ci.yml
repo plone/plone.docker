@@ -5,13 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [4.3.19, 5.1.6, 5.2.1]
-        os: [debian, alpine, python2]
-        exclude:
-        - version: 4.3.19
-          os: python2
-        - version: 5.1.6
-          os: python2
+        version: [4.3.19, 5.1.6, 5.2.2]
+        os: [debian, alpine]
 
     steps:
     - name: Extract version
