@@ -9,9 +9,17 @@ jobs:
         os: [debian, alpine, python2, python36, python37]
         exclude:
         - version: 4.3.19
-          os: [python2, python36, python37]
+          os: python2
+        - version: 4.3.19
+          os: python36
+        - version: 4.3.19
+          os: python37
         - version: 5.1.6
-          os: [python2, python36, python37]
+          os: python2
+        - version: 5.1.6
+          os: python36
+        - version: 5.1.6
+          os: python37
 
     steps:
     - name: Extract version
