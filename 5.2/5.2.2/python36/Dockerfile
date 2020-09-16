@@ -1,8 +1,8 @@
-FROM python:2.7-slim-buster
+FROM python:3.6-slim-buster
 
 ENV PIP=20.2.3 \
     ZC_BUILDOUT=2.13.3 \
-    SETUPTOOLS=44.1.1 \
+    SETUPTOOLS=50.3.0 \
     WHEEL=0.35.1 \
     PLONE_MAJOR=5.2 \
     PLONE_VERSION=5.2.2 \
