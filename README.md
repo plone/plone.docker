@@ -29,10 +29,11 @@ Make sure you have Docker installed and running for your platform. You can downl
 
 ## Usage
 
+> **NOTE**: **Python 2 based Docker images** are no longer supported by the [Docker Official Images](https://docs.docker.com/docker-hub/official_images/), thus you'll have to use `plone/plone:5-python2` instead of `plone:5-python2`
+
 Choose either single Plone instance or ZEO cluster.
 
-**It is inadvisable to use following configurations for production.**
-
+> **NOTE**: It is inadvisable to use following configurations for production.
 
 ### Standalone Plone Instance
 
