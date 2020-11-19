@@ -146,6 +146,8 @@ class Environment(object):
         versions = self.env.get("PLONE_VERSIONS",
                    self.env.get("VERSIONS", "")).strip().split()
 
+        sources = self.env.get("SOURCES", "").strip().split(";")
+
         # If profiles not provided. Install ADDONS :default profiles
         if not profiles:
             for egg in eggs:
@@ -163,6 +165,7 @@ class Environment(object):
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
+            sources="\n".join(sources),
             site=site or "Plone",
             enabled=enabled,
         )
@@ -233,6 +236,9 @@ profiles += {profiles}
 
 [versions]
 {versions}
+
+[sources]
+{sources}
 """
 
 ZEO_INSTANCE_TEMPLATE = """
