@@ -126,6 +126,8 @@ class Environment(object):
         if os.path.exists(self.custom_conf):
             return
 
+        findlinks = self.env.get("FIND_LINKS", "").strip().split()
+
         eggs = self.env.get("PLONE_ADDONS",
                self.env.get("ADDONS", "")).strip().split()
 
@@ -155,6 +157,7 @@ class Environment(object):
             return
 
         buildout = BUILDOUT_TEMPLATE.format(
+            findlinks="\n\t".join(findlinks),
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
             develop="\n\t".join(develop),
@@ -218,6 +221,7 @@ CORS_TEMPLACE = """<configure
 BUILDOUT_TEMPLATE = """
 [buildout]
 extends = develop.cfg
+find-links += {findlinks}
 develop += {develop}
 eggs += {eggs}
 zcml += {zcml}
