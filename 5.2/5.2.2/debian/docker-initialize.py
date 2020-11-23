@@ -146,7 +146,7 @@ class Environment(object):
         versions = self.env.get("PLONE_VERSIONS",
                    self.env.get("VERSIONS", "")).strip().split()
 
-        sources = self.env.get("SOURCES", "").strip().split(";")
+        sources = self.env.get("SOURCES", "").strip().split(",")
 
         # If profiles not provided. Install ADDONS :default profiles
         if not profiles:
