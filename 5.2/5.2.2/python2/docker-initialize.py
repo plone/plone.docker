@@ -126,6 +126,8 @@ class Environment(object):
         if os.path.exists(self.custom_conf):
             return
 
+        findlinks = self.env.get("FIND_LINKS", "").strip().split()
+
         eggs = self.env.get("PLONE_ADDONS",
                self.env.get("ADDONS", "")).strip().split()
 
@@ -144,6 +146,8 @@ class Environment(object):
         versions = self.env.get("PLONE_VERSIONS",
                    self.env.get("VERSIONS", "")).strip().split()
 
+        sources = self.env.get("SOURCES", "").strip().split(",")
+
         # If profiles not provided. Install ADDONS :default profiles
         if not profiles:
             for egg in eggs:
@@ -155,11 +159,13 @@ class Environment(object):
             return
 
         buildout = BUILDOUT_TEMPLATE.format(
+            findlinks="\n\t".join(findlinks),
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
+            sources="\n".join(sources),
             site=site or "Plone",
             enabled=enabled,
         )
@@ -218,6 +224,7 @@ CORS_TEMPLACE = """<configure
 BUILDOUT_TEMPLATE = """
 [buildout]
 extends = develop.cfg
+find-links += {findlinks}
 develop += {develop}
 eggs += {eggs}
 zcml += {zcml}
@@ -229,6 +236,9 @@ profiles += {profiles}
 
 [versions]
 {versions}
+
+[sources]
+{sources}
 """
 
 ZEO_INSTANCE_TEMPLATE = """
