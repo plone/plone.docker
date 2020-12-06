@@ -49,6 +49,7 @@ RUN apk add --no-cache --virtual .build-deps \
 && apk add --no-cache --virtual .run-deps \
     su-exec \
     bash \
+    git \
     rsync \
     libxml2 \
     libxslt \

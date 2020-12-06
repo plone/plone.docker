@@ -108,7 +108,7 @@ $ docker run -p 8080:8080 -e SITE="mysite" -e ADDONS="eea.facetednavigation coll
 
 To use specific add-ons versions:
 
-```console
+```bash
  -e ADDONS="eea.facetednavigation collective.easyform" -e VERSIONS="eea.facetednavigation=13.3 collective.easyform=2.1.0"
 ```
 
@@ -130,6 +130,16 @@ $ curl -H 'Accept: application/json' http://localhost:8080/plone
 * `PLONE_PROFILES, PROFILES` - GenericSetup profiles to include when `SITE` environment provided.
 * `PLONE_ZCML`, `ZCML` - Include custom Plone add-ons ZCML files
 * `PLONE_DEVELOP`, `DEVELOP` - Develop new or existing Plone add-ons
+* `FIND_LINKS` - Add custom `find-links` to the buildout configuration
+* `SOURCES` - Add custom `sources` to the buildout configuration
+
+In order to add custom sources, the `SOURCES` env var needs to be a string containing a *comma*-separated list of sources. This is different from the other environment variables described above, which are *space*-separated.
+
+For example:
+
+```bash
+ -e SOURCES="plone.restapi = git https://github.com/plone/plone.restapi,plone.staticresources = git https://github.com/plone/plone.staticresources"
+```
 
 **ZEO:**
 
