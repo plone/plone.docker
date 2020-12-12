@@ -1,0 +1,8 @@
+extends: existence
+message: Consider removing or changing '%s'. Not all users find actions simple.
+link: https://ocular-d.github.io/styleguide-editorial/use-simple-words-concise-sentences.html
+ignorecase: true
+level: warning
+tokens:
+  - just
+  - simple

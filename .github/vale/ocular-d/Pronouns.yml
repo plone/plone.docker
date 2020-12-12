@@ -1,0 +1,15 @@
+extends: existence
+message: 'Avoid using "%s"'
+link: https://ocular-d.github.io/styleguide-editorial/pronouns-and-gender.html
+scope: text
+level: error
+tokens:
+  - I
+  - me
+    #- us
+    #- our
+  - we
+  - him
+  - her
+  - she
+  - he
