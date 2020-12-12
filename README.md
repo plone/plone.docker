@@ -106,7 +106,7 @@ The Plone image uses several environment variable that allow to specify a more s
 * `SITE` - Add Plone with this id to `Data.fs` on first run. If NOT provided, you'll have to manually add a Plone Site via web UI
 * `VERSIONS` - Use specific versions of Plone Add-on or python libraries
 
-Run Plone and install two addons ([eea.facetednavigation](https://github.com/eea/eea.facetednavigation) and [collective.easyform](https://github.com/collective/collective.easyform).)
+Run Plone and install two addons ([eea.facetednavigation](https://github.com/eea/eea.facetednavigation) and [collective.easyform](https://github.com/collective/collective.easyform)).
 
 ```shell
 docker run -p 8080:8080 -e SITE="mysite" -e ADDONS="eea.facetednavigation collective.easyform" plone
