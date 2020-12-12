@@ -1,7 +1,9 @@
+> **NOTE**: Our images are excellent for test driving Plone, checking add-ons or as a base for development/theming. \
+We **don't** recommended them for production!
+
 # Plone
 
 [Plone](https://plone.org) is a free and open source content management system built on top of the Zope application server.
-
 
 ## Features
 
@@ -9,6 +11,8 @@
 - Enable add-ons via environment variables
 - Choose between [Debian](https://www.debian.org/) or [Alpine](http://www.alpinelinux.org/) based images
 
+> **NOTE**: **Python 2 based Docker images** are no longer supported by the [Docker Official Images](https://docs.docker.com/docker-hub/official_images/) \
+If you need Python 2, you can use `plone/plone:5-python2` instead of `plone:5-python2`.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -24,103 +28,105 @@
 
 ## Prerequisites
 
-Make sure you have Docker installed and running for your platform. You can download Docker from https://www.docker.com.
-
+Make sure you have Docker installed and running for your platform.
+You can download Docker from https://www.docker.com.
 
 ## Usage
-
-> **NOTE**: **Python 2 based Docker images** are no longer supported by the [Docker Official Images](https://docs.docker.com/docker-hub/official_images/), thus you'll have to use `plone/plone:5-python2` instead of `plone:5-python2`
 
 Choose either single Plone instance or ZEO cluster.
 
 > **NOTE**: It is inadvisable to use following configurations for production.
 
-### Standalone Plone Instance
+### Standalone Plone instance
 
 Plone standalone instances are best suited for testing Plone and development.
 
 Download and start the latest Plone 5 container, based on [Debian](https://www.debian.org/).
 
-```console
-$ docker run -p 8080:8080 plone
+```shell
+docker run -p 8080:8080 plone
 ```
 
-This image includes `EXPOSE 8080` (the Plone port), so standard container linking will make it automatically available to the linked containers. Now you can add a Plone Site at http://localhost:8080 - default Zope user and password are **`admin/admin`**.
+This image includes `EXPOSE 8080` (the Plone port), standard container linking will make it automatically available to the linked containers.
+
+You can add a Plone Site at http://localhost:8080 - default Zope user and password are **`admin/admin`**.
 
 By using the `tags` listed above a Plone container with a different version can be downloaded and started.
 
 The following command starts a Plone 4.3 container, based on [Alpine](https://alpinelinux.org/).
 
-```console
-$ docker run -p 8080:8080 plone:4.3-alpine
+```shell
+docker run -p 8080:8080 plone:4.3-alpine
 ```
 
-### Plone As ZEO Cluster
+### Plone as ZEO cluster
 
 ZEO cluster are best suited for production setups, you will **need** a loadbalancer.
 
 Start ZEO server in the background
 
-```console
-$ docker run -d --name=zeo plone zeo
+```shell
+docker run -d --name=zeo plone zeo
 ```
 
 Start 2 Plone clients (also in the background)
 
-```console
-$ docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8081:8080 plone
-$ docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8082:8080 plone
+```shell
+docker run -d --name=instance1 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8081:8080 plone
+docker run -d --name=instance2 --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8082:8080 plone
 ```
 
-### Start Plone In Debug Mode
+### Start Plone in debug mode
 
 You can also start Plone in debug mode (`fg`) by running
 
-```console
-$ docker run -p 8080:8080 plone fg
+```shell
+docker run -p 8080:8080 plone fg
 ```
 
-Debug mode may also be used with ZEO
+Debug mode may be used with ZEO
 
-```console
-$ docker run --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 plone fg
+```shell
+docker run --link=zeo -e ZEO_ADDRESS=zeo:8080 -p 8080:8080 plone fg
 ```
 
-For more information on how to extend this image with your own custom settings, adding more add-ons, building it or mounting volumes, please refer to our [documentation](https://docs.plone.org/manage/docker/docs/index.html).
+For more information on how to extend this image with your own custom settings,
+adding more add-ons, building it or mounting volumes,
+please refer to our [documentation](https://docs.plone.org/manage/docker/docs/index.html).
 
 
-## Supported Environment Variables
+## Supported environment variables
 
 The Plone image uses several environment variable that allow to specify a more specific setup.
 
-### For Basic Usage
+### For basic usage
 
 * `ADDONS` - Customize Plone via Plone add-ons using this environment variable
 * `ZEO_ADDRESS` - This environment variable allows you to run Plone image as a ZEO client.
 * `SITE` - Add Plone with this id to `Data.fs` on first run. If NOT provided, you'll have to manually add a Plone Site via web UI
 * `VERSIONS` - Use specific versions of Plone Add-on or python libraries
 
-Run Plone and install two addons (eea.facetednavigation and collective.easyform)
+Run Plone and install two addons ([eea.facetednavigation](https://github.com/eea/eea.facetednavigation) and [collective.easyform](https://github.com/collective/collective.easyform).)
 
-```console
-$ docker run -p 8080:8080 -e SITE="mysite" -e ADDONS="eea.facetednavigation collective.easyform" plone
+```shell
+docker run -p 8080:8080 -e SITE="mysite" -e ADDONS="eea.facetednavigation collective.easyform" plone
 ```
 
 To use specific add-ons versions:
 
-```bash
+```shell
  -e ADDONS="eea.facetednavigation collective.easyform" -e VERSIONS="eea.facetednavigation=13.3 collective.easyform=2.1.0"
 ```
 
 RestAPI:
 
-```console
-$ docker run -p 8080:8080 -e SITE=plone plone
+```shell
+docker run -p 8080:8080 -e SITE=plone plone
 
-$ curl -H 'Accept: application/json' http://localhost:8080/plone
+curl -H 'Accept: application/json' http://localhost:8080/plone
 ```
 
-### For Advanced Usage
+### For advanced usage
 
 **Plone:**
 
@@ -133,11 +139,12 @@ $ curl -H 'Accept: application/json' http://localhost:8080/plone
 * `FIND_LINKS` - Add custom `find-links` to the buildout configuration
 * `SOURCES` - Add custom `sources` to the buildout configuration
 
-In order to add custom sources, the `SOURCES` env var needs to be a string containing a *comma*-separated list of sources. This is different from the other environment variables described above, which are *space*-separated.
+To add custom sources, the `SOURCES` env var needs to be a string containing a *comma*-separated list of sources.
+This is different from the other environment variables described above, which are *space*-separated.
 
 For example:
 
-```bash
+```shell
  -e SOURCES="plone.restapi = git https://github.com/plone/plone.restapi,plone.staticresources = git https://github.com/plone/plone.staticresources"
 ```
 
@@ -153,31 +160,26 @@ For example:
 
 **CORS:**
 
-* `CORS_ALLOW_ORIGIN` - Origins that are allowed access to the resource. Either a comma separated list of origins, e.g. `http://example.net,http://mydomain.com` or `*`. Defaults to `http://localhost:3000,http://127.0.0.1:3000`
-* `CORS_ALLOW_METHODS` - A comma separated list of HTTP method names that are allowed by this CORS policy, e.g. `DELETE,GET,OPTIONS,PATCH,POST,PUT`. Defaults to `DELETE,GET,OPTIONS,PATCH,POST,PUT`
+* `CORS_ALLOW_ORIGIN` - Origins that are allowed access to the resource. Either a comma separated list of origins, for example `http://example.net,http://mydomain.com` or `*`. Defaults to `http://localhost:3000,http://127.0.0.1:3000`
+* `CORS_ALLOW_METHODS` - A comma separated list of HTTP method names that are allowed by this CORS policy, for example `DELETE,GET,OPTIONS,PATCH,POST,PUT`. Defaults to `DELETE,GET,OPTIONS,PATCH,POST,PUT`
 * `CORS_ALLOW_CREDENTIALS` - Indicates whether the resource supports user credentials in the request. Defaults to `true`
-* `CORS_EXPOSE_HEADERS` - A comma separated list of response headers clients can access, e.g. `Content-Length,X-My-Header`. Defaults to `Content-Length,X-My-Header`
-* `CORS_ALLOW_HEADERS` - A comma separated list of request headers allowed to be sent by the client, e.g. `X-My-Header`. Defaults to `Accept,Authorization,Content-Type,X-Custom-Header`
+* `CORS_EXPOSE_HEADERS` - A comma separated list of response headers clients can access, for example `Content-Length,X-My-Header`. Defaults to `Content-Length,X-My-Header`
+* `CORS_ALLOW_HEADERS` - A comma separated list of request headers allowed to be sent by the client, for example `X-My-Header`. Defaults to `Accept,Authorization,Content-Type,X-Custom-Header`
 * `CORS_MAX_AGE` - Indicates how long the results of a preflight request can be cached. Defaults to `3600`
 
 ## Documentation
 
 Full documentation for end users can be found online at [docs.plone.org](https://docs.plone.org/manage/docker/docs/index.html).
 
-
 ## Contribute
-
 
 - Issue Tracker: http://github.com/plone/plone.docker/issues
 - Source Code: http://github.com/plone/plone.docker
 - Documentation: http://docs.plone.org/
 
-
 ## Support
 
-
 If you are having issues, please let us know at https://community.plone.org
-
 
 ## License
 
