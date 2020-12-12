@@ -11,7 +11,7 @@ You can start Plone in debug mode (fg) by running
 Debugging With Pdp
 ==================
 
-You can use the the python debugger [Pdp] inside the container.
+You can use the python debugger [Pdp] inside the container.
 
 For this, you'll have to run Plone inside container like
 

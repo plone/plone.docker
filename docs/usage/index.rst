@@ -4,7 +4,7 @@ Usage
 
 .. topic:: Description
 
-   This chapter explains the usage of this container image. 
+   This chapter explains the usage of this container image.
 
 .. toctree::
 

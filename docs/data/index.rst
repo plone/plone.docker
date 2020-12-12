@@ -24,7 +24,7 @@ without having to prepare hosts in advance or care about read/write permission
 or selinux policy rules.
 
 The downside is that the files may be hard to locate for tools and applications
-that run directly on the host system, i.e. outside containers.
+that run directly on the host system, for example outside containers.
 
 Use data volumes with Plone on the command line
 
@@ -70,11 +70,10 @@ This places the database files in a known location on the host system.
 Tools and applications on the host system can access the files.
 
 The downside is that the user needs to make sure that the directory exists,
-and that e.g. directory permissions and other security mechanisms
+and that for example directory permissions and other security mechanisms
 on the host system are set up correctly.
 
-- Create data directories on a suitable volume on your host system, e.g. ``/var/local/data/filestorage`` and ``/var/local/data/blobstorage``
-
+- Create data directories on a suitable volume on your host system, for example ``/var/local/data/filestorage`` and ``/var/local/data/blobstorage``
 
 - Start your ``Plone`` container
 

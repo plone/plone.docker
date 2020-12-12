@@ -48,13 +48,13 @@ Running unit tests:
   Please note that passing `PLONE_` environment variables will slow down
   container creation as a buildout re-run inside container is triggered.
 
-  Thus, we strongly recommend to use this only for testing or development purpose.
+  It is **strongly** recommend to use this only for testing or development purpose.
 
   For production use, create a new image as described.
 
 Theme development
 =================
-You can mount a local `resources` folder to serve diazo theme resources `from resources/theme/mycustom.theme`. 
+You can mount a local `resources` folder to serve diazo theme resources `from resources/theme/mycustom.theme`.
 Please refer to `plone.resource <https://pypi.org/project/plone.resource>`_ for more details and setup instructions.
 
 .. code-block:: shell

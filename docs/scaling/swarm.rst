@@ -22,7 +22,7 @@ Only Traefik exposes its ports (80/TCP and 8080/TCP).
 Traefik monitoring interface is at port 8080 and Plone trafik goes through the port 80.
 
 You need to be running Docker Engine 1.13 on newer for this example to work.
-First we need to put Docker in swarm mode if it is not already:
+First you need to put Docker in swarm mode if it is not already:
 
 .. code-block:: shell
 
