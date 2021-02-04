@@ -108,7 +108,7 @@ class Environment(object):
         allow_headers = self.env.get("CORS_ALLOW_HEADERS",
             "Accept,Authorization,Content-Type,X-Custom-Header")
         max_age = self.env.get("CORS_MAX_AGE", "3600")
-        cors_conf = CORS_TEMPLACE.format(
+        cors_conf = CORS_TEMPLATE.format(
             allow_origin=allow_origin,
             allow_methods=allow_methods,
             allow_credentials=allow_credentials,
@@ -204,7 +204,7 @@ ZEO_TEMPLATE = """
     </zeoclient>
 """.strip()
 
-CORS_TEMPLACE = """<configure
+CORS_TEMPLATE = """<configure
   xmlns="http://namespaces.zope.org/zope">
   <configure
     xmlns="http://namespaces.zope.org/zope"
