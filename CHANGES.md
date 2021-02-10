@@ -1,5 +1,9 @@
 # Changelog
 
+- Add RelStorage support
+  [@pnicolli]
+- Typo fix: CORS_TEMPLACE
+  [@avoinea]
 - Add find-links and sources part to custom buildout
   [pnicolli]
 - Fixed interaction between SITE env var and a zeo setup. Fixes issue #135

@@ -23,14 +23,16 @@ RUN addgroup -g 500 plone \
 COPY buildout.cfg /plone/instance/
 
 RUN apk add --no-cache --virtual .build-deps \
-    gcc \
+    build-base \
     libc-dev \
     zlib-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
     libxslt-dev \
+    mariadb-dev \
     pcre-dev \
+    postgresql-dev \
     libffi-dev \
 && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/$PLONE_VERSION_RELEASE.tgz \
 && echo "$PLONE_MD5  Plone.tgz" | md5sum -c - \
@@ -54,6 +56,8 @@ RUN apk add --no-cache --virtual .build-deps \
     libxml2 \
     libxslt \
     libjpeg-turbo \
+    mariadb-connector-c \
+    postgresql-client \
 && rm -rf /plone/buildout-cache/downloads/*
 
 VOLUME /data
