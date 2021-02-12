@@ -1,5 +1,7 @@
 # Changelog
 
+- Add LDAP/AD support
+  [@eikichi18]
 - Add RelStorage support
   [@pnicolli]
 - Typo fix: CORS_TEMPLACE
