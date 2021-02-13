@@ -1,5 +1,7 @@
 # Changelog
 
+- Only extend develop.cfg when needed
+  [@pnicolli]
 - Add RelStorage support
   [@pnicolli]
 - Typo fix: CORS_TEMPLACE

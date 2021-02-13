@@ -224,9 +224,13 @@ class Environment(object):
         versions = self.env.get("PLONE_VERSIONS",
                    self.env.get("VERSIONS", "")).strip().split()
 
-        sources = self.env.get("SOURCES", "").strip().split(",")
+        sources = self.env.get("SOURCES", "").strip()
+        sources = sources and [x.strip() for x in sources.split(",")]
 
         relstorage = self.relstorage_conf()
+
+        buildout_extends = ((develop or sources)
+                            and "develop.cfg" or "buildout.cfg")
 
         # If profiles not provided. Install ADDONS :default profiles
         if not profiles:
@@ -239,6 +243,7 @@ class Environment(object):
             return
 
         buildout = BUILDOUT_TEMPLATE.format(
+            buildout_extends=buildout_extends,
             findlinks="\n\t".join(findlinks),
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
@@ -304,7 +309,7 @@ CORS_TEMPLATE = """<configure
 
 BUILDOUT_TEMPLATE = """
 [buildout]
-extends = develop.cfg
+extends = {buildout_extends}
 find-links += {findlinks}
 develop += {develop}
 eggs += {eggs}
