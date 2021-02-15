@@ -10,6 +10,8 @@ We **don't** recommended them for production!
 - Images for Plone 5.x and Plone 4.x
 - Enable add-ons via environment variables
 - Choose between [Debian](https://www.debian.org/) or [Alpine](http://www.alpinelinux.org/) based images
+- Built-in RelStorage support, configurable via environment variables
+- Built-in LDAP/AD support via pas.plugins.ldap
 
 > **NOTE**: **Python 2 based Docker images** are no longer supported by the [Docker Official Images](https://docs.docker.com/docker-hub/official_images/) \
 If you need Python 2, you can use `plone/plone:5-python2` instead of `plone:5-python2`.

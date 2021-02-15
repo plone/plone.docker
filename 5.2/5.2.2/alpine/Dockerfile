@@ -31,6 +31,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libxml2-dev \
     libxslt-dev \
     mariadb-dev \
+    openldap-dev \
     pcre-dev \
     postgresql-dev \
     libffi-dev \
