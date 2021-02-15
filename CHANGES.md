@@ -1,5 +1,7 @@
 # Changelog
 
+- Only extend develop.cfg when needed
+  [@pnicolli]
 - Add LDAP/AD support
   [@eikichi18]
 - Add RelStorage support
