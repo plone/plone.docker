@@ -251,7 +251,6 @@ class Environment(object):
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
-            sources="\n".join(sources),
             site=site or "Plone",
             enabled=enabled,
         )

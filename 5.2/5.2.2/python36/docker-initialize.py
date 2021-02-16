@@ -251,7 +251,6 @@ class Environment(object):
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
-            sources="\n".join(sources),
             site=site or "Plone",
             enabled=enabled,
         )
@@ -332,9 +331,6 @@ profiles += {profiles}
 
 [versions]
 {versions}
-
-[sources]
-{sources}
 """
 
 ZEO_INSTANCE_TEMPLATE = """
