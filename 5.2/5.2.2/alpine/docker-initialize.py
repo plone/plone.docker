@@ -260,9 +260,15 @@ class Environment(object):
         # configure collective.recipe.plonesite properly
         server = self.env.get("ZEO_ADDRESS", None)
         if server:
-            buildout += ZEO_INSTANCE_TEMPLATE.format(
-                zeoaddress=server,
-            )
+            buildout += ZEO_INSTANCE_TEMPLATE.format(zeoaddress=server)
+
+        # Add RelStorage configuration if needed
+        if relstorage:
+            buildout += RELSTORAGE_TEMPLATE.format(relstorage=relstorage)
+
+        # Add sources configuration if needed
+        if sources:
+            buildout += SOURCES_TEMPLATE.format(sources="\n".join(sources))
 
         with open(self.custom_conf, 'w') as cfile:
             cfile.write(buildout)
@@ -339,6 +345,20 @@ zeo-address = {zeoaddress}
 shared-blob = off
 http-fast-listen = off
 """
+
+RELSTORAGE_TEMPLATE = """
+
+[instance]
+rel-storage =
+  {relstorage}
+"""
+
+SOURCES_TEMPLATE = """
+
+[sources]
+{sources}
+"""
+
 
 def initialize():
     """ Configure Plone instance as ZEO Client
