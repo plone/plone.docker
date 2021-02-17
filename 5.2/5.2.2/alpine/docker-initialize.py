@@ -247,7 +247,6 @@ class Environment(object):
             findlinks="\n\t".join(findlinks),
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
-            relstorage=relstorage,
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
@@ -320,10 +319,6 @@ develop += {develop}
 eggs += {eggs}
 zcml += {zcml}
 
-[instance]
-rel-storage =
-  {relstorage}
-
 [plonesite]
 enabled = {enabled}
 site-id = {site}
@@ -331,9 +326,6 @@ profiles += {profiles}
 
 [versions]
 {versions}
-
-[sources]
-{sources}
 """
 
 ZEO_INSTANCE_TEMPLATE = """

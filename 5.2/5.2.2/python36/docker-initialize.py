@@ -247,7 +247,6 @@ class Environment(object):
             findlinks="\n\t".join(findlinks),
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
-            relstorage=relstorage,
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
@@ -319,10 +318,6 @@ find-links += {findlinks}
 develop += {develop}
 eggs += {eggs}
 zcml += {zcml}
-
-[instance]
-rel-storage =
-  {relstorage}
 
 [plonesite]
 enabled = {enabled}
