@@ -1,5 +1,7 @@
 # Changelog
 
+- Allow buildout to extend custom files
+  [@pnicolli]
 - Only extend develop.cfg when needed
   [@pnicolli]
 - Add LDAP/AD support
