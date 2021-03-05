@@ -22,13 +22,14 @@ RUN addgroup -g 500 plone \
 COPY buildout.cfg /plone/instance/
 
 RUN apk add --no-cache --virtual .build-deps \
-    gcc \
+    build-base \
     libc-dev \
     zlib-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
     libxslt-dev \
+    openldap-dev \
     pcre-dev \
     libffi-dev \
 && wget -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
