@@ -2,6 +2,8 @@
 
 - Allow buildout to extend custom files
   [@pnicolli]
+- Enable LDAP/AD support on Plone 5.1
+  [@pnicolli]
 - Only extend develop.cfg when needed
   [@pnicolli]
 - Add LDAP/AD support

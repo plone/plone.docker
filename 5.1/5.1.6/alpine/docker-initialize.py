@@ -146,7 +146,11 @@ class Environment(object):
         versions = self.env.get("PLONE_VERSIONS",
                    self.env.get("VERSIONS", "")).strip().split()
 
-        sources = self.env.get("SOURCES", "").strip().split(",")
+        sources = self.env.get("SOURCES", "").strip()
+        sources = sources and [x.strip() for x in sources.split(",")]
+
+        buildout_extends = ((develop or sources)
+                            and "develop.cfg" or "buildout.cfg")
 
         buildout_extends = ((develop or sources)
                             and ["develop.cfg"] or ["buildout.cfg"])
@@ -171,7 +175,6 @@ class Environment(object):
             develop="\n\t".join(develop),
             profiles="\n\t".join(profiles),
             versions="\n".join(versions),
-            sources="\n".join(sources),
             site=site or "Plone",
             enabled=enabled,
         )
@@ -180,9 +183,11 @@ class Environment(object):
         # configure collective.recipe.plonesite properly
         server = self.env.get("ZEO_ADDRESS", None)
         if server:
-            buildout += ZEO_INSTANCE_TEMPLATE.format(
-                zeoaddress=server,
-            )
+            buildout += ZEO_INSTANCE_TEMPLATE.format(zeoaddress=server)
+
+        # Add sources configuration if needed
+        if sources:
+            buildout += SOURCES_TEMPLATE.format(sources="\n".join(sources))
 
         with open(self.custom_conf, 'w') as cfile:
             cfile.write(buildout)
@@ -242,9 +247,6 @@ profiles += {profiles}
 
 [versions]
 {versions}
-
-[sources]
-{sources}
 """
 
 ZEO_INSTANCE_TEMPLATE = """
@@ -255,6 +257,13 @@ zeo-address = {zeoaddress}
 shared-blob = off
 http-fast-listen = off
 """
+
+SOURCES_TEMPLATE = """
+
+[sources]
+{sources}
+"""
+
 
 def initialize():
     """ Configure Plone instance as ZEO Client
