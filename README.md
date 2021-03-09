@@ -138,6 +138,7 @@ curl -H 'Accept: application/json' http://localhost:8080/plone
 * `PLONE_PROFILES, PROFILES` - GenericSetup profiles to include when `SITE` environment provided.
 * `PLONE_ZCML`, `ZCML` - Include custom Plone add-ons ZCML files
 * `PLONE_DEVELOP`, `DEVELOP` - Develop new or existing Plone add-ons
+* `BUILDOUT_EXTENDS` - Add configuration files that buildout should extend
 * `FIND_LINKS` - Add custom `find-links` to the buildout configuration
 * `SOURCES` - Add custom `sources` to the buildout configuration
 

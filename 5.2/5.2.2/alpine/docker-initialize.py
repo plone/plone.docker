@@ -230,7 +230,9 @@ class Environment(object):
         relstorage = self.relstorage_conf()
 
         buildout_extends = ((develop or sources)
-                            and "develop.cfg" or "buildout.cfg")
+                            and ["develop.cfg"] or ["buildout.cfg"])
+        extra_extends = self.env.get("BUILDOUT_EXTENDS", "").strip().split()
+        buildout_extends.extend(extra_extends)
 
         # If profiles not provided. Install ADDONS :default profiles
         if not profiles:
@@ -239,11 +241,13 @@ class Environment(object):
                 profiles.append("%s:default" % base)
 
         enabled = bool(site)
-        if not (eggs or zcml or relstorage or develop or enabled):
+        if not (
+            eggs or zcml or relstorage or develop or enabled or extra_extends
+        ):
             return
 
         buildout = BUILDOUT_TEMPLATE.format(
-            buildout_extends=buildout_extends,
+            buildout_extends="\n\t".join(buildout_extends),
             findlinks="\n\t".join(findlinks),
             eggs="\n\t".join(eggs),
             zcml="\n\t".join(zcml),
@@ -313,7 +317,6 @@ CORS_TEMPLATE = """<configure
 
 BUILDOUT_TEMPLATE = """
 [buildout]
-extends = {buildout_extends}
 find-links += {findlinks}
 develop += {develop}
 eggs += {eggs}
