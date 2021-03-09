@@ -317,6 +317,7 @@ CORS_TEMPLATE = """<configure
 
 BUILDOUT_TEMPLATE = """
 [buildout]
+extends = {buildout_extends}
 find-links += {findlinks}
 develop += {develop}
 eggs += {eggs}

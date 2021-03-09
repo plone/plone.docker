@@ -1,20 +1,13 @@
 FROM python:2.7-slim-buster
 
-ENV PIP=20.2.3 \
-    ZC_BUILDOUT=2.13.3 \
+ENV PIP=20.3.4 \
+    ZC_BUILDOUT=2.13.4 \
     SETUPTOOLS=44.1.1 \
-    WHEEL=0.35.1 \
+    WHEEL=0.36.2 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2.2 \
-    PLONE_VERSION_RELEASE=Plone-5.2.2-UnifiedInstaller \
-    PLONE_MD5=a603eddfd3abb0528f0861472ebac934
-
-LABEL plone=$PLONE_VERSION \
-    os="debian" \
-    os.version="10" \
-    name="Plone 5.2" \
-    description="Plone image, based on Unified Installer" \
-    maintainer="Plone Community"
+    PLONE_VERSION=5.2.4 \
+    PLONE_VERSION_RELEASE=Plone-5.2.4-UnifiedInstaller-1.0 \
+    PLONE_MD5=b682cdf2384e692c033077f448b68afd
 
 RUN useradd --system -m -d /plone -U -u 500 plone \
  && mkdir -p /plone/instance/ /data/filestorage /data/blobstorage
