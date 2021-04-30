@@ -224,6 +224,8 @@ class Environment(object):
         versions = self.env.get("PLONE_VERSIONS",
                    self.env.get("VERSIONS", "")).strip().split()
 
+        stdlogging = self.env.get("STD_LOGGING")
+
         sources = self.env.get("SOURCES", "").strip()
         sources = sources and [x.strip() for x in sources.split(",")]
 
@@ -242,7 +244,7 @@ class Environment(object):
 
         enabled = bool(site)
         if not (
-            eggs or zcml or relstorage or develop or enabled or extra_extends
+            eggs or zcml or relstorage or develop or enabled or extra_extends or stdlogging
         ):
             return
 
@@ -267,6 +269,9 @@ class Environment(object):
         # Add RelStorage configuration if needed
         if relstorage:
             buildout += RELSTORAGE_TEMPLATE.format(relstorage=relstorage)
+
+        if stdlogging:
+            buildout += STD_LOGGING_INSTANCE
 
         # Add sources configuration if needed
         if sources:
@@ -352,6 +357,15 @@ SOURCES_TEMPLATE = """
 
 [sources]
 {sources}
+"""
+
+STD_LOGGING_INSTANCE = """
+
+[instance]
+event-log-handler = StreamHandler
+event-log-args = (sys.stderr,)
+access-log-handler = StreamHandler
+access-log-args = (sys.stdout,)
 """
 
 
