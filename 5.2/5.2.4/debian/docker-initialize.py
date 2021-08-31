@@ -106,7 +106,7 @@ class Environment(object):
         expose_headers = self.env.get("CORS_EXPOSE_HEADERS",
             "Content-Length,X-My-Header")
         allow_headers = self.env.get("CORS_ALLOW_HEADERS",
-            "Accept,Authorization,Content-Type,X-Custom-Header")
+            "Accept,Authorization,Content-Type,X-Custom-Header,Lock-Token")
         max_age = self.env.get("CORS_MAX_AGE", "3600")
         cors_conf = CORS_TEMPLATE.format(
             allow_origin=allow_origin,
