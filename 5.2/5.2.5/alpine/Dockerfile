@@ -1,13 +1,13 @@
 FROM python:3.8-alpine
 
-ENV PIP=21.0.1 \
+ENV PIP=21.2.4 \
     ZC_BUILDOUT=2.13.4 \
-    SETUPTOOLS=51.3.3 \
-    WHEEL=0.36.2 \
+    SETUPTOOLS=58.2.0 \
+    WHEEL=0.37.2 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2.4 \
-    PLONE_VERSION_RELEASE=Plone-5.2.4-UnifiedInstaller-1.0 \
-    PLONE_MD5=b682cdf2384e692c033077f448b68afd
+    PLONE_VERSION=5.2.5 \
+    PLONE_VERSION_RELEASE=Plone-5.2.5-UnifiedInstaller-1.0 \
+    PLONE_MD5=842e49ecf20739aab0760603669259e6
 
 RUN addgroup -g 500 plone \
  && adduser -S -D -G plone -u 500 plone \

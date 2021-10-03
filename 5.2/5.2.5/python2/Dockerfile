@@ -1,13 +1,13 @@
-FROM python:2.7-slim-buster
+FROM python:2.7-slim-bullseye
 
 ENV PIP=20.3.4 \
     ZC_BUILDOUT=2.13.4 \
     SETUPTOOLS=44.1.1 \
     WHEEL=0.36.2 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2.4 \
-    PLONE_VERSION_RELEASE=Plone-5.2.4-UnifiedInstaller-1.0 \
-    PLONE_MD5=b682cdf2384e692c033077f448b68afd
+    PLONE_VERSION=5.2.5 \
+    PLONE_VERSION_RELEASE=Plone-5.2.5-UnifiedInstaller-1.0 \
+    PLONE_MD5=842e49ecf20739aab0760603669259e6
 
 RUN useradd --system -m -d /plone -U -u 500 plone \
  && mkdir -p /plone/instance/ /data/filestorage /data/blobstorage

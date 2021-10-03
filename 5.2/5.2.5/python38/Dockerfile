@@ -1,4 +1,4 @@
-FROM python:3.6-slim-bullseye
+FROM python:3.8-slim-bullseye
 
 ENV PIP=21.2.4 \
     ZC_BUILDOUT=2.13.4 \
