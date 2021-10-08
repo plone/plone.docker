@@ -1,5 +1,7 @@
 # Changelog
 
+- Default logging to stdout/stderr by default from 5.2.5. Setting env FILE_LOGGING to revert to previous behavior.
+  [@mamico]
 - Allow buildout to extend custom files
   [@pnicolli]
 - Enable LDAP/AD support on Plone 5.1
