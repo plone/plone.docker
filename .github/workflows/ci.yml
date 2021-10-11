@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [4.3.19, 5.1.6, 5.2.4]
+        version: [4.3.19, 5.1.6, 5.2.5]
         os: [debian, alpine, python2, python36, python37]
         exclude:
         - version: 4.3.19
