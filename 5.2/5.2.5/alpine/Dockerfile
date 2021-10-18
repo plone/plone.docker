@@ -1,9 +1,9 @@
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 
-ENV PIP=21.2.4 \
+ENV PIP=21.0.1 \
     ZC_BUILDOUT=2.13.4 \
     SETUPTOOLS=51.3.3 \
-    WHEEL=0.37.0 \
+    WHEEL=0.36.2 \
     PLONE_MAJOR=5.2 \
     PLONE_VERSION=5.2.5 \
     PLONE_VERSION_RELEASE=Plone-5.2.5-UnifiedInstaller-1.0 \
