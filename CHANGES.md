@@ -53,3 +53,5 @@
   [svx]
 - Add (`apt-mark showauto`), Jenkins shut up
   [svx]
+- Indicate where Plone 6 images are available from
+  [tkimnguyen]

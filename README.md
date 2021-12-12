@@ -8,6 +8,7 @@ We **don't** recommended them for production!
 ## Features
 
 - Images for Plone 5.x and Plone 4.x
+- Images for Plone 6 are available at https://github.com/plone/plone-backend
 - Enable add-ons via environment variables
 - Choose between [Debian](https://www.debian.org/) or [Alpine](http://www.alpinelinux.org/) based images
 - Built-in RelStorage support, configurable via environment variables (requires Plone 5.2+)
