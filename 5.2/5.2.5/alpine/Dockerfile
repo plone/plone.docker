@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.8-alpine
 
 ENV PIP=21.0.1 \
     ZC_BUILDOUT=2.13.5 \
