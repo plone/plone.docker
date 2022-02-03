@@ -7,10 +7,9 @@ We **don't** recommended them for production!
 
 ## Features
 
-- Images for Plone 5.x and Plone 4.x
-- Images for Plone 6 are available at https://github.com/plone/plone-backend
+- Images for **Plone 5.x** and **Plone 4.x**
+- Images for **Plone 6** are available at https://github.com/plone/plone-backend
 - Enable add-ons via environment variables
-- Choose between [Debian](https://www.debian.org/) or [Alpine](http://www.alpinelinux.org/) based images
 - Built-in RelStorage support, configurable via environment variables (requires Plone 5.2+)
 - Built-in LDAP/AD support via pas.plugins.ldap (requires Plone 5.1+)
 
@@ -19,15 +18,11 @@ If you need Python 2, you can use `plone/plone:5-python2` instead of `plone:5-py
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`5.2.5-python39`, `5.2-python39`, `5-python39`, `python39`, `5.2.5`, `5.2`, `5`, `latest` (*5.2.5/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.5/debian/Dockerfile)
-- [`5.2.5-python38`, `5.2-python38`, `5-python38`, `python38` (*5.2.5/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.5/python38/Dockerfile)
-- [`5.2.5-python37`, `5.2-python37`, `5-python37`, `python37` (*5.2.5/python37/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.5/python37/Dockerfile)
-- [`5.2.5-python36`, `5.2-python36`, `5-python36`, `python36` (*5.2.5/python36/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.5/python36/Dockerfile)
-- [`5.2.5-alpine`, `5.2-alpine`, `5-alpine`, `alpine` (*5.2.5/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.5/alpine/)
+- [`5.2.7-python38`, `5.2-python38`, `5-python38`, `python38`, `5.2.7`, `5.2`, `5`, `latest` (*5.2.7/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.7/debian/Dockerfile)
 
 ## Older versions
 
-- [`5.2.5-python2`, `5.2-python2`, `5-python2`, `python2` (*5.2.5/python2/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.5/python2/Dockerfile)
+- [`5.2.7-python2`, `5.2-python2`, `5-python2`, `python2` (*5.2.7/python2/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.7/python2/Dockerfile)
 - [`5.1.6`, `5.1` (*5.1.6/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.6/debian/Dockerfile)
 - [`5.1.6-alpine`, `5.1-alpine` (*5.1.6/alpine/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.6/alpine/Dockerfile)
 - [`4.3.19`, `4.3`, `4` (*4.3.19/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.19/debian/Dockerfile)

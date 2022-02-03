@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [5.2.5, 5.2.6]
+        version: [5.2.5, 5.2.6, 5.2.7]
         os: [debian, python2]
 
     steps:
