@@ -167,9 +167,11 @@ class Environment(object):
         # If we need to create a plonesite and we have a zeo setup
         # configure collective.recipe.plonesite properly
         server = self.env.get("ZEO_ADDRESS", None)
+        shared_blob_dir=self.env.get("ZEO_SHARED_BLOB_DIR", "off")
         if server:
             buildout += ZEO_INSTANCE_TEMPLATE.format(
                 zeoaddress=server,
+                shared_blob_dir=shared_blob_dir
             )
 
         with open(self.custom_conf, 'w') as cfile:
@@ -236,7 +238,7 @@ ZEO_INSTANCE_TEMPLATE = """
 [instance]
 zeo-client = true
 zeo-address = {zeoaddress}
-shared-blob = off
+shared-blob = {shared_blob_dir}
 http-fast-listen = off
 """
 
