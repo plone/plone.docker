@@ -347,7 +347,6 @@ ZEO_INSTANCE_TEMPLATE = """
 zeo-client = true
 zeo-address = {zeoaddress}
 shared-blob = {shared_blob_dir}
-
 http-fast-listen = off
 """
 
