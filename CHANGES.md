@@ -1,5 +1,6 @@
 # Changelog
-
+- fix shared-blob-dir always off
+  [@sauzher]
 - Default logging to stdout/stderr by default from 5.2.5. Setting env FILE_LOGGING to revert to previous behavior.
   [@mamico]
 - Allow buildout to extend custom files
