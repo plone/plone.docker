@@ -47,6 +47,7 @@ RUN apk add --no-cache --virtual .build-deps \
     bash \
     git \
     rsync \
+    libldap \
     libxml2 \
     libxslt \
     libjpeg-turbo \
