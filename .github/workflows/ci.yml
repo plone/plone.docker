@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [5.2.5, 5.2.6, 5.2.7]
-        os: [debian, python2]
+        version: [5.2.8]
+        os: [alpine, debian, python2, python36, python37]
 
     steps:
     - name: Extract version
