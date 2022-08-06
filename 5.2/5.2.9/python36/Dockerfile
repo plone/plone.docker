@@ -1,6 +1,6 @@
 FROM python:3.6-slim-buster
 
-ENV PIP=22.2.2 \
+ENV PIP=21.3.1 \
     ZC_BUILDOUT=2.13.7 \
     SETUPTOOLS=51.3.3 \
     WHEEL=0.37.1 \
