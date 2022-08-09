@@ -56,3 +56,5 @@
   [svx]
 - Indicate where Plone 6 images are available from
   [tkimnguyen]
+- unit tests for docker-initialize.py
+  [@winniehell]
