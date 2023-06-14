@@ -56,3 +56,5 @@
   [svx]
 - Indicate where Plone 6 images are available from
   [tkimnguyen]
+- Updated Wheel Package to 0.38.1 to remove the vulnerability associated with the package
+  [suryadev99]
