@@ -1,7 +1,7 @@
 FROM python:2.7-slim-buster
 
 ENV PIP=20.3.4 \
-    ZC_BUILDOUT=2.13.7 \
+    ZC_BUILDOUT=2.13.8 \
     SETUPTOOLS=44.1.1 \
     WHEEL=0.37.1 \
     PLONE_MAJOR=5.2 \
