@@ -58,3 +58,5 @@
   [tkimnguyen]
 - Updated Wheel Package to 0.38.1 to remove the vulnerability associated with the package
   [suryadev99]
+- Release Plone 5.2.10
+  [iulianpetchesi]
