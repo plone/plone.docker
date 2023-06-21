@@ -60,3 +60,5 @@
   [suryadev99]
 - Release Plone 5.2.10
   [iulianpetchesi]
+- Release Plone 5.2.11
+  [iulianpetchesi]
