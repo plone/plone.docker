@@ -18,11 +18,11 @@ If you need Python 2, you can use `plone/plone:5-python2` instead of `plone:5-py
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`5.2.10-python38`, `5.2-python38`, `5-python38`, `python38`, `5.2.10`, `5.2`, `5`, `latest` (*5.2.10/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.10/debian/Dockerfile)
+- [`5.2.12-python38`, `5.2-python38`, `5-python38`, `python38`, `5.2.12`, `5.2`, `5`, `latest` (*5.2.12/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.12/debian/Dockerfile)
 
 ## Older versions
 
-- [`5.2.10-python2`, `5.2-python2`, `5-python2`, `python2` (*5.2.10/python2/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.10/python2/Dockerfile)
+- [`5.2.12-python2`, `5.2-python2`, `5-python2`, `python2` (*5.2.12/python2/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.2/5.2.12/python2/Dockerfile)
 - [`5.1.6`, `5.1` (*5.1.6/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/5.1/5.1.6/debian/Dockerfile)
 - [`4.3.19`, `4.3`, `4` (*4.3.19/Dockerfile*)](https://github.com/plone/plone.docker/blob/master/4.3/4.3.19/debian/Dockerfile)
 

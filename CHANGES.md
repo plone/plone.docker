@@ -62,3 +62,5 @@
   [iulianpetchesi]
 - Release Plone 5.2.11
   [iulianpetchesi]
+- Release Plone 5.2.12
+  [iulianpetchesi]
