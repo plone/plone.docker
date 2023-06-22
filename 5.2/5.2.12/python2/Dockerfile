@@ -1,4 +1,4 @@
-FROM python:2.7-slim-bullseye
+FROM python:2.7-slim-buster
 
 ENV PIP=20.3.4 \
     ZC_BUILDOUT=2.13.8 \
