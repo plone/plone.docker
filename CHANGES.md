@@ -64,3 +64,5 @@
   [iulianpetchesi]
 - Release Plone 5.2.12
   [iulianpetchesi]
+- Release Plone 5.2.13
+  [valipod]
