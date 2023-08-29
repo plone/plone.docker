@@ -34,6 +34,8 @@ RUN apk add --no-cache --virtual .build-deps \
 && cp -rv ./$PLONE_VERSION_RELEASE/base_skeleton/* /plone/instance/ \
 && cp -v ./$PLONE_VERSION_RELEASE/buildout_templates/buildout.cfg /plone/instance/buildout-base.cfg \
 && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT wheel==$WHEEL \
+# some package needs PyYAML 5.4.1, and this can only be built with cython<3.0.0
+&& pip install "cython<3.0.0" && pip install --no-build-isolation pyyaml==5.4.1 \
 && cd /plone/instance \
 && buildout \
 && ln -s /data/filestorage/ /plone/instance/var/filestorage \
