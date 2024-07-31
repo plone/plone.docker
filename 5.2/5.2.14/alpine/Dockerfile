@@ -5,9 +5,9 @@ ENV PIP=22.2.2 \
     SETUPTOOLS=65.7.0 \
     WHEEL=0.38.4 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2.13 \
-    PLONE_VERSION_RELEASE=Plone-5.2.13-UnifiedInstaller-1.0 \
-    PLONE_MD5=12c037fae9413385149e8677f8457b84
+    PLONE_VERSION=5.2.14 \
+    PLONE_VERSION_RELEASE=Plone-5.2.14-UnifiedInstaller-1.0 \
+    PLONE_MD5=e8e1f774f069026319be3038631e0734
 
 RUN addgroup -g 500 plone \
  && adduser -S -D -G plone -u 500 plone \

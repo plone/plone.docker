@@ -5,9 +5,9 @@ ENV PIP=20.3.4 \
     SETUPTOOLS=44.1.1 \
     WHEEL=0.37.1 \
     PLONE_MAJOR=5.2 \
-    PLONE_VERSION=5.2.13 \
-    PLONE_VERSION_RELEASE=Plone-5.2.13-UnifiedInstaller-1.0 \
-    PLONE_MD5=12c037fae9413385149e8677f8457b84
+    PLONE_VERSION=5.2.14 \
+    PLONE_VERSION_RELEASE=Plone-5.2.14-UnifiedInstaller-1.0 \
+    PLONE_MD5=e8e1f774f069026319be3038631e0734
 
 RUN useradd --system -m -d /plone -U -u 500 plone \
  && mkdir -p /plone/instance/ /data/filestorage /data/blobstorage
