@@ -1,0 +1,21 @@
+# hadolint configuration for plone-legacy-images.
+#
+# Each ignore below is a deliberate, recorded decision — not a silenced bug.
+ignored:
+  # DL3008: pin apt versions — deliberately unpinned; Dependabot pins the base
+  # image digests and the historical ARGs are the real pins in this repo.
+  - DL3008
+  # DL3003: "use WORKDIR instead of cd". The cd's here are inside a single RUN
+  # that extracts a source tarball, builds it, and deletes it again. The
+  # directory does not exist until that same RUN creates it, and nothing after
+  # the RUN should inherit it — which is exactly what WORKDIR would do.
+  - DL3003
+  # SC2016: "expressions don't expand in single quotes". Intended: the sed
+  # scripts rewriting zope.conf must match the *literal* string $INSTANCE.
+  # Double quotes would let the build shell expand it to the empty string.
+  - SC2016
+  # DL3066: "non-numeric user-id may not be resolvable by the host". USER plone
+  # (uid 500) is the documented convention of these images, inherited from
+  # plone/plone-backend. The uid is fixed at 500 by useradd -u 500, so host-side
+  # volume ownership is deterministic despite the symbolic USER.
+  - DL3066
