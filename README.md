@@ -26,6 +26,20 @@ If you need Python 2, you can use `plone/plone:5-python2` instead of `plone:5-py
 - [`5.1.6`, `5.1` (*5.1.6/Dockerfile*)](https://github.com/plone/plone.docker/blob/main/5.1/5.1.6/debian/Dockerfile)
 - [`4.3.19`, `4.3`, `4` (*4.3.19/Dockerfile*)](https://github.com/plone/plone.docker/blob/main/4.3/4.3.19/debian/Dockerfile)
 
+## Legacy images (Plone 1.0 - 4.2)
+
+Images for Plone releases older than 4.3 live under [`legacy/`](legacy/) and are
+built separately. They are intended for **content extraction, migration
+rehearsal and archaeology only** — these stacks have known, unpatched security
+issues and must never be exposed.
+
+Each series also ships a `-demo` variant with a Plone site already created, and
+carries an `upgrade` command so a database can be walked up one version at a
+time. See [`legacy/README.md`](legacy/README.md).
+
+Currently built: **4.2** (Plone 4.2.6). The remaining series land one per pull
+request.
+
 ## Prerequisites
 
 Make sure you have Docker installed and running for your platform.

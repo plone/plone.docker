@@ -1,0 +1,173 @@
+name: legacy build
+
+# Builds the legacy image matrix under legacy/ (Plone 1.0 - 4.2).
+#
+# Separate from ci.yml by design: that workflow belongs to the decommissioned
+# Docker Official Image and is pinned to the retired `master` branch. This one
+# is the live pipeline. One series lands per pull request; append to the
+# paths-filter list and to ALL below as each is ported.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.matrix.outputs.versions }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dorny/paths-filter@v4.0.3
+        id: filter
+        with:
+          filters: |
+            shared: &shared
+              - 'legacy/shared/**'
+              - 'legacy/demo/**'
+              - 'legacy/Makefile'
+              - '.github/workflows/legacy-build.yml'
+            v4.2:
+              - *shared
+              - 'legacy/4.2/**'
+            # Append an entry here for each new version directory, and to ALL
+            # below (see legacy/README.md "Version matrix").
+      - name: Compute matrix
+        id: matrix
+        env:
+          CHANGES: ${{ steps.filter.outputs.changes }}
+          BUILD_ALL: ${{ github.event_name != 'pull_request' }}
+        run: |
+          # Implemented versions; append when a new directory lands.
+          ALL='["4.2"]'
+          if [ "${BUILD_ALL}" = "true" ]; then
+            VERSIONS="${ALL}"
+          else
+            VERSIONS=$(echo "${CHANGES}" | jq -c '[.[] | select(startswith("v")) | ltrimstr("v")]')
+          fi
+          echo "versions=${VERSIONS}" >> "${GITHUB_OUTPUT}"
+          echo "building: ${VERSIONS}"
+
+  build:
+    needs: changes
+    if: needs.changes.outputs.versions != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ${{ fromJSON(needs.changes.outputs.versions) }}
+    env:
+      GHCR_IMAGE: ghcr.io/${{ github.repository }}
+      DOCKERHUB_IMAGE: plone/plone
+      # Secrets cannot be referenced from an `if:` condition, so the presence
+      # check is hoisted into a job-level env var and the Docker Hub steps gate
+      # on that instead. Without the credentials the job still builds, tests
+      # and pushes to GHCR - it just skips Hub rather than failing.
+      HAS_DOCKERHUB: ${{ secrets.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Resolve full version from the Makefile
+        id: ver
+        run: |
+          FULL=$(sed -n "s/^FULL_VERSION_${{ matrix.version }} := //p" legacy/Makefile)
+          test -n "${FULL}"
+          echo "full=${FULL}" >> "${GITHUB_OUTPUT}"
+
+      - name: Build (load locally for testing)
+        uses: docker/build-push-action@v7
+        with:
+          context: legacy
+          file: legacy/${{ matrix.version }}/Dockerfile
+          platforms: linux/amd64
+          load: true
+          tags: |
+            plone-legacy:${{ steps.ver.outputs.full }}
+            plone-legacy:${{ matrix.version }}
+          cache-from: type=gha,scope=${{ matrix.version }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.version }}
+
+      # SMOKE_CREATE_SITE=1 makes CI assert the full stretch gate: not just that
+      # Zope answers and every product loads, but that a Plone site can actually
+      # be created and renders real Plone markup. The weaker gate has already
+      # been shown to pass on an unusable image.
+      - name: Smoke test
+        working-directory: legacy
+        run: |
+          SMOKE_CREATE_SITE=1 \
+          IMAGE=plone-legacy:${{ steps.ver.outputs.full }} \
+          ./shared/smoke-test.sh
+
+      # `demo-image-`, not `demo-`: the base image is already in the daemon's
+      # store from the step above, and `make demo-<v>` would rebuild it against
+      # a cache this job does not share.
+      #
+      # The target pins a docker-driver builder, which is not a detail:
+      # `FROM ${BASE_IMAGE}` resolves against the DAEMON's images, and the
+      # docker-container builder that setup-buildx-action makes default here
+      # cannot read those. It reports the base image as "pull access denied"
+      # rather than as unreadable, which reads like a credentials problem.
+      - name: Build -demo variant
+        working-directory: legacy
+        run: make demo-image-${{ matrix.version }} DEMO_BUILDER=default
+
+      # SMOKE_EXPECT_SITE=1 asserts the site is ALREADY there on first start,
+      # with no creation step - the only check that distinguishes a correctly
+      # seeded demo image from its own base image.
+      - name: Smoke test -demo
+        working-directory: legacy
+        run: make test-demo-${{ matrix.version }}
+
+      - name: Login to GHCR
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Login to Docker Hub
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && env.HAS_DOCKERHUB == 'true'
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Four tags per series: the full version and the series, each with a
+      # -demo counterpart. GHCR always; Docker Hub only when credentials are
+      # configured, so the pipeline is useful before they are provisioned.
+      - name: Push
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          for tag in "${{ steps.ver.outputs.full }}" "${{ matrix.version }}" \
+                     "${{ steps.ver.outputs.full }}-demo" "${{ matrix.version }}-demo"; do
+            docker tag "plone-legacy:${tag}" "${GHCR_IMAGE}:${tag}"
+            docker push "${GHCR_IMAGE}:${tag}"
+            if [ "${HAS_DOCKERHUB}" = "true" ]; then
+              docker tag "plone-legacy:${tag}" "${DOCKERHUB_IMAGE}:${tag}"
+              docker push "${DOCKERHUB_IMAGE}:${tag}"
+            fi
+          done
+          if [ "${HAS_DOCKERHUB}" != "true" ]; then
+            echo "::notice::DOCKERHUB_USERNAME/DOCKERHUB_TOKEN not set - pushed to GHCR only."
+          fi
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: make lint
+        working-directory: legacy
+        run: make lint
