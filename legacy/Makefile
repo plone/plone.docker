@@ -14,7 +14,7 @@ PLATFORM ?= linux/amd64
 # the matrix in README.md, and the ALL list in
 # ../.github/workflows/legacy-build.yml. One series lands per pull request;
 # append here as each one is ported.
-SERIES := 4.2
+SERIES := 4.1 4.2
 
 # Builder used for the -demo images, which MUST be a `docker`-driver one:
 # demo/Dockerfile's FROM reads the base image out of the local image store, and
@@ -40,6 +40,9 @@ DEMO_TEST_PASSWORD ?= smoke-not-admin
 # [V 2026-08-20] 4.2.6, not the final 4.2.7: 4.2.7 has no UnifiedInstaller
 # published, and the installer is what carries the offline buildout-cache
 # these images are built from.
+# [V 2026-08-20] 4.1.6 is both the final 4.1.x release and the last
+# UnifiedInstaller published for the series, so this row needs no compromise.
+FULL_VERSION_4.1 := 4.1.6
 FULL_VERSION_4.2 := 4.2.6
 
 .PHONY: help
