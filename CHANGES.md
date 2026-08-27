@@ -1,4 +1,6 @@
 # Changelog
+- Add Plone 4.2 image, the first of the legacy matrix (Plone 1.0 - 4.2). For content extraction, migration and archaeology only. Refs #180
+  [@ericof]
 - fix shared-blob-dir always off
   [@sauzher]
 - Default logging to stdout/stderr by default from 5.2.5. Setting env FILE_LOGGING to revert to previous behavior.
