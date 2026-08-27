@@ -1,5 +1,11 @@
 name: Plone Docker Official Image
-on: [push]
+# Pinned to the retired `master` branch. The default branch is now `main`,
+# so this workflow no longer triggers. It is kept for historical reference
+# only: it targets a deprecated toolchain (actions/checkout@v2,
+# `::set-output`, a matrix pinned to 5.2.13) and publishes nothing.
+on:
+  push:
+    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
