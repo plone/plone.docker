@@ -32,7 +32,7 @@ If you need Python 2, you can use `plone/plone:5-python2` instead of `plone:5-py
 Newest to oldest. For the 4.3 - 5.2 series only the **latest point release** is
 listed; earlier point releases remain in the repository and on Docker Hub.
 
-| Plone | Python | Variant | Built from | Docker Hub tags |
+| Plone | Python | Variant | Built from | Published tags |
 |---|---|---|---|---|
 | 5.2.14 | 3.8 | Debian | [`5.2/5.2.14/debian/Dockerfile`](5.2/5.2.14/debian/Dockerfile) | `latest`, `5`, `5.2`, `5.2.14`, `python38`, `5-python38`, `5.2-python38`, `5.2.14-python38` |
 | 5.2.14 | 3.8 | Alpine | [`5.2/5.2.14/alpine/Dockerfile`](5.2/5.2.14/alpine/Dockerfile) | *not published* |
@@ -44,15 +44,32 @@ listed; earlier point releases remain in the repository and on Docker Hub.
 | 5.0.8 | 2.7 | Alpine | [`5.0/5.0.8/alpine/Dockerfile`](5.0/5.0.8/alpine/Dockerfile) | *not published* |
 | 4.3.19 | 2.7 | Debian | [`4.3/4.3.19/debian/Dockerfile`](4.3/4.3.19/debian/Dockerfile) | `4`, `4.3`, `4.3.19` |
 | 4.3.19 | 2.7 | Alpine | [`4.3/4.3.19/alpine/Dockerfile`](4.3/4.3.19/alpine/Dockerfile) | `4-alpine`, `4.3-alpine`, `4.3.19-alpine` |
-| 4.2.6 | 2.7.18 | Debian *(legacy)* | [`legacy/4.2/Dockerfile`](legacy/4.2/Dockerfile) | *not yet published* |
+| 4.2.6 | 2.7.18 | Debian *(legacy)* | [`legacy/4.2/Dockerfile`](legacy/4.2/Dockerfile) | `4.2`, `4.2.6`, `4.2-demo`, `4.2.6-demo` |
 | 4.1.6 | 2.6.9 | Debian *(legacy)* | [`legacy/4.1/Dockerfile`](legacy/4.1/Dockerfile) | *not yet published* |
+
+### Where the tags live
+
+The two halves of the table publish to **different places**, and the tag names
+alone do not say which:
+
+| Rows | Registry | Pull with |
+|---|---|---|
+| 4.3 - 5.2 | the official `plone` image | `docker pull plone:5.2.14` |
+| `legacy/` | `plone/plone` and GHCR | `docker pull plone/plone:4.2`<br>`docker pull ghcr.io/plone/plone.docker:4.2` |
+
+`plone/plone` also carries its own 4.3 - 5.2 tags, but those are a mirror last
+pushed in **March 2021** and are older than the official image's. For anything
+4.3 and above, prefer `plone:<tag>`.
+
+Each legacy series publishes four tags — the full version and the series, each
+with a `-demo` counterpart that ships a Plone site already created.
 
 The 4.3 - 5.2 images take Python from an upstream `python:*` base image. The
 `legacy/` images build the interpreter from source, because no usable base
 image exists for Python 2.3 - 2.7 of that vintage.
 
 Floating tags such as `5.2-alpine`, `5.2-python2` and `5.2-python37` exist on
-Docker Hub but point at **earlier** point releases than 5.2.14 — the 5.2.14
+the official image but point at **earlier** point releases than 5.2.14 — the 5.2.14
 roll published only the Python 3.8 variant.
 
 ## Legacy images (Plone 1.0 - 4.2)
