@@ -1,5 +1,16 @@
-> **NOTE**: Our images are excellent for test driving Plone, checking add-ons or as a base for development/theming. \
-We **don't** recommended them for production!
+> **⚠️ WARNING**: **These images are no longer supported.** They are preserved for
+> historical reference only. Plone 4.x and 5.x have both reached end of life, the
+> images receive no security or dependency updates, and they are no longer part of
+> the [Docker Official Images](https://docs.docker.com/docker-hub/official_images/)
+> programme. Do **not** run them in production or expose them to an untrusted
+> network.
+>
+> They remain useful for content extraction, migration rehearsal and archaeology.
+> For a supported Plone, use Plone 6:
+> [plone-backend](https://github.com/plone/plone-backend),
+> [plone-frontend](https://github.com/plone/plone-frontend) and
+> [plone-zeo](https://github.com/plone/plone-zeo). See the
+> [release schedule](https://plone.org/download/release-schedule).
 
 # Plone
 
@@ -7,7 +18,7 @@ We **don't** recommended them for production!
 
 ## Features
 
-- Images for **Plone 5.x** and **Plone 4.x**
+- Images for **Plone 5.x** and **Plone 4.x**, plus a `legacy/` matrix reaching back to **Plone 1.0**
 - Images for **Plone 6** are available at https://github.com/plone/plone-backend
 - Enable add-ons via environment variables
 - Built-in RelStorage support, configurable via environment variables (requires Plone 5.2+)
@@ -16,15 +27,32 @@ We **don't** recommended them for production!
 > **NOTE**: **Python 2 based Docker images** are no longer supported by the [Docker Official Images](https://docs.docker.com/docker-hub/official_images/) \
 If you need Python 2, you can use `plone/plone:5-python2` instead of `plone:5-python2`.
 
-## Supported tags and respective `Dockerfile` links
+## Images
 
-- [`5.2.13-python38`, `5.2-python38`, `5-python38`, `python38`, `5.2.13`, `5.2`, `5`, `latest` (*5.2.13/Dockerfile*)](https://github.com/plone/plone.docker/blob/main/5.2/5.2.13/debian/Dockerfile)
+Newest to oldest. For the 4.3 - 5.2 series only the **latest point release** is
+listed; earlier point releases remain in the repository and on Docker Hub.
 
-## Older versions
+| Plone | Python | Variant | Built from | Docker Hub tags |
+|---|---|---|---|---|
+| 5.2.14 | 3.8 | Debian | [`5.2/5.2.14/debian/Dockerfile`](5.2/5.2.14/debian/Dockerfile) | `latest`, `5`, `5.2`, `5.2.14`, `python38`, `5-python38`, `5.2-python38`, `5.2.14-python38` |
+| 5.2.14 | 3.8 | Alpine | [`5.2/5.2.14/alpine/Dockerfile`](5.2/5.2.14/alpine/Dockerfile) | *not published* |
+| 5.2.14 | 3.7 | Debian | [`5.2/5.2.14/python37/Dockerfile`](5.2/5.2.14/python37/Dockerfile) | *not published* |
+| 5.2.14 | 2.7 | Debian | [`5.2/5.2.14/python2/Dockerfile`](5.2/5.2.14/python2/Dockerfile) | *not published* |
+| 5.1.6 | 2.7 | Debian | [`5.1/5.1.6/debian/Dockerfile`](5.1/5.1.6/debian/Dockerfile) | `5.1`, `5.1.6` |
+| 5.1.6 | 2.7 | Alpine | [`5.1/5.1.6/alpine/Dockerfile`](5.1/5.1.6/alpine/Dockerfile) | `5.1-alpine`, `5.1.6-alpine` |
+| 5.0.8 | 2.7 | Debian | [`5.0/5.0.8/debian/Dockerfile`](5.0/5.0.8/debian/Dockerfile) | `5.0`, `5.0.8` |
+| 5.0.8 | 2.7 | Alpine | [`5.0/5.0.8/alpine/Dockerfile`](5.0/5.0.8/alpine/Dockerfile) | *not published* |
+| 4.3.19 | 2.7 | Debian | [`4.3/4.3.19/debian/Dockerfile`](4.3/4.3.19/debian/Dockerfile) | `4`, `4.3`, `4.3.19` |
+| 4.3.19 | 2.7 | Alpine | [`4.3/4.3.19/alpine/Dockerfile`](4.3/4.3.19/alpine/Dockerfile) | `4-alpine`, `4.3-alpine`, `4.3.19-alpine` |
+| 4.2.6 | 2.7.18 | Debian *(legacy)* | [`legacy/4.2/Dockerfile`](legacy/4.2/Dockerfile) | *not yet published* |
 
-- [`5.2.13-python2`, `5.2-python2`, `5-python2`, `python2` (*5.2.13/python2/Dockerfile*)](https://github.com/plone/plone.docker/blob/main/5.2/5.2.13/python2/Dockerfile)
-- [`5.1.6`, `5.1` (*5.1.6/Dockerfile*)](https://github.com/plone/plone.docker/blob/main/5.1/5.1.6/debian/Dockerfile)
-- [`4.3.19`, `4.3`, `4` (*4.3.19/Dockerfile*)](https://github.com/plone/plone.docker/blob/main/4.3/4.3.19/debian/Dockerfile)
+The 4.3 - 5.2 images take Python from an upstream `python:*` base image. The
+`legacy/` images build the interpreter from source, because no usable base
+image exists for Python 2.3 - 2.7 of that vintage.
+
+Floating tags such as `5.2-alpine`, `5.2-python2` and `5.2-python37` exist on
+Docker Hub but point at **earlier** point releases than 5.2.14 — the 5.2.14
+roll published only the Python 3.8 variant.
 
 ## Legacy images (Plone 1.0 - 4.2)
 
@@ -36,9 +64,6 @@ issues and must never be exposed.
 Each series also ships a `-demo` variant with a Plone site already created, and
 carries an `upgrade` command so a database can be walked up one version at a
 time. See [`legacy/README.md`](legacy/README.md).
-
-Currently built: **4.2** (Plone 4.2.6). The remaining series land one per pull
-request.
 
 ## Prerequisites
 
