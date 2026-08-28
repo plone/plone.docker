@@ -17,9 +17,10 @@ They exist for content extraction, migration rehearsal, and archaeology.
 | 4.0  | 4.0.9 | 2.12.19 | 2.6.9  | buildout | stdlib `json` | **done** |
 | 3.3  | 3.3.6 | 2.10.13 | 2.4.6  | buildout | `simplejson` 2.0.9 (bundled) | **done** |
 | 3.2  | 3.2.3 | 2.10.7  | 2.4.6  | buildout | `simplejson` 2.0.9 (installed) | **done** |
+| 3.1  | 3.1.7 | 2.10.6  | 2.4.6  | buildout | `simplejson` 2.0.9 (installed) | **done** |
 
 The matrix extends down to Plone 1.0. One series lands per pull request; the
-remaining six follow these. When adding a series, keep four places in sync:
+remaining five follow these. When adding a series, keep four places in sync:
 the directory, the table above, `SERIES` and `FULL_VERSION_*` in the
 [`Makefile`](Makefile), and the paths-filter list plus `ALL` in
 [`../.github/workflows/legacy-build.yml`](../.github/workflows/legacy-build.yml).
