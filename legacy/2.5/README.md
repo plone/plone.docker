@@ -53,7 +53,7 @@ or a derived image).
 - **[V 2026-08-20]** Python 2.4.6 builds via the shared `build-python2.sh`
   with no 2.5-specific changes; `lib-dynload` has no `*_failed.so`.
 - **[V 2026-08-20]** Bundle layout is `Plone-2.5.4-2/<Product>/...`, 38 product
-  directories (vs. 20 in 2.0.5 and 32 installed in 2.1.4).
+  directories (vs. 20 in 2.0.5 and 30 in 2.1.4).
 - **[V 2026-08-20]** Zope 2.9.12 C extensions compile with gcc 12 given
   `CFLAGS="-fcommon -fno-strict-aliasing"`. As with 2.8.12, this confirms the
   flag is *sufficient*; it was not re-run without `-fcommon`, so necessity is
