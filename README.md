@@ -48,6 +48,7 @@ listed; earlier point releases remain in the repository and on Docker Hub.
 | 4.1.6 | 2.6.9 | Debian *(legacy)* | [`legacy/4.1/Dockerfile`](legacy/4.1/Dockerfile) | `4.1`, `4.1.6`, `4.1-demo`, `4.1.6-demo` |
 | 4.0.9 | 2.6.9 | Debian *(legacy)* | [`legacy/4.0/Dockerfile`](legacy/4.0/Dockerfile) | `4.0`, `4.0.9`, `4.0-demo`, `4.0.9-demo` |
 | 3.3.6 | 2.4.6 | Debian *(legacy)* | [`legacy/3.3/Dockerfile`](legacy/3.3/Dockerfile) | `3.3`, `3.3.6`, `3.3-demo`, `3.3.6-demo` |
+| 3.2.3 | 2.4.6 | Debian *(legacy)* | [`legacy/3.2/Dockerfile`](legacy/3.2/Dockerfile) | `3.2`, `3.2.3`, `3.2-demo`, `3.2.3-demo` |
 
 ### Where the tags live
 
