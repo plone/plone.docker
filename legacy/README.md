@@ -21,10 +21,27 @@ They exist for content extraction, migration rehearsal, and archaeology.
 | 3.0  | 3.0.5 | 2.10.13 | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 
 The matrix extends down to Plone 1.0. One series lands per pull request; the
-remaining four follow these. When adding a series, keep four places in sync:
-the directory, the table above, `SERIES` and `FULL_VERSION_*` in the
-[`Makefile`](Makefile), and the paths-filter list plus `ALL` in
-[`../.github/workflows/legacy-build.yml`](../.github/workflows/legacy-build.yml).
+remaining four follow these.
+
+Adding a series touches eight places. Miss one and the build still passes — the
+image is simply never built, or the docs quietly disagree with what ships — so
+the list is worth working through rather than recalling:
+
+1. `<version>/Dockerfile`
+2. `<version>/README.md`, carrying that version's validated/hypothesised ledger
+3. `SERIES` in the [`Makefile`](Makefile), oldest first
+4. `FULL_VERSION_<version>` in the [`Makefile`](Makefile)
+5. the paths-filter `v<version>` entry in
+   [`../.github/workflows/legacy-build.yml`](../.github/workflows/legacy-build.yml)
+6. the `ALL` list in that same workflow — **separate from the filter**, and the
+   one that decides what a push to `main` builds
+7. the table above, including its "remaining N" count, **and** the image table
+   in [`../README.md`](../README.md)
+8. a [`../CHANGES.md`](../CHANGES.md) entry
+
+Then `make lint`, `make -n` on all four targets for the new series (see the
+GNU Make 3.81 note in the Makefile), and both smoke gates —
+`SMOKE_CREATE_SITE=1 make test-<version>` and `make test-demo-<version>`.
 
 The point release is what is actually *buildable*, which is not always the last
 release. **4.2.6, not the final 4.2.7**: no UnifiedInstaller was ever published
