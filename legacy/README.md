@@ -18,9 +18,10 @@ They exist for content extraction, migration rehearsal, and archaeology.
 | 3.3  | 3.3.6 | 2.10.13 | 2.4.6  | buildout | `simplejson` 2.0.9 (bundled) | **done** |
 | 3.2  | 3.2.3 | 2.10.7  | 2.4.6  | buildout | `simplejson` 2.0.9 (installed) | **done** |
 | 3.1  | 3.1.7 | 2.10.6  | 2.4.6  | buildout | `simplejson` 2.0.9 (installed) | **done** |
+| 3.0  | 3.0.5 | 2.10.13 | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 
 The matrix extends down to Plone 1.0. One series lands per pull request; the
-remaining five follow these. When adding a series, keep four places in sync:
+remaining four follow these. When adding a series, keep four places in sync:
 the directory, the table above, `SERIES` and `FULL_VERSION_*` in the
 [`Makefile`](Makefile), and the paths-filter list plus `ALL` in
 [`../.github/workflows/legacy-build.yml`](../.github/workflows/legacy-build.yml).
@@ -211,6 +212,8 @@ Shared build logic lives in `shared/`:
 | `build-pil.sh` | Builds PIL 1.1.6 with working JPEG + PNG |
 | `build-plone-buildout.sh` | Offline buildout from a UnifiedInstaller's bundled cache |
 | `docker-entrypoint-buildout.sh` | Buildout-era entrypoint (`bin/instance fg`, `parts/instance/` paths) |
+| `docker-entrypoint.sh` | Tarball-era entrypoint (`bin/zopectl fg`, `etc/zope.conf` paths) |
+| `build-elementtree.sh` | Builds ElementTree 1.2.7 for Plone 3.0's Marshall dependency |
 | `create-plone-site.sh` | Creates a site on a running instance, discovering the factory per era |
 | `seed-demo-site.sh` | Build-time driver behind the `-demo` images |
 | `reset-admin-password.py` | Applies `ADMIN_USER`/`ADMIN_PASSWORD` to a seeded database |
@@ -220,9 +223,8 @@ Shared build logic lives in `shared/`:
 | `json-probe.py` | Asserts a JSON module imports and round-trips, used by the smoke test |
 | `smoke-test.sh` | The CI gate: HTTP, auth, product load, optional site creation |
 
-Two further scripts arrive with the earlier series they serve:
-`build-elementtree.sh` (Plone 3.0) and `docker-entrypoint.sh` (tarball era,
-1.0 – 3.0).
+Every shared script is now present: `build-elementtree.sh` and
+`docker-entrypoint.sh` arrived with 3.0, the last series to need a new one.
 
 Per-version notes — including each version's validated/hypothesised ledger —
 live in that version directory's README.
