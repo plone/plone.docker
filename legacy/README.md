@@ -16,9 +16,10 @@ They exist for content extraction, migration rehearsal, and archaeology.
 | 4.1  | 4.1.6 | 2.13.15 | 2.6.9  | buildout | stdlib `json` | **done** |
 | 4.0  | 4.0.9 | 2.12.19 | 2.6.9  | buildout | stdlib `json` | **done** |
 | 3.3  | 3.3.6 | 2.10.13 | 2.4.6  | buildout | `simplejson` 2.0.9 (bundled) | **done** |
+| 3.2  | 3.2.3 | 2.10.7  | 2.4.6  | buildout | `simplejson` 2.0.9 (installed) | **done** |
 
 The matrix extends down to Plone 1.0. One series lands per pull request; the
-remaining seven follow these. When adding a series, keep four places in sync:
+remaining six follow these. When adding a series, keep four places in sync:
 the directory, the table above, `SERIES` and `FULL_VERSION_*` in the
 [`Makefile`](Makefile), and the paths-filter list plus `ALL` in
 [`../.github/workflows/legacy-build.yml`](../.github/workflows/legacy-build.yml).
@@ -93,9 +94,11 @@ are applied to the seeded database before Zope starts serving, since Zope's own
 
 ## JSON
 
-Python 2.7 has a stdlib `json`, so 4.2 needs nothing extra. Earlier series ship
-`simplejson` instead; import defensively if one script must cover the whole
-matrix:
+Python grew a stdlib `json` in 2.6, so the 4.x series need nothing extra. Every
+series below 4.0 ships `simplejson` 2.0.9 instead — 3.3 finds it already in its
+own buildout-cache, while 3.2 and earlier have it installed by
+`shared/install-simplejson.sh`. Import defensively if one script must cover the
+whole matrix:
 
 ```python
 try:
@@ -212,12 +215,13 @@ Shared build logic lives in `shared/`:
 | `reset-admin-password.py` | Applies `ADMIN_USER`/`ADMIN_PASSWORD` to a seeded database |
 | `configure-zeo.sh` | Rewrites `zope.conf` into a ZEO client when `ZEO_ADDRESS` is set |
 | `upgrade-plone.py` | Runs `portal_migration` and commits it, behind the `upgrade` command |
+| `install-simplejson.sh` | Installs simplejson into a pre-2.6 interpreter, with a `sort_keys` round-trip gate |
 | `json-probe.py` | Asserts a JSON module imports and round-trips, used by the smoke test |
 | `smoke-test.sh` | The CI gate: HTTP, auth, product load, optional site creation |
 
-Three further scripts arrive with the earlier series they serve:
-`build-elementtree.sh` (Plone 3), `install-simplejson.sh` (pre-4.0) and
-`docker-entrypoint.sh` (tarball era, 1.0 – 3.0).
+Two further scripts arrive with the earlier series they serve:
+`build-elementtree.sh` (Plone 3.0) and `docker-entrypoint.sh` (tarball era,
+1.0 – 3.0).
 
 Per-version notes — including each version's validated/hypothesised ledger —
 live in that version directory's README.
