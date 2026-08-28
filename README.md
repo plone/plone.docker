@@ -53,6 +53,7 @@ listed; earlier point releases remain in the repository and on Docker Hub.
 | 3.0.5 | 2.4.6 | Debian *(legacy)* | [`legacy/3.0/Dockerfile`](legacy/3.0/Dockerfile) | `3.0`, `3.0.5`, `3.0-demo`, `3.0.5-demo` |
 | 2.5.4-2 | 2.4.6 | Debian *(legacy)* | [`legacy/2.5/Dockerfile`](legacy/2.5/Dockerfile) | `2.5`, `2.5.4-2`, `2.5-demo`, `2.5.4-2-demo` |
 | 2.1.4 | 2.4.6 | Debian *(legacy)* | [`legacy/2.1/Dockerfile`](legacy/2.1/Dockerfile) | `2.1`, `2.1.4`, `2.1-demo`, `2.1.4-demo` |
+| 2.0.5 | 2.3.7 | Debian *(legacy)* | [`legacy/2.0/Dockerfile`](legacy/2.0/Dockerfile) | `2.0`, `2.0.5`, `2.0-demo`, `2.0.5-demo` |
 
 ### Where the tags live
 

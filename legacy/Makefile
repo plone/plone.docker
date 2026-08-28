@@ -14,7 +14,7 @@ PLATFORM ?= linux/amd64
 # the matrix in README.md, and the ALL list in
 # ../.github/workflows/legacy-build.yml. One series lands per pull request;
 # append here as each one is ported.
-SERIES := 2.1 2.5 3.0 3.1 3.2 3.3 4.0 4.1 4.2
+SERIES := 2.0 2.1 2.5 3.0 3.1 3.2 3.3 4.0 4.1 4.2
 
 # Builder used for the -demo images, which MUST be a `docker`-driver one:
 # demo/Dockerfile's FROM reads the base image out of the local image store, and
@@ -42,6 +42,7 @@ DEMO_TEST_PASSWORD ?= smoke-not-admin
 # these images are built from.
 # [V 2026-08-20] 4.1.6 is both the final 4.1.x release and the last
 # UnifiedInstaller published for the series, so this row needs no compromise.
+FULL_VERSION_2.0 := 2.0.5
 FULL_VERSION_2.1 := 2.1.4
 # [V 2026-08-20] There is no Plone 2.5.5 on dist.plone.org (nor /download/
 # nor /packages/). The last 2.5.x is 2.5.4, shipped as two tarballs with

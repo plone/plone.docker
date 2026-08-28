@@ -21,9 +21,10 @@ They exist for content extraction, migration rehearsal, and archaeology.
 | 3.0  | 3.0.5 | 2.10.13 | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 | 2.5  | 2.5.4-2 | 2.9.12  | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 | 2.1  | 2.1.4 | 2.8.12  | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
+| 2.0  | 2.0.5 | 2.7.8   | 2.3.7  | tarball  | `simplejson` 1.9.3 (installed) | **done** |
 
 The matrix extends down to Plone 1.0. One series lands per pull request; the
-remaining two follow these.
+remaining one follows these.
 
 Adding a series touches eight places. Miss one and the build still passes — the
 image is simply never built, or the docs quietly disagree with what ships — so
@@ -116,10 +117,18 @@ are applied to the seeded database before Zope starts serving, since Zope's own
 ## JSON
 
 Python grew a stdlib `json` in 2.6, so the 4.x series need nothing extra. Every
-series below 4.0 ships `simplejson` 2.0.9 instead — 3.3 finds it already in its
-own buildout-cache, while 3.2 and earlier have it installed by
-`shared/install-simplejson.sh`. Import defensively if one script must cover the
-whole matrix:
+series below 4.0 ships `simplejson` instead — 3.3 finds it already in its own
+buildout-cache, while 3.2 and earlier have it installed by
+`shared/install-simplejson.sh`.
+
+**The release is not the same across the matrix, and cannot be.** 2.4-era
+series get 2.0.9; Plone 2.0 runs on Python 2.3, where 2.0.9's `encoder.py`
+calls `items.sort(key=...)` — `key=` is 2.4+ — so `dumps(sort_keys=True)`
+raises `TypeError`. That series gets 1.9.3. `install-simplejson.sh` fails the
+build on a wrong pairing rather than shipping an image whose JSON breaks only
+on the call that matters for extraction.
+
+Import defensively if one script must cover the whole matrix:
 
 ```python
 try:
