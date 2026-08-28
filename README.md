@@ -45,7 +45,8 @@ listed; earlier point releases remain in the repository and on Docker Hub.
 | 4.3.19 | 2.7 | Debian | [`4.3/4.3.19/debian/Dockerfile`](4.3/4.3.19/debian/Dockerfile) | `4`, `4.3`, `4.3.19` |
 | 4.3.19 | 2.7 | Alpine | [`4.3/4.3.19/alpine/Dockerfile`](4.3/4.3.19/alpine/Dockerfile) | `4-alpine`, `4.3-alpine`, `4.3.19-alpine` |
 | 4.2.6 | 2.7.18 | Debian *(legacy)* | [`legacy/4.2/Dockerfile`](legacy/4.2/Dockerfile) | `4.2`, `4.2.6`, `4.2-demo`, `4.2.6-demo` |
-| 4.1.6 | 2.6.9 | Debian *(legacy)* | [`legacy/4.1/Dockerfile`](legacy/4.1/Dockerfile) | *not yet published* |
+| 4.1.6 | 2.6.9 | Debian *(legacy)* | [`legacy/4.1/Dockerfile`](legacy/4.1/Dockerfile) | `4.1`, `4.1.6`, `4.1-demo`, `4.1.6-demo` |
+| 4.0.9 | 2.6.9 | Debian *(legacy)* | [`legacy/4.0/Dockerfile`](legacy/4.0/Dockerfile) | `4.0`, `4.0.9`, `4.0-demo`, `4.0.9-demo` |
 
 ### Where the tags live
 

@@ -14,7 +14,7 @@ PLATFORM ?= linux/amd64
 # the matrix in README.md, and the ALL list in
 # ../.github/workflows/legacy-build.yml. One series lands per pull request;
 # append here as each one is ported.
-SERIES := 4.1 4.2
+SERIES := 4.0 4.1 4.2
 
 # Builder used for the -demo images, which MUST be a `docker`-driver one:
 # demo/Dockerfile's FROM reads the base image out of the local image store, and
@@ -42,6 +42,11 @@ DEMO_TEST_PASSWORD ?= smoke-not-admin
 # these images are built from.
 # [V 2026-08-20] 4.1.6 is both the final 4.1.x release and the last
 # UnifiedInstaller published for the series, so this row needs no compromise.
+# [V 2026-08-20] 4.0.9, not 4.0.10: 4.0.10 is the final release and its egg
+# set exists at dist.plone.org/release/4.0.10/, but Launchpad published no
+# UnifiedInstaller past 4.0.9 — and the installer is what carries the offline
+# buildout-cache these images are built from.
+FULL_VERSION_4.0 := 4.0.9
 FULL_VERSION_4.1 := 4.1.6
 FULL_VERSION_4.2 := 4.2.6
 
