@@ -1,4 +1,6 @@
 # Changelog
+- Add Plone 3.3 image to the legacy matrix. Refs #184
+  [@ericof]
 - Add Plone 4.0 image to the legacy matrix. Refs #183
   [@ericof]
 - Add Plone 4.1 image to the legacy matrix. Refs #182

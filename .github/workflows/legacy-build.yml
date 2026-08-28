@@ -37,6 +37,9 @@ jobs:
               - 'legacy/demo/**'
               - 'legacy/Makefile'
               - '.github/workflows/legacy-build.yml'
+            v3.3:
+              - *shared
+              - 'legacy/3.3/**'
             v4.0:
               - *shared
               - 'legacy/4.0/**'
@@ -55,7 +58,7 @@ jobs:
           BUILD_ALL: ${{ github.event_name != 'pull_request' }}
         run: |
           # Implemented versions; append when a new directory lands.
-          ALL='["4.0","4.1","4.2"]'
+          ALL='["3.3","4.0","4.1","4.2"]'
           if [ "${BUILD_ALL}" = "true" ]; then
             VERSIONS="${ALL}"
           else
