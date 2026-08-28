@@ -1,4 +1,6 @@
 # Changelog
+- Add Plone 4.1 image to the legacy matrix. Refs #182
+  [@ericof]
 - Add Plone 4.2 image, the first of the legacy matrix (Plone 1.0 - 4.2). For content extraction, migration and archaeology only. Refs #180
   [@ericof]
 - fix shared-blob-dir always off

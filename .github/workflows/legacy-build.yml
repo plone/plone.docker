@@ -37,6 +37,9 @@ jobs:
               - 'legacy/demo/**'
               - 'legacy/Makefile'
               - '.github/workflows/legacy-build.yml'
+            v4.1:
+              - *shared
+              - 'legacy/4.1/**'
             v4.2:
               - *shared
               - 'legacy/4.2/**'
@@ -49,7 +52,7 @@ jobs:
           BUILD_ALL: ${{ github.event_name != 'pull_request' }}
         run: |
           # Implemented versions; append when a new directory lands.
-          ALL='["4.2"]'
+          ALL='["4.1","4.2"]'
           if [ "${BUILD_ALL}" = "true" ]; then
             VERSIONS="${ALL}"
           else
@@ -58,8 +61,18 @@ jobs:
           echo "versions=${VERSIONS}" >> "${GITHUB_OUTPUT}"
           echo "building: ${VERSIONS}"
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: make lint
+        working-directory: legacy
+        run: make lint
+
   build:
-    needs: changes
+    needs:
+      - changes
+      - lint
     if: needs.changes.outputs.versions != '[]'
     runs-on: ubuntu-latest
     strategy:
@@ -164,10 +177,33 @@ jobs:
             echo "::notice::DOCKERHUB_USERNAME/DOCKERHUB_TOKEN not set - pushed to GHCR only."
           fi
 
-  lint:
+  # Syncs the Docker Hub description from the root README, so the Hub page
+  # cannot drift from what this repository actually publishes.
+  description:
+    needs:
+      - build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_IMAGE: plone/plone
+      # Secrets cannot be referenced from an `if:` condition, so the presence
+      # check is hoisted into a job-level env var and the step gates on that
+      # instead. Without the credentials this job does nothing rather than
+      # failing, matching how the push job skips Hub.
+      HAS_DOCKERHUB: ${{ secrets.DOCKERHUB_USERNAME != '' && secrets.DOCKERHUB_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v7
-      - name: make lint
-        working-directory: legacy
-        run: make lint
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v5
+        if: env.HAS_DOCKERHUB == 'true'
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ env.DOCKERHUB_IMAGE }}
+          short-description: ${{ github.event.repository.description }}
+          # The README links to paths in this repository relative to its root
+          # (legacy/, 5.2/5.2.14/debian/Dockerfile, ...). On Docker Hub those
+          # would resolve against hub.docker.com and 404, so let the action
+          # rewrite them to absolute GitHub URLs.
+          enable-url-completion: true
+          readme-filepath: ./README.md
