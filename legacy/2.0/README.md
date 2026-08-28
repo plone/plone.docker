@@ -1,7 +1,8 @@
 # Plone 2.0 legacy image
 
 Plone 2.0.5 on Zope 2.7.8 / Python 2.3.7. Tarball-era template (no buildout).
-The oldest image in the matrix.
+The oldest image that runs upstream source unmodified: 1.0 is older, but needs
+two patches to run on this same Zope 2.7.8 stack.
 
 **Not for production.** Zope 2.7 has known, unpatched vulnerabilities. This image
 exists for content extraction, migration rehearsal, and historical inspection.

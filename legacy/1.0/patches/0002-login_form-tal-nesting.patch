@@ -1,0 +1,17 @@
+--- a/CMFPlone/skins/plone_forms/login_form.pt
++++ b/CMFPlone/skins/plone_forms/login_form.pt
+@@ -61,7 +61,13 @@
+ <script language="javascript">
+ <!--
+    if (cookiesEnabled && !cookiesEnabled()) {
+-      document.writeln('<p><div align="center"><b><font color="red">Cookies must be enabled on your browser before you can sign in.</font></b><br><a href="enabling_cookies">How to enable cookies</a></div></p>');
++      // [plone-legacy] The close tags below are split across a string
++      // concatenation so Zope 2.7's HTMLTALParser does not read them as
++      // real markup. Zope 2.6's parser tolerated them inline; 2.7's
++      // raises NestingError and the whole template fails to compile.
++      document.writeln('<p><div align="center"><b><font color="red">Cookies must be enabled on your browser before you can sign in.'
++        + '<' + '/font><' + '/b><br><a href="enabling_cookies">How to enable cookies<' + '/a>'
++        + '<' + '/div><' + '/p>');
+    }
+ //-->
+ </script>

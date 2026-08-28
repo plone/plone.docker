@@ -22,9 +22,11 @@ They exist for content extraction, migration rehearsal, and archaeology.
 | 2.5  | 2.5.4-2 | 2.9.12  | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 | 2.1  | 2.1.4 | 2.8.12  | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 | 2.0  | 2.0.5 | 2.7.8   | 2.3.7  | tarball  | `simplejson` 1.9.3 (installed) | **done** |
+| 1.0  | 1.0.6 | 2.7.8   | 2.3.7  | tarball  | `simplejson` 1.9.3 (installed) | **done**, [patched](1.0/README.md#the-two-patches) |
 
-The matrix extends down to Plone 1.0. One series lands per pull request; the
-remaining one follows these.
+The matrix is **complete**: every series from 1.0 to 4.2 is ported. 1.0 is the
+only image that patches upstream source, because it targets Zope 2.6 and has
+to run on 2.7.
 
 Adding a series touches eight places. Miss one and the build still passes — the
 image is simply never built, or the docs quietly disagree with what ships — so
