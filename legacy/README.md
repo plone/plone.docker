@@ -20,9 +20,10 @@ They exist for content extraction, migration rehearsal, and archaeology.
 | 3.1  | 3.1.7 | 2.10.6  | 2.4.6  | buildout | `simplejson` 2.0.9 (installed) | **done** |
 | 3.0  | 3.0.5 | 2.10.13 | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 | 2.5  | 2.5.4-2 | 2.9.12  | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
+| 2.1  | 2.1.4 | 2.8.12  | 2.4.6  | tarball  | `simplejson` 2.0.9 (installed) | **done** |
 
 The matrix extends down to Plone 1.0. One series lands per pull request; the
-remaining three follow these.
+remaining two follow these.
 
 Adding a series touches eight places. Miss one and the build still passes — the
 image is simply never built, or the docs quietly disagree with what ships — so

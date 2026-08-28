@@ -1,4 +1,6 @@
 # Changelog
+- Add Plone 2.1 image to the legacy matrix. Refs #195
+  [@ericof]
 - Add Plone 2.5 image to the legacy matrix. Refs #194
   [@ericof]
 - Expand the legacy series-wiring checklist in legacy/README.md from four places to eight. Refs #204
