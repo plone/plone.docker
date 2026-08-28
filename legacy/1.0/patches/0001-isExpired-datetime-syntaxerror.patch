@@ -1,0 +1,20 @@
+--- a/CMFPlone/skins/plone_scripts/isExpired.py
++++ b/CMFPlone/skins/plone_scripts/isExpired.py
+@@ -13,10 +13,16 @@
+ if hasattr(content, 'ExpirationDate'):
+     expiry=content.ExpirationDate()
+ 
++# [plone-legacy] Zope 2.6's DateTime raised IndexError on an unparseable
++# string, which is what this handler was written against. Zope 2.7's
++# raises DateTime.SyntaxError instead, and CMF hands us the literal
++# string 'None' whenever no expiry is set -- so the exception escaped
++# and every page render 500'd. The upstream intent is unchanged:
++# a date that will not parse has not expired.
+ try:
+     if DateTime(expiry).isPast():
+         return 1
+-except IndexError:
++except:
+     pass #Could convert value to DateTime
+ 
+ return 0
